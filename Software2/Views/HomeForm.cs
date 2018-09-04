@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Software2.Views.manager;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,11 +13,18 @@ namespace Software2
 {
     public partial class HomeForm : Form
     {
-        private bool isLoggedIn = false;
+        private IFormManager _formManager;
+        public bool isLoggedIn = false;
 
-        public HomeForm()
+        public HomeForm(IFormManager formManager)
         {
+            this._formManager = formManager;
             InitializeComponent();
+            if(!isLoggedIn)
+            {
+                this.Hide();
+                _formManager.ShowForm<LoginForm>();
+            }
         }
 
 

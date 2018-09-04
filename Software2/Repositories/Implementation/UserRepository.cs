@@ -10,7 +10,7 @@ namespace Software2.Repositories.Implementation
 {
     class UserRepository : IUserRepository
     {
-        private CalendarEntities _db;
+        public CalendarEntities _db { private get; set; }
         
         public UserRepository(CalendarEntities db)
         {

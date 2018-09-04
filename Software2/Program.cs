@@ -1,5 +1,8 @@
-﻿using Software2.Repositories.Implementation;
+﻿using SimpleInjector;
+using Software2.Repositories.Implementation;
+using Software2.Repositories.Interfaces;
 using Software2.Services;
+using Software2.Views.manager;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -17,6 +20,7 @@ namespace Software2
         /// 
 
         private static CalendarEntities calendarEntities;
+        private static Container container;
 
         [STAThread]
         static void Main()
@@ -24,16 +28,25 @@ namespace Software2
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Bootstrap();
-            var userRepository = new UserRepository(calendarEntities);
-            var userService = new UserService(userRepository);
-            Application.Run(new FormWrapper(calendarEntities, userService));
+            Application.Run(container.GetInstance<HomeForm>());
         }
 
 
 
         static void Bootstrap()
         {
+            container = new Container();
             calendarEntities = new CalendarEntities();
+            container.RegisterInitializer<UserRepository>(repoToInitialize =>
+            {
+                repoToInitialize._db = calendarEntities;
+            });
+
+            container.Register<IUserRepository, UserRepository>();
+            container.Register<UserService>();
+            container.Register<IFormManager, FormManager>();
+            container.Register<LoginForm>();
+            container.Register<HomeForm>();
             if(calendarEntities.users == null || calendarEntities.users.Count() == 0)
             {
                 var user = new user();

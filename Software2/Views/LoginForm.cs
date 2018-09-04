@@ -1,4 +1,5 @@
 ﻿using Software2.Services;
+using Software2.Views.manager;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,15 +17,15 @@ namespace Software2
 
     public partial class LoginForm : Form
     {
+        private IFormManager _formManager;
         private UserService userService;
-        private SetUserAuthenticated setUserAuthenticated;
-        public LoginForm(UserService userService, SetUserAuthenticated setUserAuthenticated):base()
+        public LoginForm(UserService userService, IFormManager formManager) : base()
         {
             InitializeComponent();
+            this._formManager = formManager;
             passwordTextbox.PasswordChar = '*';
             passwordTextbox.MaxLength = 10;
             this.userService = userService;
-            this.setUserAuthenticated = setUserAuthenticated;
         }
 
         private void loginButton_Click(object sender, EventArgs e)
@@ -33,7 +34,7 @@ namespace Software2
             var password = passwordTextbox.Text;
             if(userService.ValidateCredentials(username, password))
             {
-                this.setUserAuthenticated(this, username);
+                
             }
         }
     }

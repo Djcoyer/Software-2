@@ -99,6 +99,13 @@
     <Compile Include="customer.cs">
       <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Views\Customer\CustomerListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\CustomerListForm.Designer.cs">
+      <DependentUpon>CustomerListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\manager\FormManager.cs" />
     <Compile Include="Models\Exceptions\InvalidInputException.cs" />
     <Compile Include="Models\Exceptions\NotFoundException.cs" />
@@ -129,6 +136,15 @@
       <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Views\manager\IFormManager.cs" />
+    <Compile Include="Views\UserListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\UserListForm.Designer.cs">
+      <DependentUpon>UserListForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\HomeForm.resx">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -141,6 +157,9 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\UserListForm.resx">
+      <DependentUpon>UserListForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="CalendarEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CalendarEntities.Designer.cs</LastGenOutput>

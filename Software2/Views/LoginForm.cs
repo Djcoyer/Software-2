@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,13 +17,12 @@ namespace Software2
     public delegate void SetUserAuthenticated(Form form, string username);
 
     public partial class LoginForm : Form
-    {
-        private IFormManager _formManager;
+    { 
+        public SetUserAuthenticated setUserAuthenticated;
         private UserService userService;
-        public LoginForm(UserService userService, IFormManager formManager) : base()
+        public LoginForm(UserService userService) : base()
         {
             InitializeComponent();
-            this._formManager = formManager;
             passwordTextbox.PasswordChar = '*';
             passwordTextbox.MaxLength = 10;
             this.userService = userService;
@@ -32,9 +32,16 @@ namespace Software2
         {
             var username = usernameTextbox.Text;
             var password = passwordTextbox.Text;
-            if(userService.ValidateCredentials(username, password))
+            try
             {
-                
+                userService.ValidateCredentials(username, password);
+                errorLabel.Hide();
+                setUserAuthenticated(this, username);
+
+            } catch(Exception ex)
+            {
+                errorLabel.Text = ex.Message;
+                errorLabel.Show();
             }
         }
     }

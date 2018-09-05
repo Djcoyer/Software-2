@@ -28,13 +28,97 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.headingLabel = new System.Windows.Forms.Label();
+            this.loginButton = new System.Windows.Forms.Button();
+            this.customersButton = new System.Windows.Forms.Button();
+            this.addressButton = new System.Windows.Forms.Button();
+            this.citiesButton = new System.Windows.Forms.Button();
+            this.appointmentsButton = new System.Windows.Forms.Button();
+            this.SuspendLayout();
+            // 
+            // headingLabel
+            // 
+            this.headingLabel.AutoSize = true;
+            this.headingLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.headingLabel.Location = new System.Drawing.Point(33, 31);
+            this.headingLabel.Name = "headingLabel";
+            this.headingLabel.Size = new System.Drawing.Size(279, 25);
+            this.headingLabel.TabIndex = 0;
+            this.headingLabel.Text = "Please Select An Operation";
+            // 
+            // loginButton
+            // 
+            this.loginButton.Location = new System.Drawing.Point(169, 142);
+            this.loginButton.Name = "loginButton";
+            this.loginButton.Size = new System.Drawing.Size(75, 27);
+            this.loginButton.TabIndex = 1;
+            this.loginButton.Text = "Login";
+            this.loginButton.UseVisualStyleBackColor = true;
+            this.loginButton.Click += new System.EventHandler(this.loginButton_Click);
+            // 
+            // customersButton
+            // 
+            this.customersButton.Location = new System.Drawing.Point(26, 142);
+            this.customersButton.Name = "customersButton";
+            this.customersButton.Size = new System.Drawing.Size(87, 27);
+            this.customersButton.TabIndex = 2;
+            this.customersButton.Text = "Customers";
+            this.customersButton.UseVisualStyleBackColor = true;
+            this.customersButton.Click += new System.EventHandler(this.customersButton_Click);
+            // 
+            // addressButton
+            // 
+            this.addressButton.Location = new System.Drawing.Point(165, 142);
+            this.addressButton.Name = "addressButton";
+            this.addressButton.Size = new System.Drawing.Size(90, 27);
+            this.addressButton.TabIndex = 3;
+            this.addressButton.Text = "Addresses";
+            this.addressButton.UseVisualStyleBackColor = true;
+            // 
+            // citiesButton
+            // 
+            this.citiesButton.Location = new System.Drawing.Point(303, 142);
+            this.citiesButton.Name = "citiesButton";
+            this.citiesButton.Size = new System.Drawing.Size(75, 27);
+            this.citiesButton.TabIndex = 4;
+            this.citiesButton.Text = "Cities";
+            this.citiesButton.UseVisualStyleBackColor = true;
+            // 
+            // appointmentsButton
+            // 
+            this.appointmentsButton.Location = new System.Drawing.Point(420, 142);
+            this.appointmentsButton.Name = "appointmentsButton";
+            this.appointmentsButton.Size = new System.Drawing.Size(116, 27);
+            this.appointmentsButton.TabIndex = 5;
+            this.appointmentsButton.Text = "Appointments";
+            this.appointmentsButton.UseVisualStyleBackColor = true;
+            // 
+            // HomeForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(705, 450);
+            this.Controls.Add(this.appointmentsButton);
+            this.Controls.Add(this.citiesButton);
+            this.Controls.Add(this.addressButton);
+            this.Controls.Add(this.customersButton);
+            this.Controls.Add(this.loginButton);
+            this.Controls.Add(this.headingLabel);
+            this.Name = "HomeForm";
+            this.Text = "Calendar";
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
         }
 
         #endregion
+
+        private System.Windows.Forms.Label headingLabel;
+        private System.Windows.Forms.Button loginButton;
+        private System.Windows.Forms.Button customersButton;
+        private System.Windows.Forms.Button addressButton;
+        private System.Windows.Forms.Button citiesButton;
+        private System.Windows.Forms.Button appointmentsButton;
     }
 }
 

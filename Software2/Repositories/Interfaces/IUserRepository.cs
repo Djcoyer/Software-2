@@ -12,7 +12,7 @@ namespace Software2.Repositories.Interfaces
         user FindById(int id);
         void AddUser(user user);
         void UpdateUser(user user, int id);
-        bool DeleteUser(int id);
+        void DeleteUser(int id);
         user FindByUsername(string username);
     }
 }

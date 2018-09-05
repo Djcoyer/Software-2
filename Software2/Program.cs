@@ -42,11 +42,9 @@ namespace Software2
                 repoToInitialize._db = calendarEntities;
             });
 
+            container.Register<CustomerService>();
             container.Register<IUserRepository, UserRepository>();
             container.Register<UserService>();
-            container.Register<IFormManager, FormManager>();
-            container.Register<LoginForm>();
-            container.Register<HomeForm>();
             if(calendarEntities.users == null || calendarEntities.users.Count() == 0)
             {
                 var user = new user();

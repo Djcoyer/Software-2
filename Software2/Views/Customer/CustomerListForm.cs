@@ -18,8 +18,9 @@ namespace Software2.Views.Customer
         public CustomerListForm(CustomerService customerService)
         {
             this.customerService = customerService;
-            this.customers = customerService.FindAllCustomers();
+            customers = customerService.FindAllCustomers();
             InitializeComponent();
+            customerGridView.DataSource = customers;
         }
     }
 }

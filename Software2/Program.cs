@@ -41,11 +41,20 @@ namespace Software2
             {
                 repoToInitialize._db = calendarEntities;
             });
+            container.RegisterInitializer<CustomerRepository>(repoToInitialize =>
+            {
+                repoToInitialize._db = calendarEntities;
+            });
 
-            container.Register<CustomerService>();
+
             container.Register<IUserRepository, UserRepository>();
+            container.Register<ICustomerRepository, CustomerRepository>();
+
+
             container.Register<UserService>();
-            if(calendarEntities.users == null || calendarEntities.users.Count() == 0)
+            container.Register<CustomerService>();
+
+            if (calendarEntities.users == null || calendarEntities.users.Count() == 0)
             {
                 var user = new user();
                 user.active = 1;
@@ -58,8 +67,52 @@ namespace Software2
                 user.password = "test";
 
                 calendarEntities.users.Add(user);
-                calendarEntities.SaveChanges();
             }
+            if(calendarEntities.customers == null || calendarEntities.customers.Count() == 0)
+            {
+                var customer = new customer()
+                {
+                    active = true,
+                    createDate = DateTime.Now,
+                    lastUpdate = DateTime.Now,
+                    createdBy = "Devyn Coyer",
+                    lastUpdateBy = "Devyn Coyer",
+                    customerName = "Bob Smith",
+                    customerId = 1,
+                    addressId = 1
+                };
+
+                calendarEntities.customers.Add(customer);
+            }
+
+            if(calendarEntities.cities == null || calendarEntities.cities.Count() == 0)
+            {
+                calendarEntities.cities.Add(new city()
+                {
+                    cityId = 1,
+                    countryId = 1,
+                    city1 = "Lancaster",
+                    createDate = DateTime.Now,
+                    createdBy = "Devyn Coyer",
+                    lastUpdate = DateTime.Now,
+                    lastUpdateBy = "Devyn Coyer"
+                });
+            }
+
+            if(calendarEntities.countries == null || calendarEntities.countries.Count() == 0)
+            {
+                calendarEntities.countries.Add(new country()
+                {
+                    countryId =1,
+                    country1 = "USA",
+                    createDate = DateTime.Now,
+                    createdBy = "Devyn Coyer",
+                    lastUpdate = DateTime.Now,
+                    lastUpdateBy = "Devyn Coyer"
+                });
+            }
+
+            calendarEntities.SaveChanges();
         }
     }
 }

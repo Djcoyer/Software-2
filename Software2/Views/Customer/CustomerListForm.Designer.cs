@@ -28,12 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.customerGridView = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.customerGridView)).BeginInit();
+            this.SuspendLayout();
+            // 
+            // customerGridView
+            // 
+            this.customerGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.customerGridView.Location = new System.Drawing.Point(24, 59);
+            this.customerGridView.Name = "customerGridView";
+            this.customerGridView.RowTemplate.Height = 24;
+            this.customerGridView.Size = new System.Drawing.Size(547, 347);
+            this.customerGridView.TabIndex = 0;
+            // 
+            // CustomerListForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(594, 530);
+            this.Controls.Add(this.customerGridView);
+            this.Name = "CustomerListForm";
             this.Text = "CustomerListForm";
+            ((System.ComponentModel.ISupportInitialize)(this.customerGridView)).EndInit();
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.DataGridView customerGridView;
     }
 }

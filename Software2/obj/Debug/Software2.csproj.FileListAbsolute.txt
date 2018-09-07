@@ -61,3 +61,4 @@ C:\Users\User\Documents\projects\Software-2\Software2\obj\Debug\Software2.pdb
 C:\Users\User\Documents\projects\Software-2\Software2\obj\Debug\Software2.csprojAssemblyReference.cache
 C:\Users\User\Documents\projects\Software-2\Software2\obj\Debug\Software2.HomeForm.resources
 C:\Users\User\Documents\projects\Software-2\Software2\obj\Debug\Software2.Views.UserListForm.resources
+C:\Users\User\Documents\projects\Software-2\Software2\obj\Debug\Software2.Views.Customer.CustomerListForm.resources

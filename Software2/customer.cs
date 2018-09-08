@@ -14,6 +14,14 @@ namespace Software2
     
     public partial class customer
     {
+
+        public customer()
+        {
+            createDate = DateTime.Now;
+            lastUpdate = DateTime.Now;
+            active = true;
+        }
+
         public int customerId { get; set; }
         public string customerName { get; set; }
         public int addressId { get; set; }

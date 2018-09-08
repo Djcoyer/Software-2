@@ -45,14 +45,21 @@ namespace Software2
             {
                 repoToInitialize._db = calendarEntities;
             });
-
+            container.RegisterInitializer<AddressRepository>(repoToInitialize =>
+            {
+                repoToInitialize._db = calendarEntities;
+            });
 
             container.Register<IUserRepository, UserRepository>();
             container.Register<ICustomerRepository, CustomerRepository>();
+            container.Register<IAddressRepository, AddressRepository>();
+
+            container.Register<IFormManager, FormManager>();
 
 
             container.Register<UserService>();
             container.Register<CustomerService>();
+            container.Register<AddressService>();
 
             if (calendarEntities.users == null || calendarEntities.users.Count() == 0)
             {
@@ -109,6 +116,23 @@ namespace Software2
                     createdBy = "Devyn Coyer",
                     lastUpdate = DateTime.Now,
                     lastUpdateBy = "Devyn Coyer"
+                });
+            }
+
+            if(calendarEntities.addresses == null || calendarEntities.addresses.Count() == 0)
+            {
+                calendarEntities.addresses.Add(new address()
+                {
+                    cityId = 1,
+                    address1 = "123 My Street",
+                    address2 = "",
+                    addressId = 1,
+                    createDate = DateTime.Now,
+                    lastUpdate = DateTime.Now,
+                    lastUpdateBy = "Devyn Coyer",
+                    createdBy = "Devyn  Coyer",
+                    postalCode = "12345",
+                    phone = "123-456-7890"
                 });
             }
 

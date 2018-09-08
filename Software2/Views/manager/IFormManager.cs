@@ -11,5 +11,6 @@ namespace Software2.Views.manager
     {
         void ShowForm<TForm>() where TForm : Form;
         void ShowForm<TForm>(int id) where TForm : Form;
+        Form GetForm<TForm>() where TForm : Form;
     }
 }

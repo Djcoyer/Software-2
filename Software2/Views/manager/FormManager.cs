@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using SimpleInjector;
+using Software2.Views;
 using Software2.Views.manager;
 
 namespace Software2
@@ -26,7 +27,7 @@ namespace Software2
             }
             else
             {
-                form = this.GetForm<TForm>();
+                form = this.getForm<TForm>();
                 this.OpenedForms.Add(form.GetType(), form);
                 form.Closed += (s, e) => this.OpenedForms.Remove(form.GetType());
             }
@@ -43,14 +44,22 @@ namespace Software2
             }
             else
             {
-                form = this.GetForm<TForm>();
+                form = this.getForm<TForm>();
                 this.OpenedForms.Add(form.GetType(), form);
                 form.Closed += (s, e) => this.OpenedForms.Remove(form.GetType());
             }
             form.Show();
         }
 
-        private Form GetForm<TForm>() where TForm : Form
+        public Form GetForm<TForm>() where TForm: Form
+        {
+            if(this.OpenedForms.ContainsKey(typeof(TForm)))
+                return this.OpenedForms[typeof(TForm)];
+
+            else return getForm<TForm>();
+        } 
+
+        private Form getForm<TForm>() where TForm : Form
         {
             return this.container.GetInstance<TForm>();
         }

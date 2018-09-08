@@ -15,13 +15,11 @@ namespace Software2
     public partial class HomeForm : Form
     {
         public bool isLoggedIn = false;
-        private LoginForm loginForm;
-        private CustomerListForm customerListForm;
+        private IFormManager _formManager;
 
-        public HomeForm(LoginForm loginForm, CustomerListForm customerListForm)
+        public HomeForm(IFormManager formManager)
         {
-            this.loginForm = loginForm;
-            this.customerListForm = customerListForm;
+            this._formManager = formManager;
             InitializeComponent();
             if(!isLoggedIn)
             {
@@ -55,11 +53,13 @@ namespace Software2
 
         private void loginButton_Click(object sender, EventArgs e)
         {
+            var loginForm = _formManager.GetForm<LoginForm>() as LoginForm;
+
             loginForm.setUserAuthenticated = (Form form, string username) =>
             {
-                this.SetUserAuthenticated(username);
+                SetUserAuthenticated(username);
                 form.Close();
-                this.Show();
+                Show();
             };
 
             loginForm.Show();
@@ -69,7 +69,7 @@ namespace Software2
         private void customersButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            customerListForm.Show();
+            _formManager.ShowForm<CustomerListForm>();
         }
     }
 }

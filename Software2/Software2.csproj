@@ -99,9 +99,18 @@
     <Compile Include="customer.cs">
       <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Repositories\Implementation\AddressRepository.cs" />
     <Compile Include="Repositories\Implementation\CustomerRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAddressRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICustomerRepository.cs" />
+    <Compile Include="Services\AddressService.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Views\Customer\CustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\CustomerForm.Designer.cs">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Customer\CustomerListForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +153,9 @@
     <Compile Include="Views\UserListForm.Designer.cs">
       <DependentUpon>UserListForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Customer\CustomerForm.resx">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Customer\CustomerListForm.resx">
       <DependentUpon>CustomerListForm.cs</DependentUpon>
     </EmbeddedResource>

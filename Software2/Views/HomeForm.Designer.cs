@@ -83,6 +83,7 @@
             this.citiesButton.TabIndex = 4;
             this.citiesButton.Text = "Cities";
             this.citiesButton.UseVisualStyleBackColor = true;
+            this.citiesButton.Click += new System.EventHandler(this.citiesButton_Click);
             // 
             // appointmentsButton
             // 

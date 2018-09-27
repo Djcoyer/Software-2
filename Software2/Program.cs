@@ -49,10 +49,15 @@ namespace Software2
             {
                 repoToInitialize._db = calendarEntities;
             });
+            container.RegisterInitializer<CityRepository>(repoToInitialize =>
+            {
+                repoToInitialize._db = calendarEntities;
+            });
 
             container.Register<IUserRepository, UserRepository>();
             container.Register<ICustomerRepository, CustomerRepository>();
             container.Register<IAddressRepository, AddressRepository>();
+            container.Register<ICityRepository, CityRepository>();
             container.Register<AuthRepository>(Lifestyle.Singleton);
             container.Register<IFormManager, FormManager>();
 
@@ -60,6 +65,7 @@ namespace Software2
             container.Register<UserService>();
             container.Register<CustomerService>();
             container.Register<AddressService>();
+            container.Register<CityService>();
 
             if (calendarEntities.users == null || calendarEntities.users.Count() == 0)
             {

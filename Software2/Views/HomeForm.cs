@@ -1,4 +1,5 @@
 ﻿using Software2.Repositories.Implementation;
+using Software2.Views.City;
 using Software2.Views.Customer;
 using Software2.Views.manager;
 using System;
@@ -78,6 +79,12 @@ namespace Software2
         {
             this.Hide();
             _formManager.ShowForm<CustomerListForm>();
+        }
+
+        private void citiesButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            _formManager.ShowForm<CityListForm>();
         }
     }
 }

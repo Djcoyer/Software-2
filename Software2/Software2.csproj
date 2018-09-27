@@ -99,7 +99,10 @@
     <Compile Include="customer.cs">
       <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\CommonMethods.cs" />
+    <Compile Include="Models\CustomerRow.cs" />
     <Compile Include="Repositories\Implementation\AddressRepository.cs" />
+    <Compile Include="Repositories\Implementation\AuthRepository.cs" />
     <Compile Include="Repositories\Implementation\CustomerRepository.cs" />
     <Compile Include="Repositories\Interfaces\IAddressRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICustomerRepository.cs" />

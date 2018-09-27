@@ -20,5 +20,10 @@ namespace Software2.Services
         {
             return _repository.FindAll();
         }
+
+        public address FindOne(int addressId)
+        {
+            return _repository.FindOne(addressId);
+        }
     }
 }

@@ -28,7 +28,7 @@ namespace Software2.Repositories.Implementation
 
         public address FindOne(int id)
         {
-            throw new NotImplementedException();
+            return _db.addresses.FirstOrDefault(a => a.addressId == id);
         }
 
         public void Update(address address, int id)

@@ -1,4 +1,5 @@
-﻿using Software2.Views.Customer;
+﻿using Software2.Repositories.Implementation;
+using Software2.Views.Customer;
 using Software2.Views.manager;
 using System;
 using System.Collections.Generic;
@@ -12,16 +13,21 @@ using System.Windows.Forms;
 
 namespace Software2
 {
+
+    public delegate void CloseForm(Form form);
+
     public partial class HomeForm : Form
     {
         public bool isLoggedIn = false;
         private IFormManager _formManager;
+        public AuthRepository _authRepository { get; set; }
 
-        public HomeForm(IFormManager formManager)
+        public HomeForm(IFormManager formManager, AuthRepository authRepository)
         {
+            _authRepository = authRepository;
             this._formManager = formManager;
             InitializeComponent();
-            if(!isLoggedIn)
+            if(!_authRepository.UserAuthenticated)
             {
                 customersButton.Hide();
                 addressButton.Hide();
@@ -43,6 +49,8 @@ namespace Software2
 
         private void SetUserAuthenticated(string username)
         {
+            _authRepository.EmailAddress = username;
+            _authRepository.UserAuthenticated = true;
             customersButton.Show();
             addressButton.Show();
             citiesButton.Show();

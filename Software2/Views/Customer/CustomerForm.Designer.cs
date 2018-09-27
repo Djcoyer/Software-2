@@ -30,14 +30,14 @@
         {
             this.formLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cancelButton = new System.Windows.Forms.Button();
+            this.saveCustomerButton = new System.Windows.Forms.Button();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.addressTextBox = new System.Windows.Forms.TextBox();
             this.lastNameTextBox = new System.Windows.Forms.TextBox();
             this.firstNameTextBox = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.saveCustomerButton = new System.Windows.Forms.Button();
-            this.cancelButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +67,53 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
+            // cancelButton
+            // 
+            this.cancelButton.Location = new System.Drawing.Point(24, 273);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(75, 23);
+            this.cancelButton.TabIndex = 7;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            // 
+            // saveCustomerButton
+            // 
+            this.saveCustomerButton.Location = new System.Drawing.Point(294, 273);
+            this.saveCustomerButton.Name = "saveCustomerButton";
+            this.saveCustomerButton.Size = new System.Drawing.Size(75, 23);
+            this.saveCustomerButton.TabIndex = 6;
+            this.saveCustomerButton.Text = "Save";
+            this.saveCustomerButton.UseVisualStyleBackColor = true;
+            this.saveCustomerButton.Click += new System.EventHandler(this.saveCustomerButton_Click);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(54, 154);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(45, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Address";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(54, 94);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(58, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Last Name";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(54, 32);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(57, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "First Name";
+            // 
             // addressTextBox
             // 
             this.addressTextBox.Location = new System.Drawing.Point(57, 173);
@@ -87,52 +134,6 @@
             this.firstNameTextBox.Name = "firstNameTextBox";
             this.firstNameTextBox.Size = new System.Drawing.Size(121, 20);
             this.firstNameTextBox.TabIndex = 0;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(54, 32);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(57, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "First Name";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(54, 94);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(58, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Last Name";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(54, 154);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Address";
-            // 
-            // saveCustomerButton
-            // 
-            this.saveCustomerButton.Location = new System.Drawing.Point(294, 273);
-            this.saveCustomerButton.Name = "saveCustomerButton";
-            this.saveCustomerButton.Size = new System.Drawing.Size(75, 23);
-            this.saveCustomerButton.TabIndex = 6;
-            this.saveCustomerButton.Text = "Save";
-            this.saveCustomerButton.UseVisualStyleBackColor = true;
-            this.saveCustomerButton.Click += new System.EventHandler(this.saveCustomerButton_Click);
-            // 
-            // cancelButton
-            // 
-            this.cancelButton.Location = new System.Drawing.Point(24, 273);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(75, 23);
-            this.cancelButton.TabIndex = 7;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
             // 
             // CustomerForm
             // 

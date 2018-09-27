@@ -18,6 +18,8 @@ namespace Software2.Repositories.Implementation
 
         public void Add(customer customer)
         {
+            var lastId = _db.customers.Max(p => p.customerId);
+            customer.customerId = lastId + 1;
             _db.customers.Add(customer);
             _db.SaveChanges();
         }

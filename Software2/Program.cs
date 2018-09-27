@@ -53,7 +53,7 @@ namespace Software2
             container.Register<IUserRepository, UserRepository>();
             container.Register<ICustomerRepository, CustomerRepository>();
             container.Register<IAddressRepository, AddressRepository>();
-
+            container.Register<AuthRepository>(Lifestyle.Singleton);
             container.Register<IFormManager, FormManager>();
 
 

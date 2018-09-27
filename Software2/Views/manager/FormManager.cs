@@ -51,12 +51,12 @@ namespace Software2
             form.Show();
         }
 
-        public Form GetForm<TForm>() where TForm: Form
+        public TForm GetForm<TForm>() where TForm: Form
         {
             if(this.OpenedForms.ContainsKey(typeof(TForm)))
-                return this.OpenedForms[typeof(TForm)];
+                return this.OpenedForms[typeof(TForm)] as TForm;
 
-            else return getForm<TForm>();
+            else return getForm<TForm>() as TForm;
         } 
 
         private Form getForm<TForm>() where TForm : Form

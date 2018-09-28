@@ -11,11 +11,10 @@ namespace Software2.Repositories.Implementation
     {
         public CalendarEntities _db { private get; set; }
 
-
         public void add(city city)
         {
             var lastId = _db.cities.Max(p => p.cityId);
-            city.cityId = lastId += 1;
+            city.cityId = lastId + 1;
             _db.cities.Add(city);
             _db.SaveChanges();
         }
@@ -30,6 +29,11 @@ namespace Software2.Repositories.Implementation
         public IEnumerable<city> findAll()
         {
             return _db.cities.AsEnumerable();
+        }
+
+        public IEnumerable<city> findByName(string name)
+        {
+            return _db.cities.Where(c => c.city1.Equals(name, StringComparison.CurrentCultureIgnoreCase)).AsEnumerable();
         }
 
         public city findOne(int id)

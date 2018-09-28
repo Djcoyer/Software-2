@@ -13,7 +13,10 @@ namespace Software2.Repositories.Implementation
 
         public void Add(address address)
         {
-            throw new NotImplementedException();
+            var lastId = _db.addresses.Max(a => a.addressId);
+            address.addressId = lastId + 1;
+            _db.addresses.Add(address);
+            _db.SaveChanges();
         }
 
         public void Delete(int id)

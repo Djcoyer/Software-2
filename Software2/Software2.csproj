@@ -100,24 +100,22 @@
       <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Helpers\CommonMethods.cs" />
+    <Compile Include="Models\AddressAggregate.cs" />
     <Compile Include="Models\CityRow.cs" />
     <Compile Include="Models\CustomerRow.cs" />
     <Compile Include="Repositories\Implementation\AddressRepository.cs" />
     <Compile Include="Repositories\Implementation\AuthRepository.cs" />
     <Compile Include="Repositories\Implementation\CityRepository.cs" />
+    <Compile Include="Repositories\Implementation\CountryRepository.cs" />
     <Compile Include="Repositories\Implementation\CustomerRepository.cs" />
     <Compile Include="Repositories\Interfaces\IAddressRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICityRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ICountryRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICustomerRepository.cs" />
     <Compile Include="Services\AddressService.cs" />
     <Compile Include="Services\CityService.cs" />
+    <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
-    <Compile Include="Views\City\CityListForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\City\CityListForm.Designer.cs">
-      <DependentUpon>CityListForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\Customer\CustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -166,9 +164,6 @@
     <Compile Include="Views\UserListForm.Designer.cs">
       <DependentUpon>UserListForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Views\City\CityListForm.resx">
-      <DependentUpon>CityListForm.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Views\Customer\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </EmbeddedResource>

@@ -1,5 +1,4 @@
 ﻿using Software2.Repositories.Implementation;
-using Software2.Views.City;
 using Software2.Views.Customer;
 using Software2.Views.manager;
 using System;
@@ -31,8 +30,6 @@ namespace Software2
             if(!_authRepository.UserAuthenticated)
             {
                 customersButton.Hide();
-                addressButton.Hide();
-                citiesButton.Hide();
                 customersButton.Hide();
                 appointmentsButton.Hide();
                 loginButton.Show();
@@ -40,8 +37,6 @@ namespace Software2
             else
             {
                 customersButton.Show();
-                addressButton.Show();
-                citiesButton.Show();
                 customersButton.Show();
                 appointmentsButton.Show();
                 loginButton.Hide();
@@ -50,11 +45,9 @@ namespace Software2
 
         private void SetUserAuthenticated(string username)
         {
-            _authRepository.EmailAddress = username;
+            _authRepository.Username = username;
             _authRepository.UserAuthenticated = true;
             customersButton.Show();
-            addressButton.Show();
-            citiesButton.Show();
             customersButton.Show();
             appointmentsButton.Show();
             loginButton.Hide();
@@ -79,12 +72,6 @@ namespace Software2
         {
             this.Hide();
             _formManager.ShowForm<CustomerListForm>();
-        }
-
-        private void citiesButton_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            _formManager.ShowForm<CityListForm>();
         }
     }
 }

@@ -31,8 +31,6 @@
             this.headingLabel = new System.Windows.Forms.Label();
             this.loginButton = new System.Windows.Forms.Button();
             this.customersButton = new System.Windows.Forms.Button();
-            this.addressButton = new System.Windows.Forms.Button();
-            this.citiesButton = new System.Windows.Forms.Button();
             this.appointmentsButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
@@ -66,28 +64,9 @@
             this.customersButton.UseVisualStyleBackColor = true;
             this.customersButton.Click += new System.EventHandler(this.customersButton_Click);
             // 
-            // addressButton
-            // 
-            this.addressButton.Location = new System.Drawing.Point(165, 142);
-            this.addressButton.Name = "addressButton";
-            this.addressButton.Size = new System.Drawing.Size(90, 27);
-            this.addressButton.TabIndex = 3;
-            this.addressButton.Text = "Addresses";
-            this.addressButton.UseVisualStyleBackColor = true;
-            // 
-            // citiesButton
-            // 
-            this.citiesButton.Location = new System.Drawing.Point(303, 142);
-            this.citiesButton.Name = "citiesButton";
-            this.citiesButton.Size = new System.Drawing.Size(75, 27);
-            this.citiesButton.TabIndex = 4;
-            this.citiesButton.Text = "Cities";
-            this.citiesButton.UseVisualStyleBackColor = true;
-            this.citiesButton.Click += new System.EventHandler(this.citiesButton_Click);
-            // 
             // appointmentsButton
             // 
-            this.appointmentsButton.Location = new System.Drawing.Point(420, 142);
+            this.appointmentsButton.Location = new System.Drawing.Point(266, 142);
             this.appointmentsButton.Name = "appointmentsButton";
             this.appointmentsButton.Size = new System.Drawing.Size(116, 27);
             this.appointmentsButton.TabIndex = 5;
@@ -100,8 +79,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(705, 450);
             this.Controls.Add(this.appointmentsButton);
-            this.Controls.Add(this.citiesButton);
-            this.Controls.Add(this.addressButton);
             this.Controls.Add(this.customersButton);
             this.Controls.Add(this.loginButton);
             this.Controls.Add(this.headingLabel);
@@ -117,8 +94,6 @@
         private System.Windows.Forms.Label headingLabel;
         private System.Windows.Forms.Button loginButton;
         private System.Windows.Forms.Button customersButton;
-        private System.Windows.Forms.Button addressButton;
-        private System.Windows.Forms.Button citiesButton;
         private System.Windows.Forms.Button appointmentsButton;
     }
 }

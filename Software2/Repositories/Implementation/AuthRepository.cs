@@ -10,6 +10,6 @@ namespace Software2.Repositories.Implementation
     public class AuthRepository
     {
         public bool UserAuthenticated { get; set; }
-        public string EmailAddress { get; set; }
+        public string Username { get; set; }
     }
 }

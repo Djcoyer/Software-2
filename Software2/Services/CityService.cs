@@ -54,5 +54,21 @@ namespace Software2.Services
 
             _repository.update(city, id);
         }
+
+        public List<city> findAllByName(string name)
+        {
+            return _repository.findByName(name).ToList();
+        }
+
+        public city findByNameAndCountryId(string name, int countryId)
+        {
+            var cities = _repository.findByName(name);
+            if (cities == null || cities.Count() == 0)
+                throw new NotFoundException("");
+            var cityToReturn = cities.Where(c => c.countryId == countryId).FirstOrDefault();
+            if (cityToReturn == null)
+                throw new NotFoundException("");
+            return cityToReturn;
+        }
     }
 }

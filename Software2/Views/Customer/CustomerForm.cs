@@ -27,13 +27,7 @@ namespace Software2.Views.Customer
             _formManager = formManager;
             this.customerService = customerService;
             this.addressService = addressService;
-            addresses = addressService.FindAll().ToList();
             InitializeComponent();
-            var source = new AutoCompleteStringCollection();
-            source.AddRange(addresses.Select(a => a.address1).ToArray());
-            addressTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            addressTextBox.AutoCompleteCustomSource = source;
-            addressTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
         }
 
         public void SetCustomer(customer customer)
@@ -43,7 +37,7 @@ namespace Software2.Views.Customer
             firstNameTextBox.Text = fullName[0];
             lastNameTextBox.Text = fullName[1];
             var address = addressService.FindOne(customer.addressId);
-            addressTextBox.Text = address.address1;
+            address1TextBox.Text = address.address1;
         }
 
         private void saveCustomerButton_Click(object sender, EventArgs e)
@@ -80,7 +74,7 @@ namespace Software2.Views.Customer
 
         private void updateFields(customer customer)
         {
-            var addressValue = addressTextBox.Text;
+            var addressValue = address1TextBox.Text;
             var firstName = firstNameTextBox.Text;
             var lastName = lastNameTextBox.Text;
             var existingAddress = addresses.FirstOrDefault(a => a.address1.Equals(addressValue));

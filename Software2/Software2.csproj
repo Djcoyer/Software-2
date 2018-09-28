@@ -103,6 +103,7 @@
     <Compile Include="Models\AddressAggregate.cs" />
     <Compile Include="Models\CityRow.cs" />
     <Compile Include="Models\CustomerRow.cs" />
+    <Compile Include="Models\Exceptions\DataIntegrityViolationException.cs" />
     <Compile Include="Repositories\Implementation\AddressRepository.cs" />
     <Compile Include="Repositories\Implementation\AuthRepository.cs" />
     <Compile Include="Repositories\Implementation\CityRepository.cs" />

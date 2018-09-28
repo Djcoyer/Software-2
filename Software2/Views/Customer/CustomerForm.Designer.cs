@@ -30,6 +30,16 @@
         {
             this.formLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.postalTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.phoneTextBox = new System.Windows.Forms.TextBox();
+            this.Country = new System.Windows.Forms.Label();
+            this.cityLabel = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.countryTextBox = new System.Windows.Forms.TextBox();
+            this.cityTextBox = new System.Windows.Forms.TextBox();
+            this.address2TextBox = new System.Windows.Forms.TextBox();
             this.cancelButton = new System.Windows.Forms.Button();
             this.saveCustomerButton = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -38,16 +48,7 @@
             this.address1TextBox = new System.Windows.Forms.TextBox();
             this.lastNameTextBox = new System.Windows.Forms.TextBox();
             this.firstNameTextBox = new System.Windows.Forms.TextBox();
-            this.Country = new System.Windows.Forms.Label();
-            this.cityLabel = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.countryTextBox = new System.Windows.Forms.TextBox();
-            this.cityTextBox = new System.Windows.Forms.TextBox();
-            this.address2TextBox = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.phoneTextBox = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.postalTextBox = new System.Windows.Forms.TextBox();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,6 +65,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.errorLabel);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.postalTextBox);
             this.groupBox1.Controls.Add(this.label4);
@@ -83,88 +85,48 @@
             this.groupBox1.Controls.Add(this.lastNameTextBox);
             this.groupBox1.Controls.Add(this.firstNameTextBox);
             this.groupBox1.Location = new System.Drawing.Point(48, 87);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(820, 386);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             // 
-            // cancelButton
+            // label7
             // 
-            this.cancelButton.Location = new System.Drawing.Point(32, 336);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(100, 28);
-            this.cancelButton.TabIndex = 7;
-            this.cancelButton.Text = "Cancel";
-            this.cancelButton.UseVisualStyleBackColor = true;
-            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(72, 201);
+            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(84, 17);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "Postal Code";
             // 
-            // saveCustomerButton
+            // postalTextBox
             // 
-            this.saveCustomerButton.Location = new System.Drawing.Point(682, 336);
-            this.saveCustomerButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.saveCustomerButton.Name = "saveCustomerButton";
-            this.saveCustomerButton.Size = new System.Drawing.Size(100, 28);
-            this.saveCustomerButton.TabIndex = 6;
-            this.saveCustomerButton.Text = "Save";
-            this.saveCustomerButton.UseVisualStyleBackColor = true;
-            this.saveCustomerButton.Click += new System.EventHandler(this.saveCustomerButton_Click);
+            this.postalTextBox.Location = new System.Drawing.Point(76, 224);
+            this.postalTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.postalTextBox.Name = "postalTextBox";
+            this.postalTextBox.Size = new System.Drawing.Size(160, 22);
+            this.postalTextBox.TabIndex = 6;
             // 
-            // label3
+            // label4
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(72, 124);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(72, 17);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Address 1";
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(616, 40);
+            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(49, 17);
+            this.label4.TabIndex = 15;
+            this.label4.Text = "Phone";
             // 
-            // label2
+            // phoneTextBox
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(344, 40);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(76, 17);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Last Name";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(72, 39);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(76, 17);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "First Name";
-            // 
-            // address1TextBox
-            // 
-            this.address1TextBox.Location = new System.Drawing.Point(76, 147);
-            this.address1TextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.address1TextBox.Name = "address1TextBox";
-            this.address1TextBox.Size = new System.Drawing.Size(160, 22);
-            this.address1TextBox.TabIndex = 2;
-            // 
-            // lastNameTextBox
-            // 
-            this.lastNameTextBox.Location = new System.Drawing.Point(348, 63);
-            this.lastNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.lastNameTextBox.Name = "lastNameTextBox";
-            this.lastNameTextBox.Size = new System.Drawing.Size(160, 22);
-            this.lastNameTextBox.TabIndex = 1;
-            // 
-            // firstNameTextBox
-            // 
-            this.firstNameTextBox.Location = new System.Drawing.Point(76, 63);
-            this.firstNameTextBox.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.firstNameTextBox.Name = "firstNameTextBox";
-            this.firstNameTextBox.Size = new System.Drawing.Size(160, 22);
-            this.firstNameTextBox.TabIndex = 0;
+            this.phoneTextBox.Location = new System.Drawing.Point(620, 63);
+            this.phoneTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.phoneTextBox.Name = "phoneTextBox";
+            this.phoneTextBox.Size = new System.Drawing.Size(160, 22);
+            this.phoneTextBox.TabIndex = 2;
             // 
             // Country
             // 
@@ -202,7 +164,7 @@
             this.countryTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.countryTextBox.Name = "countryTextBox";
             this.countryTextBox.Size = new System.Drawing.Size(160, 22);
-            this.countryTextBox.TabIndex = 10;
+            this.countryTextBox.TabIndex = 7;
             // 
             // cityTextBox
             // 
@@ -210,7 +172,7 @@
             this.cityTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.cityTextBox.Name = "cityTextBox";
             this.cityTextBox.Size = new System.Drawing.Size(160, 22);
-            this.cityTextBox.TabIndex = 9;
+            this.cityTextBox.TabIndex = 5;
             // 
             // address2TextBox
             // 
@@ -218,43 +180,95 @@
             this.address2TextBox.Margin = new System.Windows.Forms.Padding(4);
             this.address2TextBox.Name = "address2TextBox";
             this.address2TextBox.Size = new System.Drawing.Size(160, 22);
-            this.address2TextBox.TabIndex = 8;
+            this.address2TextBox.TabIndex = 4;
             // 
-            // label4
+            // cancelButton
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(616, 40);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(49, 17);
-            this.label4.TabIndex = 15;
-            this.label4.Text = "Phone";
+            this.cancelButton.Location = new System.Drawing.Point(32, 336);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(4);
+            this.cancelButton.Name = "cancelButton";
+            this.cancelButton.Size = new System.Drawing.Size(100, 28);
+            this.cancelButton.TabIndex = 8;
+            this.cancelButton.Text = "Cancel";
+            this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
-            // phoneTextBox
+            // saveCustomerButton
             // 
-            this.phoneTextBox.Location = new System.Drawing.Point(620, 63);
-            this.phoneTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.phoneTextBox.Name = "phoneTextBox";
-            this.phoneTextBox.Size = new System.Drawing.Size(160, 22);
-            this.phoneTextBox.TabIndex = 14;
+            this.saveCustomerButton.Location = new System.Drawing.Point(682, 336);
+            this.saveCustomerButton.Margin = new System.Windows.Forms.Padding(4);
+            this.saveCustomerButton.Name = "saveCustomerButton";
+            this.saveCustomerButton.Size = new System.Drawing.Size(100, 28);
+            this.saveCustomerButton.TabIndex = 9;
+            this.saveCustomerButton.Text = "Save";
+            this.saveCustomerButton.UseVisualStyleBackColor = true;
+            this.saveCustomerButton.Click += new System.EventHandler(this.saveCustomerButton_Click);
             // 
-            // label7
+            // label3
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(72, 201);
-            this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(84, 17);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "Postal Code";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(72, 124);
+            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(72, 17);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Address 1";
             // 
-            // postalTextBox
+            // label2
             // 
-            this.postalTextBox.Location = new System.Drawing.Point(76, 224);
-            this.postalTextBox.Margin = new System.Windows.Forms.Padding(4);
-            this.postalTextBox.Name = "postalTextBox";
-            this.postalTextBox.Size = new System.Drawing.Size(160, 22);
-            this.postalTextBox.TabIndex = 16;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(344, 40);
+            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(76, 17);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Last Name";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(72, 39);
+            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 17);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "First Name";
+            // 
+            // address1TextBox
+            // 
+            this.address1TextBox.Location = new System.Drawing.Point(76, 147);
+            this.address1TextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.address1TextBox.Name = "address1TextBox";
+            this.address1TextBox.Size = new System.Drawing.Size(160, 22);
+            this.address1TextBox.TabIndex = 3;
+            // 
+            // lastNameTextBox
+            // 
+            this.lastNameTextBox.Location = new System.Drawing.Point(348, 63);
+            this.lastNameTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.lastNameTextBox.Name = "lastNameTextBox";
+            this.lastNameTextBox.Size = new System.Drawing.Size(160, 22);
+            this.lastNameTextBox.TabIndex = 1;
+            // 
+            // firstNameTextBox
+            // 
+            this.firstNameTextBox.Location = new System.Drawing.Point(76, 63);
+            this.firstNameTextBox.Margin = new System.Windows.Forms.Padding(4);
+            this.firstNameTextBox.Name = "firstNameTextBox";
+            this.firstNameTextBox.Size = new System.Drawing.Size(160, 22);
+            this.firstNameTextBox.TabIndex = 0;
+            // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(73, 283);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(86, 20);
+            this.errorLabel.TabIndex = 3;
+            this.errorLabel.Text = "errorLabel";
+            this.errorLabel.Visible = false;
             // 
             // CustomerForm
             // 
@@ -263,7 +277,7 @@
             this.ClientSize = new System.Drawing.Size(928, 535);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.formLabel);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CustomerForm";
             this.Text = "CustomerForm";
             this.groupBox1.ResumeLayout(false);
@@ -295,5 +309,6 @@
         private System.Windows.Forms.TextBox postalTextBox;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox phoneTextBox;
+        private System.Windows.Forms.Label errorLabel;
     }
 }

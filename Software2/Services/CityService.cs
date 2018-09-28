@@ -37,7 +37,9 @@ namespace Software2.Services
 
         public void add(city city)
         {
-
+            if (findByNameAndCountryId(city.city1, city.countryId) != null)
+                throw new DataIntegrityViolationException("City already exists");
+            _repository.add(city);
         }
 
         public void delete(int id)

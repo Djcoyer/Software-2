@@ -58,6 +58,7 @@ namespace Software2
             container.Register<ICustomerRepository, CustomerRepository>();
             container.Register<IAddressRepository, AddressRepository>();
             container.Register<ICityRepository, CityRepository>();
+            container.Register<ICountryRepository, CountryRepository>();
             container.Register<AuthRepository>(Lifestyle.Singleton);
             container.Register<IFormManager, FormManager>();
 
@@ -66,6 +67,7 @@ namespace Software2
             container.Register<CustomerService>();
             container.Register<AddressService>();
             container.Register<CityService>();
+            container.Register<CountryService>();
 
             if (calendarEntities.users == null || calendarEntities.users.Count() == 0)
             {

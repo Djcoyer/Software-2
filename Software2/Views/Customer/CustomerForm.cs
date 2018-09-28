@@ -1,4 +1,5 @@
-﻿using Software2.Models.Exceptions;
+﻿using Software2.Models;
+using Software2.Models.Exceptions;
 using Software2.Services;
 using Software2.Views.manager;
 using System;
@@ -18,7 +19,6 @@ namespace Software2.Views.Customer
         private CustomerService customerService;
         private AddressService addressService;
         private customer customer;
-        private List<address> addresses;
         private int customerId;
         private IFormManager _formManager;
 
@@ -74,15 +74,34 @@ namespace Software2.Views.Customer
 
         private void updateFields(customer customer)
         {
-            var addressValue = address1TextBox.Text;
+            var address1 = address1TextBox.Text;
+            var address2 = address2TextBox.Text;
+            var postalCode = postalTextBox.Text;
             var firstName = firstNameTextBox.Text;
             var lastName = lastNameTextBox.Text;
-            var existingAddress = addresses.FirstOrDefault(a => a.address1.Equals(addressValue));
-            if (existingAddress == null)
-                throw new NotFoundException("Must input a valid address or create a new address");
-            if (String.IsNullOrEmpty(firstName) || String.IsNullOrEmpty(lastName))
-                throw new InvalidInputException("Must input first and last name");
-            customer.addressId = existingAddress.addressId;
+            address address;
+            try
+            {
+                address = addressService.FindByAddressAndPostalCode(address1, address2, postalCode);
+            }catch(NotFoundException e)
+            {
+                var addressAggregate = new AddressAggregate()
+                {
+                    Address1 = address1,
+                    Address2 = address2,
+                    CityName = cityTextBox.Text,
+                    CountryName = countryTextBox.Text,
+                    Phone = phoneTextBox.Text,
+                    PostalCode = postalCode
+                };
+                addressService.addNewAddress(addressAggregate);
+                address = addressService.FindByAddressAndPostalCode(address1, address2, postalCode);
+            } catch(InvalidInputException e)
+            {
+                errorLabel.Text = e.Message;
+                return;
+            }
+            customer.addressId = address.addressId;
             customer.customerName = String.Format("{0} {1}", firstName, lastName);
         }
 

@@ -144,11 +144,10 @@ namespace Software2.Services
 
         public void UpdateAddress(AddressAggregate addressAggregate)
         {
-            var countryId = GetUpdatedCountryId(addressAggregate.CountryId, addressAggregate.CountryName);
+            var countryId = GetUpdatedCountryId(addressAggregate.CountryName);
             var cityId = GetUpdatedCityId(addressAggregate.CityId, addressAggregate.CityName, countryId);
 
-            var existingAddress = FindOne(addressAggregate.AddressId);
-
+            var existingAddress = FindByAddressAndPostalCode(addressAggregate.Address1, addressAggregate.Address2, addressAggregate.PostalCode);
 
             var address = new address()
             {
@@ -167,51 +166,42 @@ namespace Software2.Services
             _repository.Update(address, address.addressId);
         }
 
-        private int GetUpdatedCountryId(int countryId, string countryName)
+        private int GetUpdatedCountryId(string countryName)
         {
-            var country = countryService.findOne(countryId);
-            if (countryName != country.country1)
+            try
             {
-                try
-                {
-                    var otherCountry = countryService.findByName(countryName);
-                    return otherCountry.countryId;
-                }
-                catch (NotFoundException e)
-                {
-                    countryService.add(new country()
-                    {
-                        country1 = countryName
-                    });
-                    var newCountry = countryService.findByName(countryName);
-                    return newCountry.countryId;
-                }
+                var country = countryService.findByName(countryName);
+                return country.countryId;
+
             }
-            else return countryId;
+            catch (NotFoundException e)
+            {
+                countryService.add(new country()
+                {
+                    country1 = countryName
+                });
+                var newCountry = countryService.findByName(countryName);
+                return newCountry.countryId;
+            }
         }
 
         private int GetUpdatedCityId(int cityId, string cityName, int countryId)
         {
-            var city = cityService.findOne(cityId);
-            if (cityName != city.city1)
+            try
             {
-                try
-                {
-                    var otherCity = cityService.findByNameAndCountryId(cityName, countryId);
-                    return otherCity.cityId;
-                }
-                catch (NotFoundException e)
-                {
-                    cityService.add(new city()
-                    {
-                        city1 = cityName,
-                        countryId = countryId
-                    });
-                    var newCity = cityService.findByNameAndCountryId(cityName, countryId);
-                    return newCity.cityId;
+                var city = cityService.findByNameAndCountryId(cityName, countryId);
+                return city.cityId;
             }
-        }
-            else return cityId;
+            catch (NotFoundException e)
+            {
+                cityService.add(new city()
+                {
+                    city1 = cityName,
+                    countryId = countryId
+                });
+                var newCity = cityService.findByNameAndCountryId(cityName, countryId);
+                return newCity.cityId;
+            }
         }
 
         private void ValidateAddressAggregate(AddressAggregate addressAggregate)

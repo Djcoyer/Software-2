@@ -34,7 +34,7 @@ namespace Software2.Services
         {
             var city = _repository.findOne(id);
             if (city == null)
-                throw new NotFoundException("");
+                throw new NotFoundException("Could not locate city with specified ID.");
             return city;
         }
 

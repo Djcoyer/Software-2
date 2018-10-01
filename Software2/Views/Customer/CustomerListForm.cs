@@ -71,11 +71,12 @@ namespace Software2.Views.Customer
 
         private void editCustomerButton_Click(object sender, EventArgs e)
         {
-            var _customer = GetItemFromSelectedRow(customerGridView);
-            if (_customer == null)
+            var customerRow = GetItemFromSelectedRow(customerGridView);
+            if (customerRow == null)
                 return;
+            var customer = customerService.FindOne(customerRow.customerId);
             var customerForm = _formManager.GetForm<CustomerForm>();
-            customerForm.SetCustomer(_customer);
+            customerForm.SetCustomer(customer);
             customerForm.Show();
             this.Close();
         }

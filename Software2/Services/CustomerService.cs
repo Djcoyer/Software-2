@@ -1,4 +1,5 @@
 ﻿using Software2.Models.Exceptions;
+using Software2.Repositories.Implementation;
 using Software2.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,11 @@ namespace Software2.Services
     public class CustomerService
     {
         private ICustomerRepository _repository;
+        private AuthRepository _authRepository;
 
-        public CustomerService(ICustomerRepository repository)
+        public CustomerService(ICustomerRepository repository, AuthRepository authRepository)
         {
+            _authRepository = authRepository;
             _repository = repository;
         }
 
@@ -42,7 +45,7 @@ namespace Software2.Services
         public void Update(customer customer, int customerId)
         { 
             customer.lastUpdate = DateTime.Now;
-            customer.lastUpdateBy = "Devyn Coyer";
+            customer.lastUpdateBy = _authRepository.Username;
             _repository.Update(customer, customerId);
         }
 

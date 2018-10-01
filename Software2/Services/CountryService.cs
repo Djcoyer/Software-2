@@ -21,7 +21,7 @@ namespace Software2.Services
         {
             var country = _repository.findOne(id);
             if (country == null)
-                throw new NotFoundException("");
+                throw new NotFoundException("Could not locate country with specified ID.");
             return country;
         }
 

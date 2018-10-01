@@ -72,23 +72,26 @@ namespace Software2.Views.Customer
         {
             var addressAggregate = GetAddressAggregateFromFields();
             var customer = new customer();
+            string firstName = firstNameTextBox.Text;
+            string lastName = lastNameTextBox.Text;
+            customer.customerName = String.Format("{0} {1}", firstName, lastName);
+
             validateFields(customer, addressAggregate);
 
             var addressId = UpdateAddress(addressAggregate);
 
-            string firstName = firstNameTextBox.Text;
-            string lastName = lastNameTextBox.Text;
+           
 
             customer.addressId = addressId;
-            customer.customerName = String.Format("{0} {1}", firstName, lastName);
             customerService.Add(customer);
         }
         private void UpdateCustomer()
         {
             var addressAggregate = GetAddressAggregateFromFields();
-            var addressId = UpdateAddress(addressAggregate);
             validateFields(customer, addressAggregate);
-            customerService.Update(customer, customerId);
+            int addressId = UpdateAddress(addressAggregate);
+            customer.addressId = addressId;
+            customerService.Update(customer, customer.customerId);
         }
 
         private void SetFields()
@@ -111,7 +114,7 @@ namespace Software2.Views.Customer
             try
             {
                 address = addressService.FindByAddressAndPostalCode(addressAggregate.Address1, addressAggregate.Address2, addressAggregate.PostalCode);
-                addressService.UpdateAddressAggregate(addressAggregate);
+                addressService.UpdateAddress(addressAggregate);
             }
             catch (NotFoundException e)
             {
@@ -154,7 +157,10 @@ namespace Software2.Views.Customer
                 CountryName = country,
                 CityName = city,
                 PostalCode = postalCode,
-                Phone = phone
+                Phone = phone,
+                AddressId = addressAggregate.AddressId,
+                CountryId = addressAggregate.CountryId,
+                CityId = addressAggregate.CityId
             };
         }
 

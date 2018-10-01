@@ -44,7 +44,9 @@ namespace Software2.Repositories.Implementation
         public void Update(customer customer, int id)
         {
             var dbCustomer = FindOne(id);
-            dbCustomer = customer;
+            if (dbCustomer == null)
+                return;
+            _db.Entry(dbCustomer).CurrentValues.SetValues(customer);
             _db.SaveChanges();
         }
     }

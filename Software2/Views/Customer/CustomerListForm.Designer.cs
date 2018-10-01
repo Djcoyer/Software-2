@@ -39,31 +39,32 @@
             // 
             // customerGridView
             // 
+            this.customerGridView.AllowUserToAddRows = false;
+            this.customerGridView.AllowUserToDeleteRows = false;
             this.customerGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.customerGridView.Location = new System.Drawing.Point(24, 80);
-            this.customerGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.customerGridView.Location = new System.Drawing.Point(18, 65);
+            this.customerGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.customerGridView.Name = "customerGridView";
+            this.customerGridView.ReadOnly = true;
             this.customerGridView.RowTemplate.Height = 24;
-            this.customerGridView.Size = new System.Drawing.Size(728, 347);
+            this.customerGridView.Size = new System.Drawing.Size(546, 282);
             this.customerGridView.TabIndex = 0;
             // 
             // formHeading
             // 
             this.formHeading.AutoSize = true;
             this.formHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.formHeading.Location = new System.Drawing.Point(19, 26);
-            this.formHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.formHeading.Location = new System.Drawing.Point(14, 21);
             this.formHeading.Name = "formHeading";
-            this.formHeading.Size = new System.Drawing.Size(116, 25);
+            this.formHeading.Size = new System.Drawing.Size(95, 20);
             this.formHeading.TabIndex = 1;
             this.formHeading.Text = "Customers";
             // 
             // addCustomerButton
             // 
-            this.addCustomerButton.Location = new System.Drawing.Point(635, 26);
-            this.addCustomerButton.Margin = new System.Windows.Forms.Padding(4);
+            this.addCustomerButton.Location = new System.Drawing.Point(476, 21);
             this.addCustomerButton.Name = "addCustomerButton";
-            this.addCustomerButton.Size = new System.Drawing.Size(117, 28);
+            this.addCustomerButton.Size = new System.Drawing.Size(88, 23);
             this.addCustomerButton.TabIndex = 2;
             this.addCustomerButton.Text = "Add";
             this.addCustomerButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -73,10 +74,9 @@
             // 
             // editCustomerButton
             // 
-            this.editCustomerButton.Location = new System.Drawing.Point(495, 446);
-            this.editCustomerButton.Margin = new System.Windows.Forms.Padding(4);
+            this.editCustomerButton.Location = new System.Drawing.Point(371, 362);
             this.editCustomerButton.Name = "editCustomerButton";
-            this.editCustomerButton.Size = new System.Drawing.Size(117, 28);
+            this.editCustomerButton.Size = new System.Drawing.Size(88, 23);
             this.editCustomerButton.TabIndex = 3;
             this.editCustomerButton.Text = "Edit";
             this.editCustomerButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -86,10 +86,9 @@
             // 
             // deleteCustomerButton
             // 
-            this.deleteCustomerButton.Location = new System.Drawing.Point(635, 446);
-            this.deleteCustomerButton.Margin = new System.Windows.Forms.Padding(4);
+            this.deleteCustomerButton.Location = new System.Drawing.Point(476, 362);
             this.deleteCustomerButton.Name = "deleteCustomerButton";
-            this.deleteCustomerButton.Size = new System.Drawing.Size(117, 28);
+            this.deleteCustomerButton.Size = new System.Drawing.Size(88, 23);
             this.deleteCustomerButton.TabIndex = 4;
             this.deleteCustomerButton.Text = "Delete";
             this.deleteCustomerButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -99,10 +98,9 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(28, 446);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(4);
+            this.cancelButton.Location = new System.Drawing.Point(21, 362);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(117, 28);
+            this.cancelButton.Size = new System.Drawing.Size(88, 23);
             this.cancelButton.TabIndex = 5;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -112,16 +110,16 @@
             // 
             // CustomerListForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(885, 530);
+            this.ClientSize = new System.Drawing.Size(664, 431);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.deleteCustomerButton);
             this.Controls.Add(this.editCustomerButton);
             this.Controls.Add(this.addCustomerButton);
             this.Controls.Add(this.formHeading);
             this.Controls.Add(this.customerGridView);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "CustomerListForm";
             this.Text = "CustomerListForm";
             ((System.ComponentModel.ISupportInitialize)(this.customerGridView)).EndInit();

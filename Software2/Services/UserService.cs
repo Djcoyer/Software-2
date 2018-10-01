@@ -21,7 +21,7 @@ namespace Software2.Services
         {
             var user = _repository.FindById(id);
             if (user == null)
-                throw new NotFoundException("");
+                throw new NotFoundException("Could not locate user with specified ID.");
             return user;
         }
 

@@ -36,7 +36,9 @@ namespace Software2.Repositories.Implementation
 
         public void Update(address address, int id)
         {
-            throw new NotImplementedException();
+            var existingAddress = FindOne(id);
+            existingAddress = address;
+            _db.SaveChanges();
         }
     }
 }

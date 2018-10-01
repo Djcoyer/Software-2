@@ -32,12 +32,16 @@ namespace Software2.Services
 
         public address FindOne(int addressId)
         {
-            return _repository.FindOne(addressId);
+            var address = _repository.FindOne(addressId);
+            if (address == null)
+                throw new NotFoundException("Could not locate address with specified ID");
+            return address;
         }
 
         public void addNewAddress(AddressAggregate addressAggregate)
         {
             ValidateAddressAggregate(addressAggregate);
+            var username = _authRepository.Username;
             try
             {
                 var existingAddress = FindByAddressAndPostalCode(addressAggregate.Address1, addressAggregate.Address2, addressAggregate.PostalCode);
@@ -46,7 +50,6 @@ namespace Software2.Services
             }
             catch (NotFoundException e)
             {
-
                 try
                 {
                     var country = countryService.findByName(addressAggregate.CountryName);
@@ -56,7 +59,11 @@ namespace Software2.Services
                 {
                     countryService.add(new country()
                     {
-                        country1 = addressAggregate.CountryName
+                        country1 = addressAggregate.CountryName,
+                        lastUpdate = DateTime.Now,
+                        createdBy = username,
+                        lastUpdateBy = username,
+                        createDate = DateTime.Now
                     });
 
                     var country = countryService.findByName(addressAggregate.CountryName);
@@ -74,7 +81,11 @@ namespace Software2.Services
                     cityService.add(new city()
                     {
                         countryId = addressAggregate.CountryId,
-                        city1 = addressAggregate.CityName
+                        city1 = addressAggregate.CityName,
+                        lastUpdateBy = username,
+                        createdBy = username,
+                        createDate = DateTime.Now,
+                        lastUpdate = DateTime.Now
                     });
 
                     var city = cityService.findByNameAndCountryId(addressAggregate.CityName, addressAggregate.CountryId);
@@ -88,8 +99,8 @@ namespace Software2.Services
                     address2 = addressAggregate.Address2,
                     createDate = DateTime.Now,
                     lastUpdate = DateTime.Now,
-                    createdBy = _authRepository.Username,
-                    lastUpdateBy = _authRepository.Username,
+                    createdBy = username,
+                    lastUpdateBy = username,
                     phone = addressAggregate.Phone,
                     postalCode = addressAggregate.PostalCode
                 });
@@ -106,6 +117,101 @@ namespace Software2.Services
             if (existingAddress == null)
                 throw new NotFoundException("Could not find specified address");
             return existingAddress;
+        }
+
+        public AddressAggregate FindAggregateById(int addressId)
+        {
+            address address;
+            address = FindOne(addressId);
+            var cityId = address.cityId;
+            var city = cityService.findOne(cityId);
+            var countryId = city.countryId;
+            var country = countryService.findOne(countryId);
+
+            return new AddressAggregate()
+            {
+                CityId = cityId,
+                CityName = city.city1,
+                CountryId = countryId,
+                CountryName = country.country1,
+                Address1 = address.address1,
+                Address2 = address.address2,
+                Phone = address.phone,
+                PostalCode = address.postalCode,
+                AddressId = address.addressId
+            };
+        }
+
+        public void UpdateAddress(AddressAggregate addressAggregate)
+        {
+            var countryId = GetUpdatedCountryId(addressAggregate.CountryId, addressAggregate.CountryName);
+            var cityId = GetUpdatedCityId(addressAggregate.CityId, addressAggregate.CityName, countryId);
+
+            var existingAddress = FindOne(addressAggregate.AddressId);
+
+
+            var address = new address()
+            {
+                cityId = cityId,
+                address1 = addressAggregate.Address1,
+                address2 = addressAggregate.Address2,
+                addressId = addressAggregate.AddressId,
+                phone = addressAggregate.Phone,
+                postalCode = addressAggregate.PostalCode,
+                createdBy = existingAddress.createdBy,
+                createDate = existingAddress.createDate,
+                lastUpdate = DateTime.Now,
+                lastUpdateBy = _authRepository.Username
+            };
+
+            _repository.Update(address, address.addressId);
+        }
+
+        private int GetUpdatedCountryId(int countryId, string countryName)
+        {
+            var country = countryService.findOne(countryId);
+            if (countryName != country.country1)
+            {
+                try
+                {
+                    var otherCountry = countryService.findByName(countryName);
+                    return otherCountry.countryId;
+                }
+                catch (NotFoundException e)
+                {
+                    countryService.add(new country()
+                    {
+                        country1 = countryName
+                    });
+                    var newCountry = countryService.findByName(countryName);
+                    return newCountry.countryId;
+                }
+            }
+            else return countryId;
+        }
+
+        private int GetUpdatedCityId(int cityId, string cityName, int countryId)
+        {
+            var city = cityService.findOne(cityId);
+            if (cityName != city.city1)
+            {
+                try
+                {
+                    var otherCity = cityService.findByNameAndCountryId(cityName, countryId);
+                    return otherCity.cityId;
+                }
+                catch (NotFoundException e)
+                {
+                    cityService.add(new city()
+                    {
+                        city1 = cityName,
+                        countryId = countryId
+                    });
+                    var newCity = cityService.findByNameAndCountryId(cityName, countryId);
+                    return newCity.cityId;
+            }
+        }
+            else return cityId;
         }
 
         private void ValidateAddressAggregate(AddressAggregate addressAggregate)

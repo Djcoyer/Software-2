@@ -1,4 +1,5 @@
 ﻿using Software2.Models.Exceptions;
+using Software2.Repositories.Implementation;
 using Software2.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -11,9 +12,11 @@ namespace Software2.Services
     public class CityService
     {
         private ICityRepository _repository;
+        private AuthRepository _authRepository;
 
-        public CityService(ICityRepository repository)
+        public CityService(ICityRepository repository, AuthRepository authRepository)
         {
+            _authRepository = authRepository;
             _repository = repository;
         }
 
@@ -37,9 +40,16 @@ namespace Software2.Services
 
         public void add(city city)
         {
-            if (findByNameAndCountryId(city.city1, city.countryId) != null)
+            if (String.IsNullOrWhiteSpace(city.city1))
+                throw new InvalidInputException("Must include city name");
+            try
+            {
+                var existingCity = findByNameAndCountryId(city.city1, city.countryId);
                 throw new DataIntegrityViolationException("City already exists");
-            _repository.add(city);
+            }catch(NotFoundException e)
+            {
+                _repository.add(city);
+            }
         }
 
         public void delete(int id)
@@ -66,10 +76,10 @@ namespace Software2.Services
         {
             var cities = _repository.findByName(name);
             if (cities == null || cities.Count() == 0)
-                throw new NotFoundException("");
+                throw new NotFoundException("City does not exist");
             var cityToReturn = cities.Where(c => c.countryId == countryId).FirstOrDefault();
             if (cityToReturn == null)
-                throw new NotFoundException("");
+                throw new NotFoundException("City does not exist");
             return cityToReturn;
         }
     }

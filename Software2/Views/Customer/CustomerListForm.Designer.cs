@@ -61,7 +61,7 @@
             // addCustomerButton
             // 
             this.addCustomerButton.Location = new System.Drawing.Point(635, 26);
-            this.addCustomerButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.addCustomerButton.Margin = new System.Windows.Forms.Padding(4);
             this.addCustomerButton.Name = "addCustomerButton";
             this.addCustomerButton.Size = new System.Drawing.Size(117, 28);
             this.addCustomerButton.TabIndex = 2;
@@ -74,7 +74,7 @@
             // editCustomerButton
             // 
             this.editCustomerButton.Location = new System.Drawing.Point(495, 446);
-            this.editCustomerButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.editCustomerButton.Margin = new System.Windows.Forms.Padding(4);
             this.editCustomerButton.Name = "editCustomerButton";
             this.editCustomerButton.Size = new System.Drawing.Size(117, 28);
             this.editCustomerButton.TabIndex = 3;
@@ -87,7 +87,7 @@
             // deleteCustomerButton
             // 
             this.deleteCustomerButton.Location = new System.Drawing.Point(635, 446);
-            this.deleteCustomerButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.deleteCustomerButton.Margin = new System.Windows.Forms.Padding(4);
             this.deleteCustomerButton.Name = "deleteCustomerButton";
             this.deleteCustomerButton.Size = new System.Drawing.Size(117, 28);
             this.deleteCustomerButton.TabIndex = 4;
@@ -95,11 +95,12 @@
             this.deleteCustomerButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.deleteCustomerButton.UseMnemonic = false;
             this.deleteCustomerButton.UseVisualStyleBackColor = true;
+            this.deleteCustomerButton.Click += new System.EventHandler(this.deleteCustomerButton_Click);
             // 
             // cancelButton
             // 
             this.cancelButton.Location = new System.Drawing.Point(28, 446);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.cancelButton.Margin = new System.Windows.Forms.Padding(4);
             this.cancelButton.Name = "cancelButton";
             this.cancelButton.Size = new System.Drawing.Size(117, 28);
             this.cancelButton.TabIndex = 5;

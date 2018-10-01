@@ -18,20 +18,24 @@ namespace Software2.Views.Customer
         private CustomerService customerService;
         private List<customer> customers;
         private IFormManager _formManager;
+        private BindingSource customerBindingSource;
         public CustomerListForm(CustomerService customerService, IFormManager formManager)
         {
             this.customerService = customerService;
             _formManager = formManager;
             customers = customerService.FindAllCustomers();
             InitializeComponent();
-            customerGridView.DataSource = customers.Select(c => new 
-            CustomerRow {
+            customerBindingSource = new BindingSource();
+            customerBindingSource.DataSource = customers.Select(c => new
+            CustomerRow
+            {
                 Id = c.customerId,
                 Name = c.customerName,
                 AddressId = c.addressId,
                 Created = c.createDate,
                 Updated = c.lastUpdate
             }).ToList();
+            customerGridView.DataSource = customerBindingSource; 
         }
 
         private void addCustomerButton_Click(object sender, EventArgs e)
@@ -47,12 +51,14 @@ namespace Software2.Views.Customer
         }
 
 
-        public static customer GetItemFromSelectedRow(DataGridView gridView)
+        private customer GetItemFromSelectedRow(DataGridView gridView)
         {
             if (gridView.SelectedRows.Count <= 0) return null;
             if (gridView.SelectedRows.Count > 1) { }
             var selectedRow = gridView.SelectedRows[0];
             var rowCustomer = selectedRow.DataBoundItem as CustomerRow;
+            if (rowCustomer == null)
+                return null;
             return new customer()
             {
                 customerId = rowCustomer.Id,
@@ -72,6 +78,18 @@ namespace Software2.Views.Customer
             customerForm.SetCustomer(_customer);
             customerForm.Show();
             this.Close();
+        }
+
+        private void deleteCustomerButton_Click(object sender, EventArgs e)
+        {
+            var _customer = GetItemFromSelectedRow(customerGridView);
+            if (_customer == null)
+                return;
+            var customerId = _customer.customerId;
+            customerService.Delete(customerId);
+
+            customers.Remove(_customer);
+            customerBindingSource.ResetBindings(false);
         }
     }
 }

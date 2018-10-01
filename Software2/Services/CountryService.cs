@@ -34,7 +34,7 @@ namespace Software2.Services
         {
             var country = _repository.findByName(name);
             if (country == null)
-                throw new NotFoundException("");
+                throw new NotFoundException("Could not find country with specified name.");
             return country;
         }
 
@@ -45,6 +45,8 @@ namespace Software2.Services
 
         public void add(country country)
         {
+            if (String.IsNullOrWhiteSpace(country.country1))
+                throw new InvalidInputException("Must include country name");
             _repository.add(country);
         }
     }

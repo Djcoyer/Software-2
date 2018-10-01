@@ -1,4 +1,5 @@
-﻿using Software2.Repositories.Interfaces;
+﻿using Software2.Models.Exceptions;
+using Software2.Repositories.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,11 +24,16 @@ namespace Software2.Services
 
         public customer FindOne(int id)
         {
-            return _repository.FindOne(id);
+            var customer = _repository.FindOne(id);
+            if (customer == null)
+                throw new NotFoundException("Could not locate customer with specified ID");
+            return customer;
         }
 
         public void Add(customer customer)
         {
+            if (String.IsNullOrWhiteSpace(customer.customerName))
+                throw new InvalidInputException("Must include name");
             customer.createdBy = "Devyn Coyer";
             customer.lastUpdateBy = "Devyn Coyer";
             _repository.Add(customer);
@@ -38,6 +44,12 @@ namespace Software2.Services
             customer.lastUpdate = DateTime.Now;
             customer.lastUpdateBy = "Devyn Coyer";
             _repository.Update(customer, customerId);
+        }
+
+        public void Delete(int id)
+        {
+            FindOne(id);
+            _repository.Delete(id);
         }
     }
 }

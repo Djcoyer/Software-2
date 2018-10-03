@@ -20,7 +20,6 @@ namespace Software2.Views.Customer
         private AddressService addressService;
         private AddressAggregate addressAggregate;
         private customer customer;
-        private int customerId;
         private IFormManager _formManager;
 
         public CustomerForm(CustomerService customerService, AddressService addressService, IFormManager formManager)

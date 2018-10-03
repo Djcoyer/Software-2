@@ -112,6 +112,8 @@ namespace Software2.Services
             if (String.IsNullOrEmpty(address1) || String.IsNullOrEmpty(postalCode))
                 throw new InvalidInputException("Must supply address and postal code");
             var addresses = _repository.FindAll();
+
+            //Use lambda to filter the list of entities using multiple criteria and return the first matching record
             var existingAddress = addresses.Where(a => a.address1.Equals(address1, StringComparison.CurrentCultureIgnoreCase)
             && a.address2.Equals(address2, StringComparison.CurrentCultureIgnoreCase) && a.postalCode.Equals(postalCode)).FirstOrDefault();
             if (existingAddress == null)

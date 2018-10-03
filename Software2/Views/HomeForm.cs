@@ -1,4 +1,5 @@
 ﻿using Software2.Repositories.Implementation;
+using Software2.Views.Appointment;
 using Software2.Views.Customer;
 using Software2.Views.manager;
 using System;
@@ -57,6 +58,7 @@ namespace Software2
         {
             var loginForm = _formManager.GetForm<LoginForm>() as LoginForm;
 
+            //Delegate implementation
             loginForm.setUserAuthenticated = (Form form, string username) =>
             {
                 SetUserAuthenticated(username);
@@ -72,6 +74,12 @@ namespace Software2
         {
             this.Hide();
             _formManager.ShowForm<CustomerListForm>();
+        }
+
+        private void appointmentsButton_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            _formManager.ShowForm<AppointmentForm>();
         }
     }
 }

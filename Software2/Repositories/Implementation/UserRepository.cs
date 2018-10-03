@@ -39,6 +39,7 @@ namespace Software2.Repositories.Implementation
 
         public user FindByUsername(string username)
         {
+            //Allows for searching the database by a custom field with no case sensitivity
             return _db.users.FirstOrDefault(p => p.userName.Equals(username, StringComparison.CurrentCultureIgnoreCase));
         }
 

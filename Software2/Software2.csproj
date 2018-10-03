@@ -105,18 +105,27 @@
     <Compile Include="Models\CustomerRow.cs" />
     <Compile Include="Models\Exceptions\DataIntegrityViolationException.cs" />
     <Compile Include="Repositories\Implementation\AddressRepository.cs" />
+    <Compile Include="Repositories\Implementation\AppointmentRepository.cs" />
     <Compile Include="Repositories\Implementation\AuthRepository.cs" />
     <Compile Include="Repositories\Implementation\CityRepository.cs" />
     <Compile Include="Repositories\Implementation\CountryRepository.cs" />
     <Compile Include="Repositories\Implementation\CustomerRepository.cs" />
     <Compile Include="Repositories\Interfaces\IAddressRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAppointmentRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICityRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICountryRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICustomerRepository.cs" />
     <Compile Include="Services\AddressService.cs" />
+    <Compile Include="Services\AppointmentService.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Views\Appointment\AppointmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Appointment\AppointmentForm.Designer.cs">
+      <DependentUpon>AppointmentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Customer\CustomerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +174,9 @@
     <Compile Include="Views\UserListForm.Designer.cs">
       <DependentUpon>UserListForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Appointment\AppointmentForm.resx">
+      <DependentUpon>AppointmentForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Customer\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>
     </EmbeddedResource>

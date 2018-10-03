@@ -26,6 +26,7 @@ namespace Software2.Views.Customer
             customers = customerService.FindAllCustomers();
             InitializeComponent();
             customerBindingSource = new BindingSource();
+            //Select certain fields with lambda expression to form new object similar to a ViewModel
             customerBindingSource.DataSource = customers.Select(c => new
             CustomerRow
             {

@@ -104,22 +104,29 @@
     <Compile Include="Models\CityRow.cs" />
     <Compile Include="Models\CustomerRow.cs" />
     <Compile Include="Models\Exceptions\DataIntegrityViolationException.cs" />
+    <Compile Include="Models\ReminderAggregate.cs" />
     <Compile Include="Repositories\Implementation\AddressRepository.cs" />
     <Compile Include="Repositories\Implementation\AppointmentRepository.cs" />
     <Compile Include="Repositories\Implementation\AuthRepository.cs" />
     <Compile Include="Repositories\Implementation\CityRepository.cs" />
     <Compile Include="Repositories\Implementation\CountryRepository.cs" />
     <Compile Include="Repositories\Implementation\CustomerRepository.cs" />
+    <Compile Include="Repositories\Implementation\IncrementTypeRepository.cs" />
+    <Compile Include="Repositories\Implementation\ReminderRepository.cs" />
     <Compile Include="Repositories\Interfaces\IAddressRepository.cs" />
     <Compile Include="Repositories\Interfaces\IAppointmentRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICityRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICountryRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICustomerRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IIncrementRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IReminderRepository.cs" />
     <Compile Include="Services\AddressService.cs" />
     <Compile Include="Services\AppointmentService.cs" />
     <Compile Include="Services\CityService.cs" />
     <Compile Include="Services\CountryService.cs" />
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\IncrementService.cs" />
+    <Compile Include="Services\ReminderService.cs" />
     <Compile Include="Views\Appointment\AppointmentForm.cs">
       <SubType>Form</SubType>
     </Compile>

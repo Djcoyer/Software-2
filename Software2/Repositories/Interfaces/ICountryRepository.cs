@@ -8,11 +8,11 @@ namespace Software2.Repositories.Interfaces
 {
     public interface ICountryRepository
     {
-        IEnumerable<country> findAll();
-        country findOne(int id);
-        country findByName(string name);
-        void add(country country);
-        void update(country country, int id);
-        void delete(int id);
+        IEnumerable<country> FindAll();
+        country FindOne(int id);
+        country FindByName(string name);
+        void Add(country country);
+        void Update(country country, int id);
+        void Delete(int id);
     }
 }

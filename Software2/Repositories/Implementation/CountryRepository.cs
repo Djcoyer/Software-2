@@ -16,7 +16,7 @@ namespace Software2.Repositories.Implementation
             _db = db;
         }
 
-        public void add(country country)
+        public void Add(country country)
         {
             var lastCountryId = _db.countries.Max(c => c.countryId);
             country.countryId = lastCountryId + 1;
@@ -24,30 +24,30 @@ namespace Software2.Repositories.Implementation
             _db.SaveChanges();
         }
 
-        public void delete(int id)
+        public void Delete(int id)
         {
-            var country = findOne(id);
+            var country = FindOne(id);
             _db.countries.Remove(country);
         }
 
-        public IEnumerable<country> findAll()
+        public IEnumerable<country> FindAll()
         {
             return _db.countries.AsEnumerable();
         }
 
-        public country findByName(string name)
+        public country FindByName(string name)
         {
             return _db.countries.Where(c => c.country1.Equals(name, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
         }
 
-        public country findOne(int id)
+        public country FindOne(int id)
         {
             return _db.countries.Find(id);
         }
 
-        public void update(country country, int id)
+        public void Update(country country, int id)
         {
-            var dbCountry = findOne(id);
+            var dbCountry = FindOne(id);
             dbCountry = country;
             _db.SaveChanges();
         }

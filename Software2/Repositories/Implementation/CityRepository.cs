@@ -11,7 +11,7 @@ namespace Software2.Repositories.Implementation
     {
         public CalendarEntities _db { private get; set; }
 
-        public void add(city city)
+        public void Add(city city)
         {
             var lastId = _db.cities.Max(p => p.cityId);
             city.cityId = lastId + 1;
@@ -19,29 +19,29 @@ namespace Software2.Repositories.Implementation
             _db.SaveChanges();
         }
 
-        public void delete(int id)
+        public void Delete(int id)
         {
             var city = _db.cities.Find(id);
             _db.cities.Remove(city);
             _db.SaveChanges();
         }
 
-        public IEnumerable<city> findAll()
+        public IEnumerable<city> FindAll()
         {
             return _db.cities.AsEnumerable();
         }
 
-        public IEnumerable<city> findByName(string name)
+        public IEnumerable<city> FindByName(string name)
         {
             return _db.cities.Where(c => c.city1.Equals(name, StringComparison.CurrentCultureIgnoreCase)).AsEnumerable();
         }
 
-        public city findOne(int id)
+        public city FindOne(int id)
         {
             return _db.cities.Find(id);
         }
 
-        public void update(city city, int id)
+        public void Update(city city, int id)
         {
             var dbCity = _db.cities.Find(id);
             dbCity = city;

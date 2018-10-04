@@ -15,12 +15,14 @@ namespace Software2.Services
         private IReminderRepository _reminderRepository;
         private AuthRepository _authRepository;
         private IncrementService incrementService;
+        private AppointmentService appointmentService;
 
-        public ReminderService(IReminderRepository reminderRepository, IncrementService incrementService, AuthRepository authRepository)
+        public ReminderService(IReminderRepository reminderRepository, IncrementService incrementService, AuthRepository authRepository, AppointmentService appointmentService)
         {
             _reminderRepository = reminderRepository;
             _authRepository = authRepository;
             this.incrementService = incrementService;
+            this.appointmentService = appointmentService;
         }
 
 
@@ -93,8 +95,10 @@ namespace Software2.Services
                 throw new InvalidInputException("Reminder col is required");
             if (reminder.snoozeIncrement <= 0)
                 throw new InvalidInputException("Snooze increment value must be greater than 0");
+            
             //Throws not found exception if not found
             incrementService.FindOne(reminder.snoozeIncrementTypeId);
+            appointmentService.FindOne(reminder.appointmentId);
         }
     }
 }

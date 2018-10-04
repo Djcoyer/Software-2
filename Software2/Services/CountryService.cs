@@ -19,7 +19,7 @@ namespace Software2.Services
 
         public country findOne(int id)
         {
-            var country = _repository.findOne(id);
+            var country = _repository.FindOne(id);
             if (country == null)
                 throw new NotFoundException("Could not locate country with specified ID.");
             return country;
@@ -27,12 +27,12 @@ namespace Software2.Services
 
         public List<country> findAll()
         {
-            return _repository.findAll().ToList();
+            return _repository.FindAll().ToList();
         }
 
         public country findByName(string name)
         {
-            var country = _repository.findByName(name);
+            var country = _repository.FindByName(name);
             if (country == null)
                 throw new NotFoundException("Could not find country with specified name.");
             return country;
@@ -40,14 +40,14 @@ namespace Software2.Services
 
         public void delete(int id)
         {
-            _repository.delete(id);
+            _repository.Delete(id);
         }
 
         public void add(country country)
         {
             if (String.IsNullOrWhiteSpace(country.country1))
                 throw new InvalidInputException("Must include country name");
-            _repository.add(country);
+            _repository.Add(country);
         }
     }
 }

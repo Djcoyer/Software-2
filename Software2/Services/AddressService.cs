@@ -60,10 +60,10 @@ namespace Software2.Services
                     countryService.add(new country()
                     {
                         country1 = addressAggregate.CountryName,
-                        lastUpdate = DateTime.Now,
+                        lastUpdate = DateTime.Now.ToUniversalTime(),
                         createdBy = username,
                         lastUpdateBy = username,
-                        createDate = DateTime.Now
+                        createDate = DateTime.Now.ToUniversalTime()
                     });
 
                     var country = countryService.findByName(addressAggregate.CountryName);
@@ -84,8 +84,8 @@ namespace Software2.Services
                         city1 = addressAggregate.CityName,
                         lastUpdateBy = username,
                         createdBy = username,
-                        createDate = DateTime.Now,
-                        lastUpdate = DateTime.Now
+                        createDate = DateTime.Now.ToUniversalTime(),
+                        lastUpdate = DateTime.Now.ToUniversalTime()
                     });
 
                     var city = cityService.findByNameAndCountryId(addressAggregate.CityName, addressAggregate.CountryId);
@@ -97,8 +97,8 @@ namespace Software2.Services
                     cityId = addressAggregate.CityId,
                     address1 = addressAggregate.Address1,
                     address2 = addressAggregate.Address2,
-                    createDate = DateTime.Now,
-                    lastUpdate = DateTime.Now,
+                    createDate = DateTime.Now.ToUniversalTime(),
+                    lastUpdate = DateTime.Now.ToUniversalTime(),
                     createdBy = username,
                     lastUpdateBy = username,
                     phone = addressAggregate.Phone,
@@ -161,7 +161,7 @@ namespace Software2.Services
                 postalCode = addressAggregate.PostalCode,
                 createdBy = existingAddress.createdBy,
                 createDate = existingAddress.createDate,
-                lastUpdate = DateTime.Now,
+                lastUpdate = DateTime.Now.ToUniversalTime(),
                 lastUpdateBy = _authRepository.Username
             };
 

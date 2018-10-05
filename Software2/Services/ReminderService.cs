@@ -50,6 +50,22 @@ namespace Software2.Services
             _reminderRepository.Add(reminder);
         }
 
+        public void Add(DateTime reminderDateTime, int appointmentId)
+        {
+            var incrementTypeId = incrementService.FindDefaultIncrement()?.incrementTypeId;
+
+            var reminder = new reminder() {
+                appointmentId = appointmentId,
+                createdBy = _authRepository.Username,
+                createdDate = DateTime.Now,
+                reminderDate = reminderDateTime,
+                snoozeIncrement = 5,
+                snoozeIncrementTypeId = incrementTypeId.HasValue ? incrementTypeId.Value : 1
+            };
+
+            _reminderRepository.Add(reminder);
+        }
+
 
         //Validation will take place in the other Add method's Validate method
         //And in IncrementService validate

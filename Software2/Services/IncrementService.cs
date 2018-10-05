@@ -25,6 +25,11 @@ namespace Software2.Services
             return incrementToReturn;
         }
 
+        public incrementtype FindDefaultIncrement()
+        {
+            return _repository.FindAll().Where(i => i.incrementTypeDescription.Equals("Five minute snooze")).FirstOrDefault();
+        }
+
         public IEnumerable<incrementtype> FindAll()
         {
             return _repository.FindAll()?.ToList();

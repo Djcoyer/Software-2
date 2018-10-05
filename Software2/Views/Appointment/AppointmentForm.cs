@@ -37,6 +37,8 @@ namespace Software2.Views.Appointment
             customerTextBox.AutoCompleteCustomSource = source;
             customerTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
             datePicker.MinDate = DateTime.Now;
+            startTimePicker.MinDate = DateTime.Now.Date;
+            endTimePicker.MinDate = DateTime.Now.Date;
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -46,23 +48,31 @@ namespace Software2.Views.Appointment
             var contact = contactTextBox.Text;
             var location = locationTextBox.Text;
             var url = UrlTextBox.Text;
-            var date = datePicker.Value;
             var description = descriptionTextBox.Text;
-            var startTime = startTimePicker.Value;
-            var endTime = endTimePicker.Value;
+
+            var date = datePicker.Value.Date;
+            var startTime = startTimePicker.Value.TimeOfDay;
+            var endTime = endTimePicker.Value.TimeOfDay;
+            var startDateTime = date + startTime;
+            var endDateTime = date + endTime;
+
             var customer = GetCustomerByName(customerName);
             if (customer == null) { }
+
             var appointment = new appointment()
             {
                 title = title,
                 contact = contact,
                 createdBy = _authRepository.Username,
                 customerId = customer.customerId,
-                //start = 
+                start = startDateTime,
+                end = endDateTime,
                 location = location,
                 url = url,
                 description = description
             };
+
+            appointmentService.Add(appointment);
         }
 
         public customer GetCustomerByName(string customerName)

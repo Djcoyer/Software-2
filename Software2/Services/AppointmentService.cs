@@ -1,4 +1,5 @@
-﻿using Software2.Models.Exceptions;
+﻿using Software2.Models;
+using Software2.Models.Exceptions;
 using Software2.Repositories.Implementation;
 using Software2.Repositories.Interfaces;
 using System;
@@ -14,6 +15,7 @@ namespace Software2.Services
         private IAppointmentRepository _repository;
         private AuthRepository _authRepository;
         private CustomerService customerService;
+        private ReminderService reminderService;
 
         public AppointmentService(IAppointmentRepository repository, AuthRepository authRepository, CustomerService customerService)
         {
@@ -27,17 +29,26 @@ namespace Software2.Services
             var appointment = _repository.FindOne(id);
             if (appointment == null)
                 throw new NotFoundException("Could not locate appointment with specified ID.");
-            return appointment;
+            return AdjustTimeZone(appointment);
         }
 
         public void Add(appointment appointment)
         {
             ValidateAppointment(appointment);
             appointment.createdBy = _authRepository.Username;
-            appointment.createDate = DateTime.Now;
-            appointment.lastUpdate = DateTime.Now;
             appointment.lastUpdateBy = _authRepository.Username;
+            appointment.createDate = DateTime.Now.ToUniversalTime();
+            appointment.lastUpdate = DateTime.Now.ToUniversalTime();
             _repository.Add(appointment);
+            AddReminderForNewAppointment(appointment);
+        }
+
+        private void AddReminderForNewAppointment(appointment appointment)
+        {
+            var dbAppointment = _repository.FindAll().Where(a => a.contact.Equals(appointment.contact) && a.start == appointment.start && a.end == appointment.end).FirstOrDefault();
+            var id = dbAppointment.appointmentId;
+            var reminderTime = dbAppointment.start.AddMinutes(-15);
+            reminderService.Add(reminderTime, id);
         }
 
         public void Update(appointment appointment)
@@ -50,7 +61,7 @@ namespace Software2.Services
 
         public IEnumerable<appointment> FindAll()
         {
-            return _repository.FindAll();
+            return AdjustTimeZone(_repository.FindAll());
         }
 
         public IEnumerable<appointment> FindAllByCustomerId(int customerId)
@@ -61,7 +72,7 @@ namespace Software2.Services
             var customerAppointments = appointments.Where(app => app.customerId == customerId).ToList();
             if (customerAppointments.Count == 0)
                 throw new NotFoundException("No appointments found for customer");
-            return customerAppointments;
+            return AdjustTimeZone(customerAppointments);
         }
 
         public void Delete(int id)
@@ -87,6 +98,26 @@ namespace Software2.Services
             if (appointment.end < appointment.start)
                 throw new InvalidInputException("End time must be greater than start time");
             
+        }
+
+
+        private IEnumerable<appointment> AdjustTimeZone(IEnumerable<appointment> appointments)
+        {
+            foreach (var appointment in appointments)
+            {
+                appointment.start = TimeZoneInfo.ConvertTime(appointment.start, TimeZoneInfo.Local);
+                appointment.end = TimeZoneInfo.ConvertTime(appointment.end, TimeZoneInfo.Local);
+            }
+
+            return appointments;
+        }
+
+        private appointment AdjustTimeZone(appointment appointment)
+        {
+            appointment.start = TimeZoneInfo.ConvertTime(appointment.start, TimeZoneInfo.Local);
+            appointment.end = TimeZoneInfo.ConvertTime(appointment.end, TimeZoneInfo.Local);
+
+            return appointment;
         }
     }
 }

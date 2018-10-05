@@ -91,8 +91,8 @@ namespace Software2
                 var user = new user();
                 user.active = 1;
                 user.createBy = "Devyn Coyer";
-                user.createDate = DateTime.Now;
-                user.lastUpdate = DateTime.Now;
+                user.createDate = DateTime.Now.ToUniversalTime();
+                user.lastUpdate = DateTime.Now.ToUniversalTime();
                 user.lastUpdatedBy = "Devyn Coyer";
                 user.userId = 1;
                 user.userName = "test";
@@ -105,8 +105,8 @@ namespace Software2
                 var customer = new customer()
                 {
                     active = true,
-                    createDate = DateTime.Now,
-                    lastUpdate = DateTime.Now,
+                    createDate = DateTime.Now.ToUniversalTime(),
+                    lastUpdate = DateTime.Now.ToUniversalTime(),
                     createdBy = "Devyn Coyer",
                     lastUpdateBy = "Devyn Coyer",
                     customerName = "Bob Smith",
@@ -124,9 +124,9 @@ namespace Software2
                     cityId = 1,
                     countryId = 1,
                     city1 = "Lancaster",
-                    createDate = DateTime.Now,
+                    createDate = DateTime.Now.ToUniversalTime(),
                     createdBy = "Devyn Coyer",
-                    lastUpdate = DateTime.Now,
+                    lastUpdate = DateTime.Now.ToUniversalTime(),
                     lastUpdateBy = "Devyn Coyer"
                 });
             }
@@ -137,9 +137,9 @@ namespace Software2
                 {
                     countryId =1,
                     country1 = "USA",
-                    createDate = DateTime.Now,
+                    createDate = DateTime.Now.ToUniversalTime(),
                     createdBy = "Devyn Coyer",
-                    lastUpdate = DateTime.Now,
+                    lastUpdate = DateTime.Now.ToUniversalTime(),
                     lastUpdateBy = "Devyn Coyer"
                 });
             }
@@ -152,8 +152,8 @@ namespace Software2
                     address1 = "123 My Street",
                     address2 = "",
                     addressId = 1,
-                    createDate = DateTime.Now,
-                    lastUpdate = DateTime.Now,
+                    createDate = DateTime.Now.ToUniversalTime(),
+                    lastUpdate = DateTime.Now.ToUniversalTime(),
                     lastUpdateBy = "Devyn Coyer",
                     createdBy = "Devyn  Coyer",
                     postalCode = "12345",

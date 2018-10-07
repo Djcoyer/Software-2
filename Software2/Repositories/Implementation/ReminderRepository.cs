@@ -13,6 +13,10 @@ namespace Software2.Repositories.Implementation
 
         public void Add(reminder reminder)
         {
+            var reminderId = 0;
+            if (_db.reminders.Count() > 0)
+                reminderId = _db.reminders.Max(r => r.reminderId);
+            reminder.reminderId = reminderId + 1;
             _db.reminders.Add(reminder);
             _db.SaveChanges();
         }

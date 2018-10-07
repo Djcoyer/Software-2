@@ -13,7 +13,10 @@ namespace Software2.Repositories.Implementation
 
         public void Add(appointment appointment)
         {
-            var lastId = _db.appointments.Max(app => app.appointmentId);
+            var lastId = 0;
+            if (_db.appointments.Count() > 0)
+                lastId = _db.appointments.Max(app => app.appointmentId);
+            //If 0, first Id will be 1.
             appointment.appointmentId = lastId + 1;
             _db.appointments.Add(appointment);
             _db.SaveChanges();

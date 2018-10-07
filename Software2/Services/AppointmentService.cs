@@ -17,11 +17,12 @@ namespace Software2.Services
         private CustomerService customerService;
         private ReminderService reminderService;
 
-        public AppointmentService(IAppointmentRepository repository, AuthRepository authRepository, CustomerService customerService)
+        public AppointmentService(IAppointmentRepository repository, AuthRepository authRepository, CustomerService customerService, ReminderService reminderService)
         {
             _repository = repository;
             _authRepository = authRepository;
             this.customerService = customerService;
+            this.reminderService = reminderService;
         }
 
         public appointment FindOne(int id)
@@ -93,6 +94,8 @@ namespace Software2.Services
                 throw new InvalidInputException("Url is required");
             if (customerService.FindOne(appointment.customerId) == null)
                 throw new InvalidInputException("A valid customer is required");
+            if (String.IsNullOrWhiteSpace(appointment.contact))
+                throw new InvalidInputException("Contact is required");
             if (appointment.start < DateTime.Now)
                 throw new InvalidInputException("Appointment must be a future time");
             if (appointment.end < appointment.start)

@@ -43,6 +43,20 @@ namespace Software2.Views.Appointment
 
         private void saveButton_Click(object sender, EventArgs e)
         {
+            try
+            {
+                errorLabel.Visible = false;
+                AddAppointment();
+            }catch(InvalidInputException ex)
+            {
+                errorLabel.Text = ex.Message;
+                errorLabel.Visible = true;
+            }
+            
+        }
+
+        private void AddAppointment()
+        {
             var title = titleTextBox.Text;
             var customerName = customerTextBox.Text;
             var contact = contactTextBox.Text;
@@ -56,6 +70,8 @@ namespace Software2.Views.Appointment
             var startDateTime = date + startTime;
             var endDateTime = date + endTime;
 
+            if (String.IsNullOrWhiteSpace(customerName))
+                throw new InvalidInputException("Must supply customer name");
             var customer = GetCustomerByName(customerName);
             if (customer == null) { }
 
@@ -78,7 +94,7 @@ namespace Software2.Views.Appointment
         public customer GetCustomerByName(string customerName)
         {
             var customers = this.customers.Where(c => c.customerName == customerName).ToList();
-            if (customers == null)
+            if (customers == null || customers.Count() == 0)
                 throw new InvalidInputException("Must select a valid customer");
             else if (customers.Count() > 1)
             {

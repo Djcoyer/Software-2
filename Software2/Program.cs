@@ -100,7 +100,7 @@ namespace Software2
 
                 calendarEntities.users.Add(user);
             }
-            if(calendarEntities.customers == null || calendarEntities.customers.Count() == 0)
+            if (calendarEntities.customers == null || calendarEntities.customers.Count() == 0)
             {
                 var customer = new customer()
                 {
@@ -117,7 +117,7 @@ namespace Software2
                 calendarEntities.customers.Add(customer);
             }
 
-            if(calendarEntities.cities == null || calendarEntities.cities.Count() == 0)
+            if (calendarEntities.cities == null || calendarEntities.cities.Count() == 0)
             {
                 calendarEntities.cities.Add(new city()
                 {
@@ -131,11 +131,11 @@ namespace Software2
                 });
             }
 
-            if(calendarEntities.countries == null || calendarEntities.countries.Count() == 0)
+            if (calendarEntities.countries == null || calendarEntities.countries.Count() == 0)
             {
                 calendarEntities.countries.Add(new country()
                 {
-                    countryId =1,
+                    countryId = 1,
                     country1 = "USA",
                     createDate = DateTime.Now.ToUniversalTime(),
                     createdBy = "Devyn Coyer",
@@ -144,7 +144,7 @@ namespace Software2
                 });
             }
 
-            if(calendarEntities.addresses == null || calendarEntities.addresses.Count() == 0)
+            if (calendarEntities.addresses == null || calendarEntities.addresses.Count() == 0)
             {
                 calendarEntities.addresses.Add(new address()
                 {
@@ -158,6 +158,15 @@ namespace Software2
                     createdBy = "Devyn  Coyer",
                     postalCode = "12345",
                     phone = "123-456-7890"
+                });
+            }
+
+            if (calendarEntities.incrementtypes == null || calendarEntities.incrementtypes.Count() == 0)
+            {
+                calendarEntities.incrementtypes.Add(new incrementtype()
+                {
+                    incrementTypeDescription = "Five minute snooze",
+                    incrementTypeId = 1
                 });
             }
 

@@ -101,6 +101,8 @@
     </Compile>
     <Compile Include="Helpers\CommonMethods.cs" />
     <Compile Include="Models\AddressAggregate.cs" />
+    <Compile Include="Models\AppointmentAggregate.cs" />
+    <Compile Include="Models\AppointmentRow.cs" />
     <Compile Include="Models\CityRow.cs" />
     <Compile Include="Models\CustomerRow.cs" />
     <Compile Include="Models\Exceptions\DataIntegrityViolationException.cs" />
@@ -132,6 +134,12 @@
     </Compile>
     <Compile Include="Views\Appointment\AppointmentForm.Designer.cs">
       <DependentUpon>AppointmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Appointment\AppointmentListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Appointment\AppointmentListForm.Designer.cs">
+      <DependentUpon>AppointmentListForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Customer\CustomerForm.cs">
       <SubType>Form</SubType>
@@ -183,6 +191,9 @@
     </Compile>
     <EmbeddedResource Include="Views\Appointment\AppointmentForm.resx">
       <DependentUpon>AppointmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Appointment\AppointmentListForm.resx">
+      <DependentUpon>AppointmentListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Customer\CustomerForm.resx">
       <DependentUpon>CustomerForm.cs</DependentUpon>

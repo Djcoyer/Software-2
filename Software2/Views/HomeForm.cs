@@ -59,7 +59,7 @@ namespace Software2
             var loginForm = _formManager.GetForm<LoginForm>() as LoginForm;
 
             //Delegate implementation
-            loginForm.setUserAuthenticated = (Form form, string username) =>
+            loginForm.setUserAuthenticated = (form, username) =>
             {
                 SetUserAuthenticated(username);
                 form.Close();
@@ -79,7 +79,7 @@ namespace Software2
         private void appointmentsButton_Click(object sender, EventArgs e)
         {
             this.Hide();
-            _formManager.ShowForm<AppointmentForm>();
+            _formManager.ShowForm<AppointmentListForm>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Software2.Models.Exceptions;
+﻿using Software2.Models;
+using Software2.Models.Exceptions;
 using Software2.Repositories.Implementation;
 using Software2.Services;
 using Software2.Views.manager;
@@ -21,7 +22,7 @@ namespace Software2.Views.Appointment
         private List<customer> customers;
         private AuthRepository _authRepository;
         private IFormManager _formManager;
-
+        private AppointmentAggregate appointmentAggregate;
         public AppointmentForm(AppointmentService appointmentService, CustomerService customerService, IFormManager formManager, AuthRepository authRepository)
         {
             this.appointmentService = appointmentService;
@@ -39,6 +40,24 @@ namespace Software2.Views.Appointment
             datePicker.MinDate = DateTime.Now;
             startTimePicker.MinDate = DateTime.Now.Date;
             endTimePicker.MinDate = DateTime.Now.Date;
+        }
+
+        public void SetAggregate(AppointmentAggregate aggregate)
+        {
+            var minDate = aggregate.Start < DateTime.Now ? aggregate.Start : DateTime.Now;
+            datePicker.MinDate = minDate;
+            startTimePicker.MinDate = minDate;
+            endTimePicker.MinDate = minDate;
+            appointmentAggregate = aggregate;
+            titleTextBox.Text = aggregate.Title;
+            contactTextBox.Text = aggregate.Contact;
+            customerTextBox.Text = aggregate.CustomerName;
+            locationTextBox.Text = aggregate.Location;
+            UrlTextBox.Text = aggregate.Url;
+            descriptionTextBox.Text = aggregate.Description;
+            datePicker.Value = aggregate.Start;
+            startTimePicker.Value = aggregate.Start;
+            endTimePicker.Value = aggregate.End;
         }
 
         private void saveButton_Click(object sender, EventArgs e)
@@ -106,7 +125,7 @@ namespace Software2.Views.Appointment
         private void cancelButton_Click(object sender, EventArgs e)
         {
             Close();
-            _formManager.ShowForm<HomeForm>();
+            _formManager.ShowForm<AppointmentListForm>();
         }
     }
 }

@@ -65,6 +65,31 @@ namespace Software2.Services
             return AdjustTimeZone(_repository.FindAll());
         }
 
+        public IEnumerable<AppointmentAggregate> FindAllAggregates()
+        {
+            var appointments = FindAll();
+            var aggregates = new List<AppointmentAggregate>();
+            var customers = customerService.FindAllCustomers();
+            foreach(var appointment in appointments)
+            {
+                var customer = customers.Where(c => c.customerId == appointment.customerId).FirstOrDefault();
+                aggregates.Add(new AppointmentAggregate()
+                {
+                    Id = appointment.appointmentId,
+                    CustomerId = customer.customerId,
+                    Contact = appointment.contact,
+                    CustomerName = customer.customerName,
+                    Description = appointment.description,
+                    Start = appointment.start,
+                    End = appointment.end,
+                    Location = appointment.location,
+                    Url = appointment.url,
+                    Title = appointment.title
+                });
+            }
+            return aggregates;
+        }
+
         public IEnumerable<appointment> FindAllByCustomerId(int customerId)
         {
             var appointments = _repository.FindAll();

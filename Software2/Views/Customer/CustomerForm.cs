@@ -18,8 +18,7 @@ namespace Software2.Views.Customer
     {
         private CustomerService customerService;
         private AddressService addressService;
-        private AddressAggregate addressAggregate;
-        private customer customer;
+        private CustomerAggregate customer;
         private IFormManager _formManager;
 
         public CustomerForm(CustomerService customerService, AddressService addressService, IFormManager formManager)
@@ -27,15 +26,13 @@ namespace Software2.Views.Customer
             _formManager = formManager;
             this.customerService = customerService;
             this.addressService = addressService;
-            addressAggregate = new AddressAggregate();
             InitializeComponent();
         }
 
-        public void SetCustomer(customer customer)
+        public void SetCustomer(CustomerAggregate customerAggregate)
         {
-            this.customer = customer;
-            var address = addressService.FindOne(customer.addressId);
-            addressAggregate = addressService.FindAggregateById(customer.addressId);
+            customer = customerAggregate;
+            var address = addressService.FindOne(customer.AddressId);
             SetFields();
         }
 
@@ -69,50 +66,61 @@ namespace Software2.Views.Customer
 
         private void AddCustomer()
         {
-            var addressAggregate = GetAddressAggregateFromFields();
-            var customer = new customer();
-            string firstName = firstNameTextBox.Text;
-            string lastName = lastNameTextBox.Text;
-            customer.customerName = String.Format("{0} {1}", firstName, lastName);
+            customer = new CustomerAggregate();
+            UpdateFields();
+            validateFields();
 
-            validateFields(customer, addressAggregate);
+            var addressId = UpdateAddress();
 
-            var addressId = UpdateAddress(addressAggregate);
-
-           
-
-            customer.addressId = addressId;
+            customer.AddressId = addressId;
             customerService.Add(customer);
         }
         private void UpdateCustomer()
         {
-            var addressAggregate = GetAddressAggregateFromFields();
-            validateFields(customer, addressAggregate);
-            int addressId = UpdateAddress(addressAggregate);
-            customer.addressId = addressId;
-            customerService.Update(customer, customer.customerId);
+            UpdateFields();
+            validateFields();
+            int addressId = UpdateAddress();
+            customer.AddressId = addressId;
+            customerService.Update(customer, customer.Id);
+        }
+
+        private void UpdateFields()
+        {
+            UpdateAddressFields();
+            UpdateCustomerFields();
         }
 
         private void SetFields()
         {
-            string[] fullName = customer.customerName.Split(' ');
+            string[] fullName = customer.CustomerName.Split(' ');
             firstNameTextBox.Text = fullName[0];
             lastNameTextBox.Text = fullName[1];
-            address1TextBox.Text = addressAggregate.Address1;
-            address2TextBox.Text = addressAggregate.Address2;
-            postalTextBox.Text = addressAggregate.PostalCode;
-            phoneTextBox.Text = addressAggregate.Phone;
-            cityTextBox.Text = addressAggregate.CityName;
-            countryTextBox.Text = addressAggregate.CountryName;
+            address1TextBox.Text = customer.Address1;
+            address2TextBox.Text = customer.Address2;
+            postalTextBox.Text = customer.PostalCode;
+            phoneTextBox.Text = customer.Phone;
+            cityTextBox.Text = customer.City;
+            countryTextBox.Text = customer.Country;
         }
 
-        private int UpdateAddress(AddressAggregate addressAggregate)
+        private int UpdateAddress()
         {
-
             address address;
+            var addressAggregate = new AddressAggregate()
+            {
+                Address1 = customer.Address1,
+                Address2 = customer.Address2,
+                PostalCode = customer.PostalCode,
+                CountryName = customer.Country,
+                CityName = customer.City,
+                Phone = customer.Phone
+            };
+
             try
             {
                 address = addressService.FindByAddressAndPostalCode(addressAggregate.Address1, addressAggregate.Address2, addressAggregate.PostalCode);
+                addressAggregate.CityId = address.cityId;
+                addressAggregate.AddressId = address.addressId;
                 addressService.UpdateAddress(addressAggregate);
             }
             catch (NotFoundException e)
@@ -124,21 +132,28 @@ namespace Software2.Views.Customer
             return address.addressId;
         }
 
-        private void validateFields(customer customer, AddressAggregate addressAggregate)
+        private void validateFields()
         {
-            if (String.IsNullOrWhiteSpace(addressAggregate.Address1))
+            if (String.IsNullOrWhiteSpace(customer.Address1))
                 throw new InvalidInputException("Must supply valid address");
-            if (String.IsNullOrWhiteSpace(customer.customerName))
+            if (String.IsNullOrWhiteSpace(customer.CustomerName))
                 throw new InvalidInputException("Must supply customer name");
-            if (String.IsNullOrWhiteSpace(addressAggregate.CityName))
+            if (String.IsNullOrWhiteSpace(customer.City))
                 throw new InvalidInputException("Must supply city");
-            if (String.IsNullOrWhiteSpace(addressAggregate.CountryName))
+            if (String.IsNullOrWhiteSpace(customer.Country))
                 throw new InvalidInputException("Must supply country");
-            if (String.IsNullOrWhiteSpace(addressAggregate.PostalCode))
+            if (String.IsNullOrWhiteSpace(customer.PostalCode))
                 throw new InvalidInputException("Must supply postal code");
         }
 
-        private AddressAggregate GetAddressAggregateFromFields()
+        private void UpdateCustomerFields()
+        {
+            string firstName = firstNameTextBox.Text;
+            string lastName = lastNameTextBox.Text;
+            customer.CustomerName = String.Format("{0} {1}", firstName, lastName);
+        }
+
+        private void UpdateAddressFields()
         {
             var address1 = address1TextBox.Text;
             var address2 = address2TextBox.Text;
@@ -148,19 +163,12 @@ namespace Software2.Views.Customer
             var city = cityTextBox.Text;
             var country = countryTextBox.Text;
             var phone = phoneTextBox.Text;
-
-            return new AddressAggregate()
-            {
-                Address1 = address1,
-                Address2 = address2,
-                CountryName = country,
-                CityName = city,
-                PostalCode = postalCode,
-                Phone = phone,
-                AddressId = addressAggregate.AddressId,
-                CountryId = addressAggregate.CountryId,
-                CityId = addressAggregate.CityId
-            };
+            customer.Address1 = address1;
+            customer.Address2 = address2;
+            customer.Country = country;
+            customer.City = city;
+            customer.PostalCode = postalCode;
+            customer.Phone = phone;
         }
 
 

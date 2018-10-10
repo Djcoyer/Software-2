@@ -1,4 +1,5 @@
-﻿using Software2.Models.Exceptions;
+﻿using Software2.Models;
+using Software2.Models.Exceptions;
 using Software2.Repositories.Implementation;
 using Software2.Repositories.Interfaces;
 using System;
@@ -13,16 +14,47 @@ namespace Software2.Services
     {
         private ICustomerRepository _repository;
         private AuthRepository _authRepository;
+        private AddressService addressService;
 
-        public CustomerService(ICustomerRepository repository, AuthRepository authRepository)
+        public CustomerService(ICustomerRepository repository, AuthRepository authRepository, AddressService addressService)
         {
             _authRepository = authRepository;
             _repository = repository;
+            this.addressService = addressService;
         }
 
-        public List<customer> FindAllCustomers()
+        public List<customer> FindAll()
         {
             return _repository.FindAll().ToList();
+        }
+
+        public IEnumerable<CustomerAggregate> FindAllAggregates()
+        {
+            var customers = FindAll();
+            var addressAggregates = addressService.FindAllAggregates();
+            var customerAggregates = new List<CustomerAggregate>();
+
+            foreach(var customer in customers)
+            {
+                var addressId = customer.addressId;
+                var addressAggregate = addressAggregates.FirstOrDefault(a => a.AddressId == addressId);
+                customerAggregates.Add(new CustomerAggregate()
+                {
+                    Id = customer.customerId,
+                    AddressId = customer.addressId,
+                    Address1 = addressAggregate.Address1,
+                    Address2 = addressAggregate.Address2,
+                    City = addressAggregate.CityName,
+                    CityId = addressAggregate.CityId,
+                    Country = addressAggregate.CountryName,
+                    CountryId = addressAggregate.CountryId,
+                    CustomerName = customer.customerName,
+                    Phone = addressAggregate.Phone,
+                    PostalCode = addressAggregate.PostalCode
+                });
+            }
+
+            return customerAggregates;
         }
 
         public customer FindOne(int id)
@@ -33,20 +65,36 @@ namespace Software2.Services
             return customer;
         }
 
-        public void Add(customer customer)
+        public void Add(CustomerAggregate aggregate)
         {
-            if (String.IsNullOrWhiteSpace(customer.customerName))
+            if (String.IsNullOrWhiteSpace(aggregate.CustomerName))
                 throw new InvalidInputException("Must include name");
-            customer.createdBy = "Devyn Coyer";
-            customer.lastUpdateBy = "Devyn Coyer";
-            _repository.Add(customer);
+
+            var date = DateTime.Now;
+            _repository.Add(new customer()
+            {
+                active = true,
+                addressId = aggregate.AddressId,
+                createDate = date,
+                lastUpdate = date,
+                createdBy = _authRepository.Username,
+                lastUpdateBy = _authRepository.Username,
+                customerName = aggregate.CustomerName,
+            });
         }
 
-        public void Update(customer customer, int customerId)
+        public void Update(CustomerAggregate aggregate, int customerId)
         { 
-            customer.lastUpdate = DateTime.Now;
-            customer.lastUpdateBy = _authRepository.Username;
-            _repository.Update(customer, customerId);
+            _repository.Update(new customer()
+            {
+                active = true,
+                addressId = aggregate.AddressId,
+                lastUpdate = DateTime.Now,
+                lastUpdateBy = _authRepository.Username,
+                customerName = aggregate.CustomerName,
+                customerId = customerId
+            }, 
+            customerId);
         }
 
         public void Delete(int id)

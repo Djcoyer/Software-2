@@ -8,10 +8,10 @@ namespace Software2.Models
 {
     class CustomerRow
     {
-        public string Name { get; set; }
         public int Id { get; set; }
+        public string Name { get; set; }
         public int AddressId { get; set; }
-        public DateTime Created { get; set; }
-        public DateTime Updated { get; set; }
+        public string Address { get; set; }
+        public string Phone { get; set; }
     }
 }

@@ -29,7 +29,7 @@ namespace Software2.Views.Appointment
             this.customerService = customerService;
             _formManager = formManager;
             _authRepository = authRepository;
-            customers = customerService.FindAllCustomers();
+            customers = customerService.FindAll();
 
             InitializeComponent();
             var source = new AutoCompleteStringCollection();

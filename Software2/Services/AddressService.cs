@@ -30,6 +30,34 @@ namespace Software2.Services
             return _repository.FindAll();
         }
 
+        public IEnumerable<AddressAggregate> FindAllAggregates()
+        {
+            var addresses = FindAll();
+            var cities = cityService.findAll();
+            var countries = countryService.findAll();
+            var addressAggregates = new List<AddressAggregate>();
+            foreach(var address in addresses)
+            {
+                var city = cities.FirstOrDefault(c => c.cityId == address.cityId);
+                var country = countries.FirstOrDefault(c => c.countryId == city.countryId);
+
+                addressAggregates.Add(new AddressAggregate()
+                {
+                    CityId = city.cityId,
+                    CityName = city.city1,
+                    CountryId = country.countryId,
+                    CountryName = country.country1,
+                    Address1 = address.address1,
+                    Address2 = address.address2,
+                    Phone = address.phone,
+                    PostalCode = address.postalCode,
+                    AddressId = address.addressId
+                });
+            }
+
+            return addressAggregates;
+        }
+
         public address FindOne(int addressId)
         {
             var address = _repository.FindOne(addressId);

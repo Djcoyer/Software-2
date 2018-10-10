@@ -48,6 +48,7 @@
             this.cancelButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.cancelButton.UseMnemonic = false;
             this.cancelButton.UseVisualStyleBackColor = true;
+            this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // deleteAppointmentButton
             // 

@@ -73,5 +73,11 @@ namespace Software2.Views.Appointment
             _formManager.ShowForm<AppointmentForm>();
             this.Close();
         }
+
+        private void cancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            _formManager.ShowForm<HomeForm>();
+        }
     }
 }

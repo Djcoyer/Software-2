@@ -16,25 +16,25 @@ namespace Software2.Views.Customer
     public partial class CustomerListForm : Form
     {
         private CustomerService customerService;
-        private List<customer> customers;
+        private List<CustomerAggregate> customers;
         private IFormManager _formManager;
         private BindingSource customerBindingSource;
         public CustomerListForm(CustomerService customerService, IFormManager formManager)
         {
             this.customerService = customerService;
             _formManager = formManager;
-            customers = customerService.FindAllCustomers();
+            customers = customerService.FindAllAggregates()?.ToList();
             InitializeComponent();
             customerBindingSource = new BindingSource();
             //Select certain fields with lambda expression to form new object similar to a ViewModel
             customerBindingSource.DataSource = customers.Select(c => new
             CustomerRow
             {
-                Id = c.customerId,
-                Name = c.customerName,
-                AddressId = c.addressId,
-                Created = c.createDate,
-                Updated = c.lastUpdate
+                Id = c.Id,
+                Name = c.CustomerName,
+                Address = String.Format("{0} {1}", c.Address1, c.Address2),
+                Phone = c.Phone,
+                AddressId = c.AddressId
             }).ToList();
             customerGridView.DataSource = customerBindingSource; 
         }
@@ -52,7 +52,7 @@ namespace Software2.Views.Customer
         }
 
 
-        private customer GetItemFromSelectedRow(DataGridView gridView)
+        private CustomerAggregate GetItemFromSelectedRow(DataGridView gridView)
         {
             if (gridView.SelectedRows.Count <= 0) return null;
             if (gridView.SelectedRows.Count > 1) { }
@@ -60,24 +60,17 @@ namespace Software2.Views.Customer
             var rowCustomer = selectedRow.DataBoundItem as CustomerRow;
             if (rowCustomer == null)
                 return null;
-            return new customer()
-            {
-                customerId = rowCustomer.Id,
-                customerName = rowCustomer.Name,
-                createDate = rowCustomer.Created,
-                lastUpdate = rowCustomer.Updated,
-                addressId = rowCustomer.AddressId
-            };
+            int id = rowCustomer.Id;
+            return customers.FirstOrDefault(p => p.Id == id);
         }
 
         private void editCustomerButton_Click(object sender, EventArgs e)
         {
-            var customerRow = GetItemFromSelectedRow(customerGridView);
-            if (customerRow == null)
+            var customerAggregate = GetItemFromSelectedRow(customerGridView);
+            if (customerAggregate == null)
                 return;
-            var customer = customerService.FindOne(customerRow.customerId);
             var customerForm = _formManager.GetForm<CustomerForm>();
-            customerForm.SetCustomer(customer);
+            customerForm.SetCustomer(customerAggregate);
             customerForm.Show();
             this.Close();
         }
@@ -87,7 +80,7 @@ namespace Software2.Views.Customer
             var _customer = GetItemFromSelectedRow(customerGridView);
             if (_customer == null)
                 return;
-            var customerId = _customer.customerId;
+            var customerId = _customer.Id;
             customerService.Delete(customerId);
 
             customers.Remove(_customer);

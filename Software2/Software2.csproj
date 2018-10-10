@@ -104,6 +104,7 @@
     <Compile Include="Models\AppointmentAggregate.cs" />
     <Compile Include="Models\AppointmentRow.cs" />
     <Compile Include="Models\CityRow.cs" />
+    <Compile Include="Models\CustomerAggregate.cs" />
     <Compile Include="Models\CustomerRow.cs" />
     <Compile Include="Models\Exceptions\DataIntegrityViolationException.cs" />
     <Compile Include="Models\ReminderAggregate.cs" />

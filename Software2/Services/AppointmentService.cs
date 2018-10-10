@@ -69,7 +69,7 @@ namespace Software2.Services
         {
             var appointments = FindAll();
             var aggregates = new List<AppointmentAggregate>();
-            var customers = customerService.FindAllCustomers();
+            var customers = customerService.FindAll();
             foreach(var appointment in appointments)
             {
                 var customer = customers.Where(c => c.customerId == appointment.customerId).FirstOrDefault();

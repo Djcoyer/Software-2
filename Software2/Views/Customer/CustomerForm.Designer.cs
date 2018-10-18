@@ -30,6 +30,7 @@
         {
             this.formLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.errorLabel = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.postalTextBox = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -48,7 +49,6 @@
             this.address1TextBox = new System.Windows.Forms.TextBox();
             this.lastNameTextBox = new System.Windows.Forms.TextBox();
             this.firstNameTextBox = new System.Windows.Forms.TextBox();
-            this.errorLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -76,8 +76,6 @@
             this.groupBox1.Controls.Add(this.countryTextBox);
             this.groupBox1.Controls.Add(this.cityTextBox);
             this.groupBox1.Controls.Add(this.address2TextBox);
-            this.groupBox1.Controls.Add(this.cancelButton);
-            this.groupBox1.Controls.Add(this.saveCustomerButton);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
@@ -88,14 +86,26 @@
             this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
-            this.groupBox1.Size = new System.Drawing.Size(820, 386);
+            this.groupBox1.Size = new System.Drawing.Size(610, 373);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
+            // 
+            // errorLabel
+            // 
+            this.errorLabel.AutoSize = true;
+            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.errorLabel.ForeColor = System.Drawing.Color.Red;
+            this.errorLabel.Location = new System.Drawing.Point(378, 339);
+            this.errorLabel.Name = "errorLabel";
+            this.errorLabel.Size = new System.Drawing.Size(86, 20);
+            this.errorLabel.TabIndex = 3;
+            this.errorLabel.Text = "errorLabel";
+            this.errorLabel.Visible = false;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(72, 201);
+            this.label7.Location = new System.Drawing.Point(378, 189);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(84, 17);
@@ -104,16 +114,16 @@
             // 
             // postalTextBox
             // 
-            this.postalTextBox.Location = new System.Drawing.Point(76, 224);
+            this.postalTextBox.Location = new System.Drawing.Point(382, 212);
             this.postalTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.postalTextBox.Name = "postalTextBox";
-            this.postalTextBox.Size = new System.Drawing.Size(160, 22);
-            this.postalTextBox.TabIndex = 6;
+            this.postalTextBox.Size = new System.Drawing.Size(193, 22);
+            this.postalTextBox.TabIndex = 5;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(616, 40);
+            this.label4.Location = new System.Drawing.Point(37, 111);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(49, 17);
@@ -122,16 +132,16 @@
             // 
             // phoneTextBox
             // 
-            this.phoneTextBox.Location = new System.Drawing.Point(620, 63);
+            this.phoneTextBox.Location = new System.Drawing.Point(37, 132);
             this.phoneTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.phoneTextBox.Name = "phoneTextBox";
-            this.phoneTextBox.Size = new System.Drawing.Size(160, 22);
+            this.phoneTextBox.Size = new System.Drawing.Size(190, 22);
             this.phoneTextBox.TabIndex = 2;
             // 
             // Country
             // 
             this.Country.AutoSize = true;
-            this.Country.Location = new System.Drawing.Point(344, 201);
+            this.Country.Location = new System.Drawing.Point(379, 263);
             this.Country.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.Country.Name = "Country";
             this.Country.Size = new System.Drawing.Size(57, 17);
@@ -141,7 +151,7 @@
             // cityLabel
             // 
             this.cityLabel.AutoSize = true;
-            this.cityLabel.Location = new System.Drawing.Point(617, 124);
+            this.cityLabel.Location = new System.Drawing.Point(34, 265);
             this.cityLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.cityLabel.Name = "cityLabel";
             this.cityLabel.Size = new System.Drawing.Size(31, 17);
@@ -151,7 +161,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(345, 123);
+            this.label6.Location = new System.Drawing.Point(32, 188);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(72, 17);
@@ -160,46 +170,46 @@
             // 
             // countryTextBox
             // 
-            this.countryTextBox.Location = new System.Drawing.Point(348, 224);
+            this.countryTextBox.Location = new System.Drawing.Point(383, 286);
             this.countryTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.countryTextBox.Name = "countryTextBox";
-            this.countryTextBox.Size = new System.Drawing.Size(160, 22);
+            this.countryTextBox.Size = new System.Drawing.Size(194, 22);
             this.countryTextBox.TabIndex = 7;
             // 
             // cityTextBox
             // 
-            this.cityTextBox.Location = new System.Drawing.Point(621, 147);
+            this.cityTextBox.Location = new System.Drawing.Point(37, 286);
             this.cityTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.cityTextBox.Name = "cityTextBox";
-            this.cityTextBox.Size = new System.Drawing.Size(160, 22);
-            this.cityTextBox.TabIndex = 5;
+            this.cityTextBox.Size = new System.Drawing.Size(190, 22);
+            this.cityTextBox.TabIndex = 6;
             // 
             // address2TextBox
             // 
-            this.address2TextBox.Location = new System.Drawing.Point(349, 147);
+            this.address2TextBox.Location = new System.Drawing.Point(37, 212);
             this.address2TextBox.Margin = new System.Windows.Forms.Padding(4);
             this.address2TextBox.Name = "address2TextBox";
-            this.address2TextBox.Size = new System.Drawing.Size(160, 22);
+            this.address2TextBox.Size = new System.Drawing.Size(190, 22);
             this.address2TextBox.TabIndex = 4;
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(32, 336);
+            this.cancelButton.Location = new System.Drawing.Point(173, 540);
             this.cancelButton.Margin = new System.Windows.Forms.Padding(4);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(100, 28);
-            this.cancelButton.TabIndex = 8;
+            this.cancelButton.Size = new System.Drawing.Size(354, 28);
+            this.cancelButton.TabIndex = 9;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.UseVisualStyleBackColor = true;
             this.cancelButton.Click += new System.EventHandler(this.cancelButton_Click);
             // 
             // saveCustomerButton
             // 
-            this.saveCustomerButton.Location = new System.Drawing.Point(682, 336);
+            this.saveCustomerButton.Location = new System.Drawing.Point(173, 491);
             this.saveCustomerButton.Margin = new System.Windows.Forms.Padding(4);
             this.saveCustomerButton.Name = "saveCustomerButton";
-            this.saveCustomerButton.Size = new System.Drawing.Size(100, 28);
-            this.saveCustomerButton.TabIndex = 9;
+            this.saveCustomerButton.Size = new System.Drawing.Size(354, 28);
+            this.saveCustomerButton.TabIndex = 8;
             this.saveCustomerButton.Text = "Save";
             this.saveCustomerButton.UseVisualStyleBackColor = true;
             this.saveCustomerButton.Click += new System.EventHandler(this.saveCustomerButton_Click);
@@ -207,7 +217,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(72, 124);
+            this.label3.Location = new System.Drawing.Point(383, 111);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 17);
@@ -217,7 +227,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(344, 40);
+            this.label2.Location = new System.Drawing.Point(382, 40);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 17);
@@ -227,7 +237,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(72, 39);
+            this.label1.Location = new System.Drawing.Point(37, 40);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 17);
@@ -236,47 +246,37 @@
             // 
             // address1TextBox
             // 
-            this.address1TextBox.Location = new System.Drawing.Point(76, 147);
+            this.address1TextBox.Location = new System.Drawing.Point(385, 132);
             this.address1TextBox.Margin = new System.Windows.Forms.Padding(4);
             this.address1TextBox.Name = "address1TextBox";
-            this.address1TextBox.Size = new System.Drawing.Size(160, 22);
+            this.address1TextBox.Size = new System.Drawing.Size(192, 22);
             this.address1TextBox.TabIndex = 3;
             // 
             // lastNameTextBox
             // 
-            this.lastNameTextBox.Location = new System.Drawing.Point(348, 63);
+            this.lastNameTextBox.Location = new System.Drawing.Point(386, 63);
             this.lastNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.lastNameTextBox.Name = "lastNameTextBox";
-            this.lastNameTextBox.Size = new System.Drawing.Size(160, 22);
+            this.lastNameTextBox.Size = new System.Drawing.Size(192, 22);
             this.lastNameTextBox.TabIndex = 1;
             // 
             // firstNameTextBox
             // 
-            this.firstNameTextBox.Location = new System.Drawing.Point(76, 63);
+            this.firstNameTextBox.Location = new System.Drawing.Point(37, 63);
             this.firstNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.firstNameTextBox.Name = "firstNameTextBox";
-            this.firstNameTextBox.Size = new System.Drawing.Size(160, 22);
+            this.firstNameTextBox.Size = new System.Drawing.Size(190, 22);
             this.firstNameTextBox.TabIndex = 0;
-            // 
-            // errorLabel
-            // 
-            this.errorLabel.AutoSize = true;
-            this.errorLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.errorLabel.ForeColor = System.Drawing.Color.Red;
-            this.errorLabel.Location = new System.Drawing.Point(73, 283);
-            this.errorLabel.Name = "errorLabel";
-            this.errorLabel.Size = new System.Drawing.Size(86, 20);
-            this.errorLabel.TabIndex = 3;
-            this.errorLabel.Text = "errorLabel";
-            this.errorLabel.Visible = false;
             // 
             // CustomerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(928, 535);
+            this.ClientSize = new System.Drawing.Size(708, 601);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.formLabel);
+            this.Controls.Add(this.cancelButton);
+            this.Controls.Add(this.saveCustomerButton);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "CustomerForm";
             this.Text = "CustomerForm";

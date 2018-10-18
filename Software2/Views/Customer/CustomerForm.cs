@@ -36,8 +36,6 @@ namespace Software2.Views.Customer
             SetFields();
         }
 
-
-
         private void saveCustomerButton_Click(object sender, EventArgs e)
         {
             try
@@ -56,6 +54,7 @@ namespace Software2.Views.Customer
                 if(ex.GetType() == typeof(NotFoundException) || ex.GetType() == typeof(InvalidInputException))
                 {
                     errorLabel.Text = ex.Message;
+                    errorLabel.Show();
                     return;
                 }
             }

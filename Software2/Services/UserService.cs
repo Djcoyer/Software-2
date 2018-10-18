@@ -43,7 +43,7 @@ namespace Software2.Services
 
         public void UpdateUser(user updatedUser, int id)
         {
-            if (updatedUser.active == null)
+            if (updatedUser.active == 0)
                 throw new Exception();
             if (updatedUser.password.Length < 10)
                 throw new Exception();

@@ -84,17 +84,15 @@ namespace Software2.Services
         }
 
         public void Update(CustomerAggregate aggregate, int customerId)
-        { 
-            _repository.Update(new customer()
-            {
-                active = true,
-                addressId = aggregate.AddressId,
-                lastUpdate = DateTime.Now,
-                lastUpdateBy = _authRepository.Username,
-                customerName = aggregate.CustomerName,
-                customerId = customerId
-            }, 
-            customerId);
+        {
+            var existingCustomer = FindOne(customerId);
+
+            existingCustomer.lastUpdate = DateTime.Now.ToUniversalTime();
+            existingCustomer.lastUpdateBy = _authRepository.Username;
+            existingCustomer.customerName = aggregate.CustomerName;
+            existingCustomer.addressId = aggregate.AddressId;
+
+            _repository.Update(existingCustomer, customerId);
         }
 
         public void Delete(int id)

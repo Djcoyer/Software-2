@@ -11,7 +11,7 @@ namespace Software2.Repositories.Implementation
     {
         public CalendarEntities _db { private get; set; }
 
-        public void Add(appointment appointment)
+        public int Add(appointment appointment)
         {
             var lastId = 0;
             if (_db.appointments.Count() > 0)
@@ -20,6 +20,7 @@ namespace Software2.Repositories.Implementation
             appointment.appointmentId = lastId + 1;
             _db.appointments.Add(appointment);
             _db.SaveChanges();
+            return appointment.appointmentId;
         }
 
         public void Delete(int id)

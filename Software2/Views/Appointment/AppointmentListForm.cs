@@ -19,11 +19,13 @@ namespace Software2.Views.Appointment
         private AppointmentService appointmentService;
         private IEnumerable<AppointmentAggregate> appointments;
         private BindingSource appointmentBindingSource;
+        private ReminderService reminderService;
 
-        public AppointmentListForm(IFormManager formManager, AppointmentService appointmentService)
+        public AppointmentListForm(IFormManager formManager, AppointmentService appointmentService, ReminderService reminderService)
         {
             _formManager = formManager;
             this.appointmentService = appointmentService;
+            this.reminderService = reminderService;
             appointments = appointmentService.FindAllAggregates();
             InitializeComponent();
             appointmentBindingSource = new BindingSource();
@@ -78,6 +80,16 @@ namespace Software2.Views.Appointment
         {
             this.Close();
             _formManager.ShowForm<HomeForm>();
+        }
+
+        private void deleteAppointmentButton_Click(object sender, EventArgs e)
+        {
+            var selectedAppointment = GetItemFromSelectedRow(appointmentGridView);
+            if (selectedAppointment == null)
+                return;
+            var id = selectedAppointment.Id;
+            appointmentService.Delete(id);
+            reminderService.DeleteByAppointmentId(id);
         }
     }
 }

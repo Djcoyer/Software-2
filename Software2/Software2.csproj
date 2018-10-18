@@ -101,13 +101,13 @@
     </Compile>
     <Compile Include="Helpers\CommonMethods.cs" />
     <Compile Include="Models\AddressAggregate.cs" />
-    <Compile Include="Models\AppointmentAggregate.cs" />
+    <Compile Include="Models\aggregate\AppointmentAggregate.cs" />
     <Compile Include="Models\AppointmentRow.cs" />
     <Compile Include="Models\CityRow.cs" />
-    <Compile Include="Models\CustomerAggregate.cs" />
+    <Compile Include="Models\aggregate\CustomerAggregate.cs" />
     <Compile Include="Models\CustomerRow.cs" />
     <Compile Include="Models\Exceptions\DataIntegrityViolationException.cs" />
-    <Compile Include="Models\ReminderAggregate.cs" />
+    <Compile Include="Models\aggregate\ReminderAggregate.cs" />
     <Compile Include="Repositories\Implementation\AddressRepository.cs" />
     <Compile Include="Repositories\Implementation\AppointmentRepository.cs" />
     <Compile Include="Repositories\Implementation\AuthRepository.cs" />
@@ -184,11 +184,11 @@
       <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
     <Compile Include="Views\manager\IFormManager.cs" />
-    <Compile Include="Views\UserListForm.cs">
+    <Compile Include="Views\Reminder\ReminderForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\UserListForm.Designer.cs">
-      <DependentUpon>UserListForm.cs</DependentUpon>
+    <Compile Include="Views\Reminder\ReminderForm.Designer.cs">
+      <DependentUpon>ReminderForm.cs</DependentUpon>
     </Compile>
     <EmbeddedResource Include="Views\Appointment\AppointmentForm.resx">
       <DependentUpon>AppointmentForm.cs</DependentUpon>
@@ -217,8 +217,8 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Views\UserListForm.resx">
-      <DependentUpon>UserListForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Reminder\ReminderForm.resx">
+      <DependentUpon>ReminderForm.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="CalendarEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

@@ -18,15 +18,22 @@ namespace Software2.Views.Appointment
     public partial class AppointmentForm : Form
     {
         private AppointmentService appointmentService;
+        private ReminderService reminderService;
         private CustomerService customerService;
         private List<customer> customers;
         private AuthRepository _authRepository;
         private IFormManager _formManager;
         private AppointmentAggregate appointmentAggregate;
-        public AppointmentForm(AppointmentService appointmentService, CustomerService customerService, IFormManager formManager, AuthRepository authRepository)
+        public AppointmentForm(
+            AppointmentService appointmentService, 
+            CustomerService customerService, 
+            IFormManager formManager, 
+            AuthRepository authRepository, 
+            ReminderService reminderService)
         {
             this.appointmentService = appointmentService;
             this.customerService = customerService;
+            this.reminderService = reminderService;
             _formManager = formManager;
             _authRepository = authRepository;
             customers = customerService.FindAll();
@@ -66,6 +73,7 @@ namespace Software2.Views.Appointment
             {
                 errorLabel.Visible = false;
                 AddAppointment();
+                Close();
             }catch(InvalidInputException ex)
             {
                 errorLabel.Text = ex.Message;
@@ -107,7 +115,14 @@ namespace Software2.Views.Appointment
                 description = description
             };
 
-            appointmentService.Add(appointment);
+            int id = appointmentService.Add(appointment);
+            AddReminder(appointment.start, id);
+        }
+
+        private void AddReminder(DateTime startTime, int id)
+        {
+            var reminderTime = startTime.AddMinutes(-15);
+            reminderService.Add(reminderTime, id);
         }
 
         public customer GetCustomerByName(string customerName)

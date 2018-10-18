@@ -15,14 +15,12 @@ namespace Software2.Services
         private IAppointmentRepository _repository;
         private AuthRepository _authRepository;
         private CustomerService customerService;
-        private ReminderService reminderService;
 
-        public AppointmentService(IAppointmentRepository repository, AuthRepository authRepository, CustomerService customerService, ReminderService reminderService)
+        public AppointmentService(IAppointmentRepository repository, AuthRepository authRepository, CustomerService customerService)
         {
             _repository = repository;
             _authRepository = authRepository;
             this.customerService = customerService;
-            this.reminderService = reminderService;
         }
 
         public appointment FindOne(int id)
@@ -33,23 +31,33 @@ namespace Software2.Services
             return AdjustTimeZone(appointment);
         }
 
-        public void Add(appointment appointment)
+        public AppointmentAggregate FindOneAggregate(int id)
+        {
+            var appointment = FindOne(id);
+            var customer = customerService.FindOne(appointment.customerId);
+            return new AppointmentAggregate()
+            {
+                Contact = appointment.contact,
+                CustomerId = appointment.customerId,
+                CustomerName = customer.customerName,
+                Description = appointment.description,
+                Start = appointment.start,
+                End = appointment.end,
+                Id = id,
+                Location = appointment.location,
+                Title = appointment.title,
+                Url = appointment.url
+            };
+        }
+
+        public int Add(appointment appointment)
         {
             ValidateAppointment(appointment);
             appointment.createdBy = _authRepository.Username;
             appointment.lastUpdateBy = _authRepository.Username;
             appointment.createDate = DateTime.Now.ToUniversalTime();
             appointment.lastUpdate = DateTime.Now.ToUniversalTime();
-            _repository.Add(appointment);
-            AddReminderForNewAppointment(appointment);
-        }
-
-        private void AddReminderForNewAppointment(appointment appointment)
-        {
-            var dbAppointment = _repository.FindAll().Where(a => a.contact.Equals(appointment.contact) && a.start == appointment.start && a.end == appointment.end).FirstOrDefault();
-            var id = dbAppointment.appointmentId;
-            var reminderTime = dbAppointment.start.AddMinutes(-15);
-            reminderService.Add(reminderTime, id);
+            return _repository.Add(appointment);
         }
 
         public void Update(appointment appointment)

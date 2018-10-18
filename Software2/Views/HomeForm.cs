@@ -1,47 +1,80 @@
-﻿using Software2.Repositories.Implementation;
+﻿using Software2.Models;
+using Software2.Repositories.Implementation;
+using Software2.Services;
 using Software2.Views.Appointment;
 using Software2.Views.Customer;
 using Software2.Views.manager;
+using Software2.Views.Reminder;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Software2
 {
-
-    public delegate void CloseForm(Form form);
+    
 
     public partial class HomeForm : Form
     {
         public bool isLoggedIn = false;
         private IFormManager _formManager;
         public AuthRepository _authRepository { get; set; }
+        private ReminderService reminderService;
 
-        public HomeForm(IFormManager formManager, AuthRepository authRepository)
+        public HomeForm(IFormManager formManager, AuthRepository authRepository, ReminderService reminderService)
         {
             _authRepository = authRepository;
             this._formManager = formManager;
+            this.reminderService = reminderService;
             InitializeComponent();
             if(!_authRepository.UserAuthenticated)
             {
-                customersButton.Hide();
-                customersButton.Hide();
-                appointmentsButton.Hide();
-                loginButton.Show();
+                ShowLoginForm();
             }
             else
             {
                 customersButton.Show();
                 customersButton.Show();
                 appointmentsButton.Show();
-                loginButton.Hide();
             }
+        }
+
+        private async void ShowLoginForm()
+        {
+            var loginForm = _formManager.GetForm<LoginForm>();
+            //Delegate implementation
+            loginForm.setUserAuthenticated = SetUserAuthenticated;
+
+            await Task.Delay(10);
+            loginForm.Show();
+            Hide();
+        }
+
+        private void SetUserAuthenticated(Form loginForm, string username)
+        {
+            SetUserAuthenticated(username);
+            UpdateLoginRecord(username);
+            SetRemindersForSession();
+            loginForm.Close();
+            Show();
+        }
+
+        private void UpdateLoginRecord(string username)
+        {
+            string fileName = string.Format("{0}/LoginRecord.txt", Environment.GetFolderPath(Environment.SpecialFolder.Desktop));
+            StreamWriter objWriter = File.AppendText(fileName);
+
+            DateTime loginTime = DateTime.Now;
+
+            objWriter.WriteLine(String.Format("{0} logged in on {1} at {2}", username, loginTime.ToShortDateString(), loginTime.ToShortTimeString()));
+            objWriter.Close();
         }
 
         private void SetUserAuthenticated(string username)
@@ -51,23 +84,31 @@ namespace Software2
             customersButton.Show();
             customersButton.Show();
             appointmentsButton.Show();
-            loginButton.Hide();
         }
 
-        private void loginButton_Click(object sender, EventArgs e)
+        private void SetRemindersForSession()
         {
-            var loginForm = _formManager.GetForm<LoginForm>() as LoginForm;
-
-            //Delegate implementation
-            loginForm.setUserAuthenticated = (form, username) =>
+            var reminderAggregates = reminderService.FindRemindersInNextHour();
+            if (reminderAggregates == null || reminderAggregates.Count() == 0)
+                return;
+            foreach (var aggregate in reminderAggregates)
             {
-                SetUserAuthenticated(username);
-                form.Close();
-                Show();
-            };
+                TimeSpan timeUntilReminder = aggregate.ReminderDate - DateTime.Now;
+                if (timeUntilReminder < TimeSpan.Zero)
+                    return;
 
-            loginForm.Show();
-            this.Hide();
+                var timer = new System.Windows.Forms.Timer();
+                timer.Interval = timeUntilReminder.Seconds * 1000;
+                timer.Enabled = true;
+                timer.Tick += new EventHandler((object sender, EventArgs e) =>
+                {
+                    timer.Enabled = false;
+                    var reminderForm = _formManager.GetForm<ReminderForm>();
+                    reminderForm.SetAggregate(aggregate);
+                    reminderForm.Show();
+                });
+
+            }
         }
 
         private void customersButton_Click(object sender, EventArgs e)
@@ -80,6 +121,11 @@ namespace Software2
         {
             this.Hide();
             _formManager.ShowForm<AppointmentListForm>();
+        }
+
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

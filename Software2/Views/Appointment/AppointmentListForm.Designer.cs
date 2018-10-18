@@ -39,10 +39,9 @@
             // 
             // cancelButton
             // 
-            this.cancelButton.Location = new System.Drawing.Point(72, 480);
-            this.cancelButton.Margin = new System.Windows.Forms.Padding(4);
+            this.cancelButton.Location = new System.Drawing.Point(54, 390);
             this.cancelButton.Name = "cancelButton";
-            this.cancelButton.Size = new System.Drawing.Size(117, 28);
+            this.cancelButton.Size = new System.Drawing.Size(88, 23);
             this.cancelButton.TabIndex = 11;
             this.cancelButton.Text = "Cancel";
             this.cancelButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -52,22 +51,21 @@
             // 
             // deleteAppointmentButton
             // 
-            this.deleteAppointmentButton.Location = new System.Drawing.Point(787, 480);
-            this.deleteAppointmentButton.Margin = new System.Windows.Forms.Padding(4);
+            this.deleteAppointmentButton.Location = new System.Drawing.Point(590, 390);
             this.deleteAppointmentButton.Name = "deleteAppointmentButton";
-            this.deleteAppointmentButton.Size = new System.Drawing.Size(117, 28);
+            this.deleteAppointmentButton.Size = new System.Drawing.Size(88, 23);
             this.deleteAppointmentButton.TabIndex = 10;
             this.deleteAppointmentButton.Text = "Delete";
             this.deleteAppointmentButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
             this.deleteAppointmentButton.UseMnemonic = false;
             this.deleteAppointmentButton.UseVisualStyleBackColor = true;
+            this.deleteAppointmentButton.Click += new System.EventHandler(this.deleteAppointmentButton_Click);
             // 
             // editAppointmentButton
             // 
-            this.editAppointmentButton.Location = new System.Drawing.Point(647, 480);
-            this.editAppointmentButton.Margin = new System.Windows.Forms.Padding(4);
+            this.editAppointmentButton.Location = new System.Drawing.Point(485, 390);
             this.editAppointmentButton.Name = "editAppointmentButton";
-            this.editAppointmentButton.Size = new System.Drawing.Size(117, 28);
+            this.editAppointmentButton.Size = new System.Drawing.Size(88, 23);
             this.editAppointmentButton.TabIndex = 9;
             this.editAppointmentButton.Text = "Edit";
             this.editAppointmentButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -77,10 +75,9 @@
             // 
             // addAppointmentButton
             // 
-            this.addAppointmentButton.Location = new System.Drawing.Point(787, 32);
-            this.addAppointmentButton.Margin = new System.Windows.Forms.Padding(4);
+            this.addAppointmentButton.Location = new System.Drawing.Point(590, 26);
             this.addAppointmentButton.Name = "addAppointmentButton";
-            this.addAppointmentButton.Size = new System.Drawing.Size(117, 28);
+            this.addAppointmentButton.Size = new System.Drawing.Size(88, 23);
             this.addAppointmentButton.TabIndex = 8;
             this.addAppointmentButton.Text = "Add";
             this.addAppointmentButton.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
@@ -92,10 +89,9 @@
             // 
             this.formHeading.AutoSize = true;
             this.formHeading.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.formHeading.Location = new System.Drawing.Point(63, 32);
-            this.formHeading.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.formHeading.Location = new System.Drawing.Point(47, 26);
             this.formHeading.Name = "formHeading";
-            this.formHeading.Size = new System.Drawing.Size(144, 25);
+            this.formHeading.Size = new System.Drawing.Size(120, 20);
             this.formHeading.TabIndex = 7;
             this.formHeading.Text = "Appointments";
             // 
@@ -104,25 +100,26 @@
             this.appointmentGridView.AllowUserToAddRows = false;
             this.appointmentGridView.AllowUserToDeleteRows = false;
             this.appointmentGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.appointmentGridView.Location = new System.Drawing.Point(68, 86);
-            this.appointmentGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.appointmentGridView.Location = new System.Drawing.Point(51, 70);
+            this.appointmentGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.appointmentGridView.Name = "appointmentGridView";
             this.appointmentGridView.ReadOnly = true;
             this.appointmentGridView.RowTemplate.Height = 24;
-            this.appointmentGridView.Size = new System.Drawing.Size(836, 368);
+            this.appointmentGridView.Size = new System.Drawing.Size(627, 299);
             this.appointmentGridView.TabIndex = 6;
             // 
             // AppointmentListForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1020, 593);
+            this.ClientSize = new System.Drawing.Size(765, 482);
             this.Controls.Add(this.cancelButton);
             this.Controls.Add(this.deleteAppointmentButton);
             this.Controls.Add(this.editAppointmentButton);
             this.Controls.Add(this.addAppointmentButton);
             this.Controls.Add(this.formHeading);
             this.Controls.Add(this.appointmentGridView);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AppointmentListForm";
             this.Text = "AppointmentListForm";
             ((System.ComponentModel.ISupportInitialize)(this.appointmentGridView)).EndInit();

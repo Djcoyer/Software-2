@@ -11,7 +11,7 @@ namespace Software2.Repositories.Interfaces
         appointment FindOne(int id);
         IEnumerable<appointment> FindAll();
         void Update(appointment appointment, int id);
-        void Add(appointment appointment);
+        int Add(appointment appointment);
         void Delete(int id);
     }
 }

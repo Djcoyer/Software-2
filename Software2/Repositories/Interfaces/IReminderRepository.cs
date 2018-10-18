@@ -13,6 +13,7 @@ namespace Software2.Repositories.Interfaces
         void Add(reminder reminder);
         void Update(reminder reminder, int id);
         void Delete(int id);
+        void DeleteMany(List<int> ids);
         IEnumerable<reminder> FindAllByAppointmentId(int appointmentId);
 
     }

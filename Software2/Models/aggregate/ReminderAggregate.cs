@@ -8,12 +8,16 @@ namespace Software2.Models
 {
     public class ReminderAggregate
     {
-        public int IncrementId { get; set; }
         public int ReminderId { get; set; }
+        public int AppointmentId { get; set; }
+        public int IncrementId { get; set; }
         public int IncrementValue { get; set; }
         public string IncrementDescription { get; set; }
-        public int AppointmentId { get; set; }
+        public string CustomerName { get; set; }
+        public string Location { get; set; }
         public DateTime ReminderDate { get; set; }
+        public DateTime StartTime { get; set; }
+        public DateTime EndTime { get; set; }
         public string ReminderCol { get; set; }
     }
 }

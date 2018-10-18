@@ -30,6 +30,16 @@ namespace Software2.Repositories.Implementation
             _db.SaveChanges();
         }
 
+        public void DeleteMany(List<int> ids)
+        {
+            foreach(int id in ids)
+            {
+                var dbReminder = FindOne(id);
+                _db.reminders.Remove(dbReminder);
+            }
+            _db.SaveChanges();
+        }
+
         public IEnumerable<reminder> FindAll()
         {
             return _db.reminders.AsEnumerable();

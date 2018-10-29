@@ -47,7 +47,7 @@ namespace Software2.Repositories.Implementation
             var existingAppointment = FindOne(id);
             if (existingAppointment == null)
                 return;
-            existingAppointment = appointment;
+            _db.Entry(existingAppointment).CurrentValues.SetValues(appointment);
             _db.SaveChanges();
         }
     }

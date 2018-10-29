@@ -53,7 +53,6 @@ namespace Software2.Services
                     PostalCode = addressAggregate.PostalCode
                 });
             }
-
             return customerAggregates;
         }
 

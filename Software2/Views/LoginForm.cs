@@ -7,7 +7,9 @@ using System.Data;
 using System.Drawing;
 using System.Globalization;
 using System.Linq;
+using System.Resources;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -21,8 +23,7 @@ namespace Software2
         public SetUserAuthenticated setUserAuthenticated;
         private UserService userService;
         public LoginForm(UserService userService) : base()
-        {
-            InitializeComponent();
+        {   InitializeComponent();
             passwordTextbox.PasswordChar = '*';
             passwordTextbox.MaxLength = 10;
             this.userService = userService;
@@ -40,9 +41,26 @@ namespace Software2
 
             } catch(Exception ex)
             {
-                errorLabel.Text = ex.Message;
-                errorLabel.Show();
+                ShowErrorMessage(ex);
             }
+        }
+
+        private void ShowErrorMessage(Exception ex)
+        {
+            var lang = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName;
+            var message = ex.Message;
+            if (lang == "es")
+            {
+                List<string> messageWords = message.Split(' ').ToList();
+                message = String.Empty;
+                messageWords.ForEach(word =>
+                {
+                    message += es_lang.ResourceManager.GetString(word) + ' ';
+                });
+            }
+
+            errorLabel.Text = message;
+            errorLabel.Show();
         }
     }
 }

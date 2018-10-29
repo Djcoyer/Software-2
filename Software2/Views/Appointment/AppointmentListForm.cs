@@ -29,16 +29,7 @@ namespace Software2.Views.Appointment
             appointments = appointmentService.FindAllAggregates();
             InitializeComponent();
             appointmentBindingSource = new BindingSource();
-            appointmentBindingSource.DataSource = appointments.Select(a =>
-            new AppointmentRow()
-            {
-                Id = a.Id,
-                Title = a.Title,
-                Contact = a.Contact,
-                StartDate = a.Start,
-                Location = a.Location,
-                CustomerName = a.CustomerName
-            }).ToList();
+            initBindingSource(appointments);
             appointmentGridView.DataSource = appointmentBindingSource;
         }
 
@@ -90,6 +81,24 @@ namespace Software2.Views.Appointment
             var id = selectedAppointment.Id;
             appointmentService.Delete(id);
             reminderService.DeleteByAppointmentId(id);
+            List<AppointmentAggregate> newAppointmentList = appointments.ToList();
+            newAppointmentList.Remove(appointments.First(p => p.Id == id));
+            initBindingSource(newAppointmentList);
+            appointmentBindingSource.ResetBindings(false);
+        }
+
+        private void initBindingSource(IEnumerable<AppointmentAggregate> appointments)
+        {
+            appointmentBindingSource.DataSource = appointments.Select(a =>
+            new AppointmentRow()
+            {
+                Id = a.Id,
+                Title = a.Title,
+                Contact = a.Contact,
+                StartDate = a.Start,
+                Location = a.Location,
+                CustomerName = a.CustomerName
+            }).ToList();
         }
     }
 }

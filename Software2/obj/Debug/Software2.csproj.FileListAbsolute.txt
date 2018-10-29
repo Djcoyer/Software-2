@@ -71,3 +71,7 @@ C:\Users\User\Documents\projects\Software-2\Software2\obj\Debug\Software2.Views.
 C:\Users\User\Documents\projects\Software-2\Software2\obj\Debug\Software2.Views.Appointment.AppointmentListForm.resources
 C:\Users\dcoyer\Documents\projects\Software-2\Software2\obj\Debug\Software2.Views.Appointment.AppointmentListForm.resources
 C:\Users\dcoyer\Documents\projects\Software-2\Software2\obj\Debug\Software2.Views.Reminder.ReminderForm.resources
+C:\Users\dcoyer\Documents\projects\Software-2\Software2\obj\Debug\Software2.es-lang.resources
+C:\Users\dcoyer\Documents\projects\Software-2\Software2\bin\Debug\es\Software2.resources.dll
+C:\Users\dcoyer\Documents\projects\Software-2\Software2\obj\Debug\Software2.LoginForm.es.resources
+C:\Users\dcoyer\Documents\projects\Software-2\Software2\obj\Debug\es\Software2.resources.dll

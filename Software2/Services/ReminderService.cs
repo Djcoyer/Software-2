@@ -116,13 +116,22 @@ namespace Software2.Services
 
         #region GET
 
-        public ReminderAggregate FindByAppointmentId(int appointmentId)
+        public reminder FindByAppointmentId(int appointmentId)
+        {
+            var appointmentAggregate = appointmentService.FindOneAggregate(appointmentId);
+            var reminder = FindAll().Where(r => r.appointmentId == appointmentId).FirstOrDefault();
+            if (reminder == null)
+                throw new NotFoundException("No reminders exist with specified appointment ID.");
+            return reminder;
+        }
+
+        public ReminderAggregate FindAggregateByAppointmentId(int appointmentId)
         {
             var appointmentAggregate = appointmentService.FindOneAggregate(appointmentId);
             var reminder = FindAll().Where(r => r.appointmentId == appointmentId).FirstOrDefault();
             return ConvertToAggregate(reminder, appointmentAggregate);
         }
-
+    
         public IEnumerable<ReminderAggregate> FindRemindersInNextHour()
         { 
             var reminders = FindAll().Where(r => (r.reminderDate - DateTime.Now).TotalHours < 1 && (r.reminderDate - DateTime.Now).TotalHours > 0).ToList();
@@ -214,7 +223,9 @@ namespace Software2.Services
                 CustomerName = appointmentAggregate.CustomerName,
                 Location = appointmentAggregate.Location,
                 ReminderId = reminder.reminderId,
-                ReminderDate = reminder.reminderDate
+                ReminderDate = reminder.reminderDate,
+                StartTime  = appointmentAggregate.Start,
+                EndTime = appointmentAggregate.End
             };
         }
 

@@ -26,16 +26,7 @@ namespace Software2.Views.Customer
             customers = customerService.FindAllAggregates()?.ToList();
             InitializeComponent();
             customerBindingSource = new BindingSource();
-            //Select certain fields with lambda expression to form new object similar to a ViewModel
-            customerBindingSource.DataSource = customers.Select(c => new
-            CustomerRow
-            {
-                Id = c.Id,
-                Name = c.CustomerName,
-                Address = String.Format("{0} {1}", c.Address1, c.Address2),
-                Phone = c.Phone,
-                AddressId = c.AddressId
-            }).ToList();
+            InitBindingSource();
             customerGridView.DataSource = customerBindingSource; 
         }
 
@@ -84,7 +75,22 @@ namespace Software2.Views.Customer
             customerService.Delete(customerId);
 
             customers.Remove(_customer);
+            InitBindingSource();
             customerBindingSource.ResetBindings(false);
+        }
+
+        private void InitBindingSource()
+        {
+            //Select certain fields with lambda expression to form new object, similar to a ViewModel
+            customerBindingSource.DataSource = customers.Select(c => new
+            CustomerRow
+            {
+                Id = c.Id,
+                Name = c.CustomerName,
+                Address = String.Format("{0} {1}", c.Address1, c.Address2),
+                Phone = c.Phone,
+                AddressId = c.AddressId
+            }).ToList();
         }
     }
 }

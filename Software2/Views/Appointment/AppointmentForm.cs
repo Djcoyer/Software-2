@@ -72,8 +72,12 @@ namespace Software2.Views.Appointment
             try
             {
                 errorLabel.Visible = false;
-                AddAppointment();
+                if (appointmentAggregate == null)
+                    AddAppointment();
+                else
+                    UpdateAppointment();
                 Close();
+                _formManager.ShowForm<AppointmentListForm>();
             }catch(InvalidInputException ex)
             {
                 errorLabel.Text = ex.Message;
@@ -83,6 +87,29 @@ namespace Software2.Views.Appointment
         }
 
         private void AddAppointment()
+        {
+            var appointment = GetAppointmentFromFields();
+            int id = appointmentService.Add(appointment);
+            AddReminder(appointment.start, id);
+        }
+
+        private void UpdateAppointment()
+        {
+            var updatedAppointment = GetAppointmentFromFields();
+            updatedAppointment.appointmentId = appointmentAggregate.Id;
+            updatedAppointment.createDate = appointmentAggregate.CreateDate;
+            updatedAppointment.createdBy = appointmentAggregate.CreatedBy;
+            appointmentService.Update(updatedAppointment);
+
+            var reminder = reminderService.FindByAppointmentId(appointmentAggregate.Id);
+            reminder.reminderDate = updatedAppointment.start.AddMinutes(-5) < DateTime.Now ?
+                updatedAppointment.start.AddMinutes(-(updatedAppointment.start - DateTime.Now).TotalMinutes + 1) 
+                : updatedAppointment.start.AddMinutes(-5);
+
+            reminderService.Update(reminder, reminder.reminderId);
+        }
+
+        private appointment GetAppointmentFromFields()
         {
             var title = titleTextBox.Text;
             var customerName = customerTextBox.Text;
@@ -102,7 +129,7 @@ namespace Software2.Views.Appointment
             var customer = GetCustomerByName(customerName);
             if (customer == null) { }
 
-            var appointment = new appointment()
+            return new appointment()
             {
                 title = title,
                 contact = contact,
@@ -114,9 +141,6 @@ namespace Software2.Views.Appointment
                 url = url,
                 description = description
             };
-
-            int id = appointmentService.Add(appointment);
-            AddReminder(appointment.start, id);
         }
 
         private void AddReminder(DateTime startTime, int id)

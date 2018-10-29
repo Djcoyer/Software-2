@@ -99,6 +99,11 @@
     <Compile Include="customer.cs">
       <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="es-lang.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>es-lang.resx</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\CommonMethods.cs" />
     <Compile Include="Models\AddressAggregate.cs" />
     <Compile Include="Models\aggregate\AppointmentAggregate.cs" />
@@ -190,6 +195,10 @@
     <Compile Include="Views\Reminder\ReminderForm.Designer.cs">
       <DependentUpon>ReminderForm.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="es-lang.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>es-lang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Appointment\AppointmentForm.resx">
       <DependentUpon>AppointmentForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -204,6 +213,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\HomeForm.resx">
       <DependentUpon>HomeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LoginForm.es.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>

@@ -92,7 +92,9 @@ namespace Software2.Services
                     End = appointment.end,
                     Location = appointment.location,
                     Url = appointment.url,
-                    Title = appointment.title
+                    Title = appointment.title,
+                    CreateDate = appointment.createDate,
+                    CreatedBy = appointment.createdBy
                 });
             }
             return aggregates;

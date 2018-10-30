@@ -195,6 +195,24 @@
     <Compile Include="Views\Reminder\ReminderForm.Designer.cs">
       <DependentUpon>ReminderForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Report\ConsultantScheduleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ConsultantScheduleForm.Designer.cs">
+      <DependentUpon>ConsultantScheduleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\ReportSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportSelectionForm.Designer.cs">
+      <DependentUpon>ReportSelectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SelectionPopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SelectionPopUp.Designer.cs">
+      <DependentUpon>SelectionPopUp.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="es-lang.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>es-lang.Designer.cs</LastGenOutput>
@@ -231,6 +249,15 @@
     </Compile>
     <EmbeddedResource Include="Views\Reminder\ReminderForm.resx">
       <DependentUpon>ReminderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ConsultantScheduleForm.resx">
+      <DependentUpon>ConsultantScheduleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportSelectionFOrm.resx">
+      <DependentUpon>ReportSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\SelectionPopUp.resx">
+      <DependentUpon>SelectionPopUp.cs</DependentUpon>
     </EmbeddedResource>
     <EntityDeploy Include="CalendarEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

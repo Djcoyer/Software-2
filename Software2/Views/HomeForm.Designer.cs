@@ -76,6 +76,7 @@
             this.reportsButton.TabIndex = 6;
             this.reportsButton.Text = "Reports";
             this.reportsButton.UseVisualStyleBackColor = true;
+            this.reportsButton.Click += new System.EventHandler(this.reportsButton_Click);
             // 
             // exitButton
             // 

@@ -23,6 +23,11 @@ namespace Software2.Services
             this.customerService = customerService;
         }
 
+        public IEnumerable<AppointmentAggregate> FindAllByContact(string contact)
+        {
+            return FindAllAggregates()?.Where(app => app.Contact.Equals(contact, StringComparison.CurrentCultureIgnoreCase));
+        }
+
         public appointment FindOne(int id)
         {
             var appointment = _repository.FindOne(id);

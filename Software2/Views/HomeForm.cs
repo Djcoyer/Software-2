@@ -5,6 +5,7 @@ using Software2.Views.Appointment;
 using Software2.Views.Customer;
 using Software2.Views.manager;
 using Software2.Views.Reminder;
+using Software2.Views.Report;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -126,6 +127,12 @@ namespace Software2
         private void exitButton_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void reportsButton_Click(object sender, EventArgs e)
+        {
+            Hide();
+            _formManager.ShowForm<ReportSelectionForm>();
         }
     }
 }

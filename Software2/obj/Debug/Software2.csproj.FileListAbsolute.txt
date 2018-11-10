@@ -109,3 +109,6 @@ C:\Users\devyn\Documents\projects\Software-2\Software2\obj\Debug\Software2.pdb
 C:\Users\devyn\Documents\projects\Software-2\Software2\obj\Debug\Software2.Views.Report.ConsultantScheduleForm.resources
 C:\Users\devyn\Documents\projects\Software-2\Software2\obj\Debug\Software2.Views.Report.ReportSelectionForm.resources
 C:\Users\devyn\Documents\projects\Software-2\Software2\obj\Debug\Software2.Views.Report.SelectionPopUp.resources
+C:\Users\dcoyer\Documents\projects\Software-2\Software2\obj\Debug\Software2.Views.Report.ReportSelectionForm.resources
+C:\Users\dcoyer\Documents\projects\Software-2\Software2\obj\Debug\Software2.Views.Report.SelectionPopUp.resources
+C:\Users\dcoyer\Documents\projects\Software-2\Software2\obj\Debug\Software2.Views.Report.ReportForm.resources

@@ -113,6 +113,7 @@
     <Compile Include="Models\CustomerRow.cs" />
     <Compile Include="Models\Exceptions\DataIntegrityViolationException.cs" />
     <Compile Include="Models\aggregate\ReminderAggregate.cs" />
+    <Compile Include="Models\ReportBase.cs" />
     <Compile Include="Repositories\Implementation\AddressRepository.cs" />
     <Compile Include="Repositories\Implementation\AppointmentRepository.cs" />
     <Compile Include="Repositories\Implementation\AuthRepository.cs" />
@@ -195,11 +196,11 @@
     <Compile Include="Views\Reminder\ReminderForm.Designer.cs">
       <DependentUpon>ReminderForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Views\Report\ConsultantScheduleForm.cs">
+    <Compile Include="Views\Report\ReportForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Views\Report\ConsultantScheduleForm.Designer.cs">
-      <DependentUpon>ConsultantScheduleForm.cs</DependentUpon>
+    <Compile Include="Views\Report\ReportForm.Designer.cs">
+      <DependentUpon>ReportForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Report\ReportSelectionForm.cs">
       <SubType>Form</SubType>
@@ -250,8 +251,8 @@
     <EmbeddedResource Include="Views\Reminder\ReminderForm.resx">
       <DependentUpon>ReminderForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Views\Report\ConsultantScheduleForm.resx">
-      <DependentUpon>ConsultantScheduleForm.cs</DependentUpon>
+    <EmbeddedResource Include="Views\Report\ReportForm.resx">
+      <DependentUpon>ReportForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Report\ReportSelectionFOrm.resx">
       <DependentUpon>ReportSelectionForm.cs</DependentUpon>

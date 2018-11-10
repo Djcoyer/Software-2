@@ -22,8 +22,9 @@ namespace Software2.Views.Report
 
         public void SetSelectionOptions(IEnumerable<string> selectionOptions)
         {
-            this.SelectionOptions = selectionOptions; 
+            SelectionOptions = selectionOptions; 
             selectionComboBox.Items.AddRange(selectionOptions.ToArray());
+            selectionComboBox.SelectedIndex = (selectionOptions.Count() > 0 ? 0 : -1);
         }
 
         public void SetSubmitSelection(SubmitSelection submitSelection)

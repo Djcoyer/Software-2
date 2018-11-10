@@ -1,6 +1,6 @@
 ﻿namespace Software2.Views.Report
 {
-    partial class ConsultantScheduleForm
+    partial class ReportForm
     {
         /// <summary>
         /// Required designer variable.
@@ -48,15 +48,16 @@
             this.backButton.TabIndex = 1;
             this.backButton.Text = "Done";
             this.backButton.UseVisualStyleBackColor = true;
+            this.backButton.Click += new System.EventHandler(this.backButton_Click);
             // 
-            // ConsultantScheduleForm
+            // ReportForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(619, 544);
             this.Controls.Add(this.backButton);
             this.Controls.Add(this.layoutPanel);
-            this.Name = "ConsultantScheduleForm";
+            this.Name = "ReportForm";
             this.Text = "ConsultantScheduleForm";
             this.ResumeLayout(false);
 

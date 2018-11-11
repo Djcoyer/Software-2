@@ -31,7 +31,7 @@ namespace Software2.Views.Reminder
         {
             customerLabel.Text = String.Format("Customer: {0}", aggregate.CustomerName);
             this.locationLabel.Text = string.Format("Location: {0}", aggregate.Location);
-            this.timeLabel.Text = string.Format("Start Time: {1}", aggregate.StartTime.ToShortTimeString());
+            this.timeLabel.Text = string.Format("Start Time: {0}", aggregate.StartTime.ToShortTimeString());
         }
 
 

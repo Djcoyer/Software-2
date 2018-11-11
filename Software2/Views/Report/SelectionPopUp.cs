@@ -27,6 +27,20 @@ namespace Software2.Views.Report
             selectionComboBox.SelectedIndex = (selectionOptions.Count() > 0 ? 0 : -1);
         }
 
+        public void SetSelectionType(string type)
+        {
+            if(type == "DATE")
+            {
+                datePicker.Visible = true;
+                datePicker.Enabled = true;
+            } 
+            else
+            {
+                datePicker.Visible = false;
+                datePicker.Enabled = false;
+            }
+        }
+
         public void SetSubmitSelection(SubmitSelection submitSelection)
         {
             this.submitSelection = submitSelection;

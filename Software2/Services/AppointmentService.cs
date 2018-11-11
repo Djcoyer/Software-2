@@ -28,6 +28,20 @@ namespace Software2.Services
             return FindAllAggregates()?.Where(app => app.Contact.Equals(contact, StringComparison.CurrentCultureIgnoreCase));
         }
 
+        public Dictionary<string, int> FindDistinctByTypeForMonth(string type, int month)
+        {
+            var aggregates = FindAllAggregates()?.Where(app => app.Start.Month == month);
+            List<string> types = aggregates.Select(a => a.Title).ToList();
+            Dictionary<string, int> appointmentTypesCount = new Dictionary<string, int>();
+            foreach(var _type in types)
+            {
+                int count = aggregates.Count(a => a.Title.Equals(type, StringComparison.CurrentCultureIgnoreCase));
+                appointmentTypesCount.Add(_type, count);
+            };
+
+            return appointmentTypesCount;
+        }
+
         public appointment FindOne(int id)
         {
             var appointment = _repository.FindOne(id);

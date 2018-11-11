@@ -63,6 +63,7 @@
             this.appointmentTypeButton.TabIndex = 2;
             this.appointmentTypeButton.Text = "Appointment Types";
             this.appointmentTypeButton.UseVisualStyleBackColor = true;
+            this.appointmentTypeButton.Click += new System.EventHandler(this.appointmentTypeButton_Click);
             // 
             // customerScheduleButton
             // 

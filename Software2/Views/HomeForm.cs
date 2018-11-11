@@ -114,13 +114,13 @@ namespace Software2
 
         private void customersButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
             _formManager.ShowForm<CustomerListForm>();
         }
 
         private void appointmentsButton_Click(object sender, EventArgs e)
         {
-            this.Hide();
+            Hide();
             _formManager.ShowForm<AppointmentListForm>();
         }
 

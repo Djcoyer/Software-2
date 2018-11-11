@@ -145,7 +145,7 @@ namespace Software2.Views.Appointment
 
         private void AddReminder(DateTime startTime, int id)
         {
-            var reminderTime = startTime.AddMinutes(-15);
+            var reminderTime = (startTime.AddMinutes(-15) > DateTime.Now ? startTime.AddMinutes(-15) : DateTime.Now.AddMinutes(1));
             reminderService.Add(reminderTime, id);
         }
 

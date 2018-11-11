@@ -31,6 +31,7 @@
             this.titleLabel = new System.Windows.Forms.Label();
             this.selectionComboBox = new System.Windows.Forms.ComboBox();
             this.SubmitButton = new System.Windows.Forms.Button();
+            this.datePicker = new System.Windows.Forms.DateTimePicker();
             this.SuspendLayout();
             // 
             // titleLabel
@@ -61,11 +62,22 @@
             this.SubmitButton.UseVisualStyleBackColor = true;
             this.SubmitButton.Click += new System.EventHandler(this.SubmitButton_Click);
             // 
+            // datePicker
+            // 
+            this.datePicker.CustomFormat = "MMMM/yyyy";
+            this.datePicker.Location = new System.Drawing.Point(88, 94);
+            this.datePicker.Name = "datePicker";
+            this.datePicker.ShowUpDown = true;
+            this.datePicker.Size = new System.Drawing.Size(200, 22);
+            this.datePicker.TabIndex = 3;
+            this.datePicker.Value = new System.DateTime(2018, 11, 1, 0, 0, 0, 0);
+            // 
             // SelectionPopUp
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(392, 200);
+            this.Controls.Add(this.datePicker);
             this.Controls.Add(this.SubmitButton);
             this.Controls.Add(this.selectionComboBox);
             this.Controls.Add(this.titleLabel);
@@ -81,5 +93,6 @@
         private System.Windows.Forms.Label titleLabel;
         private System.Windows.Forms.ComboBox selectionComboBox;
         private System.Windows.Forms.Button SubmitButton;
+        private System.Windows.Forms.DateTimePicker datePicker;
     }
 }

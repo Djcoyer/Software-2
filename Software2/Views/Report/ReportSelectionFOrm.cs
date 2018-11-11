@@ -32,14 +32,20 @@ namespace Software2.Views.Report
             var users = userService.FindAllUsers();
             IEnumerable<string> userNames = users.Select(u => u.userName);
             var form = formManager.GetForm<SelectionPopUp>();
+            form.SetSelectionType("TEXT"); 
             form.SetSelectionOptions(userNames);
-            form.SetSubmitSelection((string selectedOption, Form popupForm) => {
-            popupForm.Close();
-            var reportForm = formManager.GetForm<ReportForm>();
-            reportForm.onDoneClick = ((Form formToClose)=> {
-                formToClose.Close();
-                Show();
-            });
+
+
+            form.SetSubmitSelection((string selectedOption, Form popupForm) =>
+            {
+                popupForm.Close();
+                var reportForm = formManager.GetForm<ReportForm>();
+
+                reportForm.onDoneClick = ((Form formToClose) =>
+                {
+                    formToClose.Close();
+                    Show();
+                });
                 var appointments = appointmentService.FindAllByContact(selectedOption);
                 if (appointments.Count() == 0)
                     return;
@@ -58,14 +64,42 @@ namespace Software2.Views.Report
                 reportForm.SetReportItems(reportItems);
                 Hide();
                 reportForm.Show();
-                
+
             });
             form.Show();
         }
 
-        private void HandleSelection(string selectedOption, Form form)
+        private void appointmentTypeButton_Click(object sender, EventArgs e)
         {
+            var form = formManager.GetForm<SelectionPopUp>();
+            form.SetSelectionType("DATE");
 
+            //TODO
+            //form.SetSelectionOptions(appointmentTypes);
+
+            form.SetSubmitSelection((string selectedOption, Form selectionForm) =>
+            {
+                selectionForm.Close();
+                var reportForm = formManager.GetForm<ReportForm>();
+                reportForm.onDoneClick = ((Form formToClose) =>
+                {
+                    formToClose.Close();
+                    Show();
+                });
+
+                var appointmentTypeDictionary = appointmentService.FindDistinctByTypeForMonth("someType", DateTime.Parse(selectedOption).Month);
+                var reportItems = new List<ReportBase>();
+                appointmentTypeDictionary.Keys.ToList().ForEach(p =>
+                {
+                    var properties = new Dictionary<string, string>();
+                    properties.Add("Count", appointmentTypeDictionary[p].ToString());
+                    reportItems.Add(new ReportBase()
+                    {
+                        Title = p,
+                        Properties = properties
+                    });
+                });
+            });
         }
     }
 }

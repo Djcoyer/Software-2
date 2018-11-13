@@ -10,7 +10,7 @@ namespace Software2.Repositories.Implementation
 {
     class UserRepository : IUserRepository
     {
-        private CalendarEntities _db;
+        public CalendarEntities _db { private get; set; }
         
         public UserRepository(CalendarEntities db)
         {
@@ -18,33 +18,36 @@ namespace Software2.Repositories.Implementation
         }
         public void AddUser(user user)
         {
-            this._db.users.Add(user);
-            this._db.SaveChanges();
+            _db.users.Add(user);
+            _db.SaveChanges();
         }
 
-        public bool DeleteUser(int id)
+        public void DeleteUser(int id)
         {
-            throw new NotImplementedException();
+            _db.users.Remove(_db.users.Find(id));
         }
 
         public IEnumerable<user> FindAll()
         {
-            return this._db.users.AsEnumerable();
+            return _db.users.AsEnumerable();
         }
 
         public user FindById(int id)
         {
-            return this._db.users.Find(id);
+            return _db.users.Find(id);
         }
 
         public user FindByUsername(string username)
         {
-            return this._db.users.FirstOrDefault(p => p.userName.Equals(username, StringComparison.CurrentCultureIgnoreCase));
+            //Allows for searching the database by a custom field with no case sensitivity
+            return _db.users.FirstOrDefault(p => p.userName.Equals(username, StringComparison.CurrentCultureIgnoreCase));
         }
 
         public void UpdateUser(user user, int id)
         {
-            throw new NotImplementedException();
+            var _user = FindById(id);
+            _user = user;
+            _db.SaveChanges();
         }
     }
 }

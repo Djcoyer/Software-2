@@ -17,10 +17,37 @@ namespace Software2.Services
             this._repository = repository;
         }
 
-        public bool ValidateCredentials(string username, string password)
+        public user FindUserById(int id)
         {
+            var user = _repository.FindById(id);
+            if (user == null)
+                throw new NotFoundException("Could not locate user with specified ID.");
+            return user;
+        }
+
+        public List<user> FindAllUsers()
+        {
+            return _repository.FindAll().ToList();
+        }
+
+        public void ValidateCredentials(string username, string password)
+        {
+            if (String.IsNullOrEmpty(username) || String.IsNullOrEmpty(password))
+            {
+                throw new Exception("Username and password are required");
+            }
             var user = _repository.FindByUsername(username);
-            return user != null && user.password.Equals(password);
+            if (user == null || !user.password.Equals(password))
+                throw new InvalidInputException("Username or password incorrect");
+        }
+
+        public void UpdateUser(user updatedUser, int id)
+        {
+            if (updatedUser.active == 0)
+                throw new Exception();
+            if (updatedUser.password.Length < 10)
+                throw new Exception();
+            this._repository.UpdateUser(updatedUser, id);
         }
     }
 }

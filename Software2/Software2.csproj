@@ -44,6 +44,9 @@
     <Reference Include="MySql.Data.Entity.EF6, Version=6.10.7.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.Entity.6.10.7\lib\net452\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
+    <Reference Include="SimpleInjector, Version=4.3.0.0, Culture=neutral, PublicKeyToken=984cb50dea722e99, processorArchitecture=MSIL">
+      <HintPath>..\packages\SimpleInjector.4.3.0\lib\net45\SimpleInjector.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -96,15 +99,71 @@
     <Compile Include="customer.cs">
       <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="es-lang.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>es-lang.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Helpers\CommonMethods.cs" />
+    <Compile Include="Models\AddressAggregate.cs" />
+    <Compile Include="Models\aggregate\AppointmentAggregate.cs" />
+    <Compile Include="Models\AppointmentRow.cs" />
+    <Compile Include="Models\CityRow.cs" />
+    <Compile Include="Models\aggregate\CustomerAggregate.cs" />
+    <Compile Include="Models\CustomerRow.cs" />
+    <Compile Include="Models\Exceptions\DataIntegrityViolationException.cs" />
+    <Compile Include="Models\aggregate\ReminderAggregate.cs" />
+    <Compile Include="Models\ReportBase.cs" />
+    <Compile Include="Repositories\Implementation\AddressRepository.cs" />
+    <Compile Include="Repositories\Implementation\AppointmentRepository.cs" />
+    <Compile Include="Repositories\Implementation\AuthRepository.cs" />
+    <Compile Include="Repositories\Implementation\CityRepository.cs" />
+    <Compile Include="Repositories\Implementation\CountryRepository.cs" />
+    <Compile Include="Repositories\Implementation\CustomerRepository.cs" />
+    <Compile Include="Repositories\Implementation\IncrementTypeRepository.cs" />
+    <Compile Include="Repositories\Implementation\ReminderRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAddressRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAppointmentRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ICityRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ICountryRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ICustomerRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IIncrementRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IReminderRepository.cs" />
+    <Compile Include="Services\AddressService.cs" />
+    <Compile Include="Services\AppointmentService.cs" />
+    <Compile Include="Services\CityService.cs" />
+    <Compile Include="Services\CountryService.cs" />
+    <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\IncrementService.cs" />
+    <Compile Include="Services\ReminderService.cs" />
+    <Compile Include="Views\Appointment\AppointmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Appointment\AppointmentForm.Designer.cs">
+      <DependentUpon>AppointmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Appointment\AppointmentListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Appointment\AppointmentListForm.Designer.cs">
+      <DependentUpon>AppointmentListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\CustomerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\CustomerForm.Designer.cs">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Customer\CustomerListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Customer\CustomerListForm.Designer.cs">
+      <DependentUpon>CustomerListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\manager\FormManager.cs" />
     <Compile Include="Models\Exceptions\InvalidInputException.cs" />
     <Compile Include="Models\Exceptions\NotFoundException.cs" />
     <Compile Include="Services\UserService.cs" />
-    <Compile Include="Views\FormWrapper.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\FormWrapper.Designer.cs">
-      <DependentUpon>FormWrapper.cs</DependentUpon>
-    </Compile>
     <Compile Include="Views\HomeForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -130,6 +189,53 @@
     <Compile Include="user.cs">
       <DependentUpon>CalendarEntities.tt</DependentUpon>
     </Compile>
+    <Compile Include="Views\manager\IFormManager.cs" />
+    <Compile Include="Views\Reminder\ReminderForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Reminder\ReminderForm.Designer.cs">
+      <DependentUpon>ReminderForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\ReportForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportForm.Designer.cs">
+      <DependentUpon>ReportForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\ReportSelectionForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Report\ReportSelectionForm.Designer.cs">
+      <DependentUpon>ReportSelectionForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Report\SelectionPopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Report\SelectionPopUp.Designer.cs">
+      <DependentUpon>SelectionPopUp.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="es-lang.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>es-lang.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Appointment\AppointmentForm.resx">
+      <DependentUpon>AppointmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Appointment\AppointmentListForm.resx">
+      <DependentUpon>AppointmentListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Customer\CustomerForm.resx">
+      <DependentUpon>CustomerForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Customer\CustomerListForm.resx">
+      <DependentUpon>CustomerListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\HomeForm.resx">
+      <DependentUpon>HomeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\LoginForm.es.resx">
+      <DependentUpon>LoginForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -142,6 +248,18 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Views\Reminder\ReminderForm.resx">
+      <DependentUpon>ReminderForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportForm.resx">
+      <DependentUpon>ReportForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\ReportSelectionFOrm.resx">
+      <DependentUpon>ReportSelectionForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Report\SelectionPopUp.resx">
+      <DependentUpon>SelectionPopUp.cs</DependentUpon>
+    </EmbeddedResource>
     <EntityDeploy Include="CalendarEntities.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>CalendarEntities.Designer.cs</LastGenOutput>

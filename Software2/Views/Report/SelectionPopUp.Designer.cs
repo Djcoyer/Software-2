@@ -64,7 +64,8 @@
             // 
             // datePicker
             // 
-            this.datePicker.CustomFormat = "MMMM/yyyy";
+            this.datePicker.CustomFormat = "";
+            this.datePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.datePicker.Location = new System.Drawing.Point(88, 94);
             this.datePicker.Name = "datePicker";
             this.datePicker.ShowUpDown = true;

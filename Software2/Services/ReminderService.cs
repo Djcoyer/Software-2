@@ -1,4 +1,5 @@
-﻿using Software2.Models;
+﻿using Software2.Helpers;
+using Software2.Models;
 using Software2.Models.Exceptions;
 using Software2.Repositories.Implementation;
 using Software2.Repositories.Interfaces;
@@ -48,7 +49,7 @@ namespace Software2.Services
 
         public List<reminder> FindAllByAppointmentId(int appointmentId)
         {
-            return _reminderRepository.FindAllByAppointmentId(appointmentId)?.ToList();
+            return AdjustTimeZone(_reminderRepository.FindAllByAppointmentId(appointmentId)).ToList();
         }
 
         #endregion
@@ -65,12 +66,12 @@ namespace Software2.Services
         public void Add(DateTime reminderDateTime, int appointmentId)
         {
             var incrementTypeId = incrementService.FindDefaultIncrement()?.incrementTypeId;
-
+            reminderDateTime = CommonMethods.ConvertToUtc(reminderDateTime);
             var reminder = new reminder()
             {
                 appointmentId = appointmentId,
                 createdBy = _authRepository.Username,
-                createdDate = DateTime.Now,
+                createdDate = CommonMethods.ConvertToUtc(DateTime.Now),
                 reminderDate = reminderDateTime,
                 snoozeIncrement = 5,
                 snoozeIncrementTypeId = incrementTypeId.HasValue ? incrementTypeId.Value : 1
@@ -87,6 +88,7 @@ namespace Software2.Services
         {
             Validate(reminder);
             FindOne(id);
+            reminder.reminderDate = CommonMethods.ConvertToUtc(reminder.reminderDate);
             _reminderRepository.Update(reminder, id);
         }
 
@@ -122,7 +124,7 @@ namespace Software2.Services
             var reminder = FindAll().Where(r => r.appointmentId == appointmentId).FirstOrDefault();
             if (reminder == null)
                 throw new NotFoundException("No reminders exist with specified appointment ID.");
-            return reminder;
+            return AdjustTimeZone(reminder);
         }
 
         public ReminderAggregate FindAggregateByAppointmentId(int appointmentId)
@@ -189,7 +191,10 @@ namespace Software2.Services
         {
             foreach (var reminder in reminders)
             {
-                reminder.reminderDate = TimeZoneInfo.ConvertTime(reminder.reminderDate, TimeZoneInfo.Local);
+                if (reminder.reminderDate.Kind == DateTimeKind.Unspecified || reminder.reminderDate.Kind == DateTimeKind.Utc)
+                {
+                    reminder.reminderDate = TimeZoneInfo.ConvertTime(reminder.reminderDate, TimeZoneInfo.Utc, TimeZoneInfo.Local);
+                }
             }
 
             return reminders;
@@ -197,7 +202,10 @@ namespace Software2.Services
 
         private reminder AdjustTimeZone(reminder reminder)
         {
-            reminder.reminderDate = TimeZoneInfo.ConvertTime(reminder.reminderDate, TimeZoneInfo.Local);
+            if (reminder.reminderDate.Kind == DateTimeKind.Unspecified || reminder.reminderDate.Kind == DateTimeKind.Utc)
+            {
+                reminder.reminderDate = TimeZoneInfo.ConvertTime(reminder.reminderDate, TimeZoneInfo.Utc, TimeZoneInfo.Local);
+            }
             return reminder;
         }
 

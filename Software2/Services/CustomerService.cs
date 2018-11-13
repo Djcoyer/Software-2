@@ -69,7 +69,7 @@ namespace Software2.Services
             if (String.IsNullOrWhiteSpace(aggregate.CustomerName))
                 throw new InvalidInputException("Must include name");
 
-            var date = DateTime.Now;
+            var date = DateTime.Now.ToUniversalTime();
             _repository.Add(new customer()
             {
                 active = true,

@@ -12,7 +12,7 @@ namespace Software2.Models
         public string Contact { get; set; }
         public string Title { get; set; }
         public string CustomerName { get; set; }
-        public DateTime StartDate { get; set; }
+        public string StartDate { get; set; }
         public string Location { get; set; }
     }
 }

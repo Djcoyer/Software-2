@@ -37,6 +37,10 @@ namespace Software2.Views.Report
                 Label reportItemLabel = new Label();
                 reportItemLabel.Font = new Font("Arial", fontSize, FontStyle.Bold);
                 reportItemLabel.Text = reportItem.Title;
+                var itemMargin = reportItemLabel.Margin;
+                itemMargin.Top = 15;
+                itemMargin.Left = 0;
+                reportItemLabel.Margin = itemMargin;
 
                 layoutPanel.Controls.Add(reportItemLabel);
 
@@ -49,7 +53,7 @@ namespace Software2.Views.Report
                     itemLabel.UseCompatibleTextRendering = true;
                     itemLabel.Font = new Font("Arial", 10);
                     var margin = itemLabel.Margin;
-                    margin.Left = 15;
+                    margin.Left = 8;
                     itemLabel.Text = String.Format("{0}: {1}", key, properties[key]);
                     itemLabel.Margin = margin;
                     layoutPanel.Controls.Add(itemLabel);

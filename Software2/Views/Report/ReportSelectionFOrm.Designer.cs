@@ -73,6 +73,7 @@
             this.customerScheduleButton.TabIndex = 3;
             this.customerScheduleButton.Text = "Customer Appointments";
             this.customerScheduleButton.UseVisualStyleBackColor = true;
+            this.customerScheduleButton.Click += new System.EventHandler(this.customerScheduleButton_Click);
             // 
             // exitButton
             // 
@@ -82,6 +83,7 @@
             this.exitButton.TabIndex = 4;
             this.exitButton.Text = "Back";
             this.exitButton.UseVisualStyleBackColor = true;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
             // 
             // ReportSelectionForm
             // 

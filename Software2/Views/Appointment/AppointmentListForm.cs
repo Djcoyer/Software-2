@@ -95,7 +95,7 @@ namespace Software2.Views.Appointment
                 Id = a.Id,
                 Title = a.Title,
                 Contact = a.Contact,
-                StartDate = a.Start,
+                StartDate = a.Start.ToShortDateString(),
                 Location = a.Location,
                 CustomerName = a.CustomerName
             }).ToList();

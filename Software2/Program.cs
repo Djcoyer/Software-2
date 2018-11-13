@@ -61,30 +61,26 @@ namespace Software2
             {
                 repoToInitialize._db = calendarEntities;
             });
-            container.RegisterInitializer<AppointmentRepository>(repoToInitialize =>
-            {
-                repoToInitialize._db = calendarEntities;
-            });
 
-            container.Register<IUserRepository, UserRepository>();
-            container.Register<ICustomerRepository, CustomerRepository>();
-            container.Register<IAddressRepository, AddressRepository>();
-            container.Register<ICityRepository, CityRepository>();
-            container.Register<ICountryRepository, CountryRepository>();
+            container.Register<IUserRepository, UserRepository>(Lifestyle.Transient);
+            container.Register<ICustomerRepository, CustomerRepository>(Lifestyle.Transient);
+            container.Register<IAddressRepository, AddressRepository>(Lifestyle.Transient);
+            container.Register<ICityRepository, CityRepository>(Lifestyle.Transient);
+            container.Register<ICountryRepository, CountryRepository>(Lifestyle.Transient);
             container.Register<AuthRepository>(Lifestyle.Singleton);
             container.Register<IFormManager, FormManager>();
-            container.Register<IIncrementRepository, IncrementTypeRepository>();
-            container.Register<IReminderRepository, ReminderRepository>();
-            container.Register<IAppointmentRepository, AppointmentRepository>();
+            container.Register<IIncrementRepository, IncrementTypeRepository>(Lifestyle.Transient);
+            container.Register<IReminderRepository, ReminderRepository>(Lifestyle.Transient);
+            container.Register<IAppointmentRepository, AppointmentRepository>(Lifestyle.Transient);
 
-            container.Register<UserService>();
-            container.Register<CustomerService>();
-            container.Register<AddressService>();
-            container.Register<CityService>();
-            container.Register<CountryService>();
-            container.Register<IncrementService>();
-            container.Register<ReminderService>();
-            container.Register<AppointmentService>();
+            container.Register<UserService>(Lifestyle.Transient);
+            container.Register<CustomerService>(Lifestyle.Transient);
+            container.Register<AddressService>(Lifestyle.Transient);
+            container.Register<CityService>(Lifestyle.Transient);
+            container.Register<CountryService>(Lifestyle.Transient);
+            container.Register<IncrementService>(Lifestyle.Transient);
+            container.Register<ReminderService>(Lifestyle.Transient);
+            container.Register<AppointmentService>(Lifestyle.Transient);
 
             if (calendarEntities.users == null || calendarEntities.users.Count() == 0)
             {

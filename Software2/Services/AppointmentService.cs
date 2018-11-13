@@ -1,4 +1,5 @@
-﻿using Software2.Models;
+﻿using Software2.Helpers;
+using Software2.Models;
 using Software2.Models.Exceptions;
 using Software2.Repositories.Implementation;
 using Software2.Repositories.Interfaces;
@@ -28,14 +29,14 @@ namespace Software2.Services
             return FindAllAggregates()?.Where(app => app.Contact.Equals(contact, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        public Dictionary<string, int> FindDistinctByTypeForMonth(string type, int month)
+        public Dictionary<string, int> FindTypesByMonth(int month)
         {
             var aggregates = FindAllAggregates()?.Where(app => app.Start.Month == month);
-            List<string> types = aggregates.Select(a => a.Title).ToList();
+            List<string> types = aggregates.Select(a => a.Title).Distinct().ToList();
             Dictionary<string, int> appointmentTypesCount = new Dictionary<string, int>();
             foreach(var _type in types)
             {
-                int count = aggregates.Count(a => a.Title.Equals(type, StringComparison.CurrentCultureIgnoreCase));
+                int count = aggregates.Count(a => a.Title.Equals(_type, StringComparison.CurrentCultureIgnoreCase));
                 appointmentTypesCount.Add(_type, count);
             };
 
@@ -74,22 +75,28 @@ namespace Software2.Services
             ValidateAppointment(appointment);
             appointment.createdBy = _authRepository.Username;
             appointment.lastUpdateBy = _authRepository.Username;
-            appointment.createDate = DateTime.Now.ToUniversalTime();
-            appointment.lastUpdate = DateTime.Now.ToUniversalTime();
+            var now = CommonMethods.ConvertToUtc(DateTime.Now);
+            appointment.createDate = now;
+            appointment.lastUpdate = now;
+            appointment.start = CommonMethods.ConvertToUtc(appointment.start);
+            appointment.end = CommonMethods.ConvertToUtc(appointment.end);
             return _repository.Add(appointment);
         }
 
         public void Update(appointment appointment)
         {
             ValidateAppointment(appointment);
-            appointment.lastUpdate = DateTime.Now;
+            appointment.lastUpdate = CommonMethods.ConvertToUtc(DateTime.Now);
             appointment.lastUpdateBy = _authRepository.Username;
+            appointment.start = CommonMethods.ConvertToUtc(appointment.start);
+            appointment.end = CommonMethods.ConvertToUtc(appointment.end);
             _repository.Update(appointment, appointment.appointmentId);
         }
 
         public IEnumerable<appointment> FindAll()
         {
-            return AdjustTimeZone(_repository.FindAll());
+            var appointments = _repository.FindAll();
+            return AdjustTimeZone(appointments.ToList());
         }
 
         public IEnumerable<AppointmentAggregate> FindAllAggregates()
@@ -117,6 +124,11 @@ namespace Software2.Services
                 });
             }
             return aggregates;
+        }
+
+        public IEnumerable<AppointmentAggregate> FindAllAggregatesByCustomerId(int customerId)
+        {
+            return FindAllAggregates()?.Where(agg => agg.CustomerId == customerId).ToList();
         }
 
         public IEnumerable<appointment> FindAllByCustomerId(int customerId)
@@ -162,8 +174,14 @@ namespace Software2.Services
         {
             foreach (var appointment in appointments)
             {
-                appointment.start = TimeZoneInfo.ConvertTime(appointment.start, TimeZoneInfo.Local);
-                appointment.end = TimeZoneInfo.ConvertTime(appointment.end, TimeZoneInfo.Local);
+                //If the time hasn't been converted to local time already
+                if (appointment.start.Kind == DateTimeKind.Unspecified || appointment.start.Kind == DateTimeKind.Utc)
+                {
+                    var start = new DateTime(appointment.start.Ticks, DateTimeKind.Utc);
+                    var end = new DateTime(appointment.end.Ticks, DateTimeKind.Utc);
+                    appointment.start = TimeZoneInfo.ConvertTime(start, TimeZoneInfo.Utc, TimeZoneInfo.Local);
+                    appointment.end = TimeZoneInfo.ConvertTime(end, TimeZoneInfo.Utc, TimeZoneInfo.Local);
+                }
             }
 
             return appointments;
@@ -171,8 +189,12 @@ namespace Software2.Services
 
         private appointment AdjustTimeZone(appointment appointment)
         {
-            appointment.start = TimeZoneInfo.ConvertTime(appointment.start, TimeZoneInfo.Local);
-            appointment.end = TimeZoneInfo.ConvertTime(appointment.end, TimeZoneInfo.Local);
+            //If the time hasn't been converted to local time already
+            if (appointment.start.Kind == DateTimeKind.Unspecified || appointment.start.Kind == DateTimeKind.Utc)
+            {
+                appointment.start = TimeZoneInfo.ConvertTime(appointment.start, TimeZoneInfo.Utc, TimeZoneInfo.Local);
+                appointment.end = TimeZoneInfo.ConvertTime(appointment.end, TimeZoneInfo.Utc, TimeZoneInfo.Local);
+            }
 
             return appointment;
         }

@@ -9,7 +9,12 @@ namespace Software2.Repositories.Implementation
 {
     public class AppointmentRepository : IAppointmentRepository
     {
-        public CalendarEntities _db { private get; set; }
+        private CalendarEntities _db;
+
+        public AppointmentRepository()
+        {
+            _db = new CalendarEntities();
+        }
 
         public int Add(appointment appointment)
         {

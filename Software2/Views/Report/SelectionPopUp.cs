@@ -15,9 +15,12 @@ namespace Software2.Views.Report
     {
         private IEnumerable<string> SelectionOptions;
         private SubmitSelection submitSelection;
+        public bool IsDateSelection { get; set; }
         public SelectionPopUp()
         {
             InitializeComponent();
+            datePicker.Visible = false;
+            datePicker.Enabled = false;
         }
 
         public void SetSelectionOptions(IEnumerable<string> selectionOptions)
@@ -27,18 +30,15 @@ namespace Software2.Views.Report
             selectionComboBox.SelectedIndex = (selectionOptions.Count() > 0 ? 0 : -1);
         }
 
-        public void SetSelectionType(string type)
+        public void SetDateSelection(bool isDateSelection)
         {
-            if(type == "DATE")
-            {
-                datePicker.Visible = true;
-                datePicker.Enabled = true;
-            } 
-            else
-            {
-                datePicker.Visible = false;
-                datePicker.Enabled = false;
-            }
+            datePicker.Visible = isDateSelection;
+            datePicker.Enabled = isDateSelection    ;
+            datePicker.Format = DateTimePickerFormat.Custom;
+            datePicker.CustomFormat = "MM/yyyy";
+            selectionComboBox.Enabled = !isDateSelection;
+            selectionComboBox.Visible = !isDateSelection;
+            IsDateSelection = isDateSelection;
         }
 
         public void SetSubmitSelection(SubmitSelection submitSelection)
@@ -48,7 +48,7 @@ namespace Software2.Views.Report
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            string selectedOption = selectionComboBox.SelectedItem.ToString();
+            string selectedOption = IsDateSelection ? datePicker.Value.ToShortDateString() : selectionComboBox.SelectedItem.ToString();
             submitSelection(selectedOption, this);
         }
     }

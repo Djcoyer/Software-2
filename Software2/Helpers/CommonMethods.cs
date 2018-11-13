@@ -24,5 +24,10 @@ namespace Software2.Helpers
 
             return items;
         }
+
+        public static DateTime ConvertToUtc(DateTime toConvert)
+        {
+            return new DateTime(toConvert.ToUniversalTime().Ticks, DateTimeKind.Utc);
+        }
     }
 }

@@ -21,7 +21,10 @@ namespace Software2.Views.Appointment
         private ReminderService reminderService;
         private CustomerService customerService;
         private List<customer> customers;
+        private List<user> users;
         private AuthRepository _authRepository;
+        private UserService userService;
+
         private IFormManager _formManager;
         private AppointmentAggregate appointmentAggregate;
         public AppointmentForm(
@@ -29,21 +32,32 @@ namespace Software2.Views.Appointment
             CustomerService customerService, 
             IFormManager formManager, 
             AuthRepository authRepository, 
-            ReminderService reminderService)
+            ReminderService reminderService,
+            UserService userService
+            )
         {
+            this.userService = userService;
             this.appointmentService = appointmentService;
             this.customerService = customerService;
             this.reminderService = reminderService;
             _formManager = formManager;
             _authRepository = authRepository;
             customers = customerService.FindAll();
+            users = userService.FindAllUsers();
 
             InitializeComponent();
-            var source = new AutoCompleteStringCollection();
-            source.AddRange(customers.Select(c => c.customerName).ToArray());
+            var customerSource = new AutoCompleteStringCollection();
+            customerSource.AddRange(customers.Select(c => c.customerName).ToArray());
             customerTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
-            customerTextBox.AutoCompleteCustomSource = source;
+            customerTextBox.AutoCompleteCustomSource = customerSource;
             customerTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+
+            var contactSource = new AutoCompleteStringCollection();
+            contactSource.AddRange(users.Select(u => u.userName).ToArray());
+            contactTextBox.AutoCompleteSource = AutoCompleteSource.CustomSource;
+            contactTextBox.AutoCompleteCustomSource = contactSource;
+            contactTextBox.AutoCompleteMode = AutoCompleteMode.Suggest;
+
             datePicker.MinDate = DateTime.Now;
             startTimePicker.MinDate = DateTime.Now.Date;
             endTimePicker.MinDate = DateTime.Now.Date;
@@ -53,8 +67,6 @@ namespace Software2.Views.Appointment
         {
             var minDate = aggregate.Start < DateTime.Now ? aggregate.Start : DateTime.Now;
             datePicker.MinDate = minDate;
-            startTimePicker.MinDate = minDate;
-            endTimePicker.MinDate = minDate;
             appointmentAggregate = aggregate;
             titleTextBox.Text = aggregate.Title;
             contactTextBox.Text = aggregate.Contact;
@@ -96,15 +108,16 @@ namespace Software2.Views.Appointment
         private void UpdateAppointment()
         {
             var updatedAppointment = GetAppointmentFromFields();
+            var date = updatedAppointment.start;
             updatedAppointment.appointmentId = appointmentAggregate.Id;
             updatedAppointment.createDate = appointmentAggregate.CreateDate;
             updatedAppointment.createdBy = appointmentAggregate.CreatedBy;
             appointmentService.Update(updatedAppointment);
 
             var reminder = reminderService.FindByAppointmentId(appointmentAggregate.Id);
-            reminder.reminderDate = updatedAppointment.start.AddMinutes(-5) < DateTime.Now ?
-                updatedAppointment.start.AddMinutes(-(updatedAppointment.start - DateTime.Now).TotalMinutes + 1) 
-                : updatedAppointment.start.AddMinutes(-5);
+            reminder.reminderDate = date.AddMinutes(-5) < DateTime.Now ?
+                date.AddMinutes(-(updatedAppointment.start - DateTime.Now).TotalMinutes + 1) 
+                : date.AddMinutes(-5);
 
             reminderService.Update(reminder, reminder.reminderId);
         }
@@ -128,6 +141,7 @@ namespace Software2.Views.Appointment
                 throw new InvalidInputException("Must supply customer name");
             var customer = GetCustomerByName(customerName);
             if (customer == null) { }
+            var user = GetUserByName(contact);
 
             return new appointment()
             {
@@ -159,6 +173,18 @@ namespace Software2.Views.Appointment
                 return null;
             }
             else return customers[0];
+        }
+
+        public user GetUserByName(string userName)
+        {
+            var users = this.users.Where(u => u.userName.Equals(userName)).ToList();
+            if (users == null || users.Count() == 0)
+                throw new InvalidInputException("Must select a valid user for contact");
+            else if (users.Count() > 1)
+            {
+                return null;
+            }
+            else return users[0];
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
